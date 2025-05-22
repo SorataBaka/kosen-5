@@ -1,0 +1,5 @@
+[submodule "sorting/"]
+	url = https://github.com/SorataBaka/sorting-algorithms.git
+[submodule "sorting"]
+	path = sorting
+	url = https://github.com/SorataBaka/sorting-algorithms.git
