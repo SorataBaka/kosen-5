@@ -1,0 +1,82 @@
+\documentclass[a4j]{jarticle}
+
+%% プリアンブル部 %%
+
+\begin{document}
+
+\title{サルでもわかる\LaTeX 入門}
+\author{Christian\thanks{専攻}}
+\date{\西暦\today}
+
+\maketitle
+
+\section{\LaTeX とは何か}
+
+\LaTeX は最高級の組版ソフトである. \LaTeX を使えば，数万円のドットプリンタでも数千万円の写植機でも，その能力を最大限に発揮させることができる．
+
+
+
+章番号，節番号などを自動的につけることができるし，目次，索引，文献リストも自動的に作れる．
+また，脚注も簡単に書ける．
+
+% can comment out using percentage
+書体は，和文では明朝とゴシック，欧文では Roman，\textbf{Bold}，\textsf{Sans Serif}，\textit{Italic}，\textsl{Slanted}，\textsc{Small Caps}，\texttt{Typewriter}などが使える．
+
+また，findのfi，officeのffi，flowerのfl，shuffleのfflのような合字(ligature)の処理，VAX，TOYOTAのような寄せ(kerning)の処理，ハイフン処理(hyphenation)も自動的に行われる．
+
+数式は，なにしろ米国数学会(American Mathematical Society)の標準組版システム\cite{Rate06}になってるくらいであるから，\LaTeX は他のどんなシステムよりも自由度があり，美しい組版が可能である．たとえば
+
+  \[ \int_0^\infty \frac{\sin x}{\sqrt{x}}dx
+    = \sqrt{\frac{\pi}{2}} \]
+
+といった数式が簡単に組版できる．
+同じ数式でも本文中では $\int_0^\infty$ のように書体が自動的に変わる．
+更に，数式中の空白（アキ）も自動的に決めてくれる．
+記号 $a=b$ のアキ，足し算 $a+b$ のアキ，符号 $-a$ の後のアキはみな異なる．
+
+\LaTeX の出力は機種に依存しない．
+画面，ドットプリンタ，レーザープリンタ，印刷所の写植機でも全く同じ物を出力することができる\cite{HM99}．
+
+\LaTeX のようなソフトを使い慣れてしまうと，もう単純なワープロソフトは使う気になれなくなる（これはちょっと誇大表現だが．．．）．
+特に欧文や数式まじりの文章はワープロでは話にならない（これは本当かも）．
+
+\section{\LaTeX の作者}
+
+\subsection{Knuthについて}
+
+\LaTeX の作者 Donald E. Knuth は1938年1月10日，アメリカWisconsin州に生まれた．
+1960年Case Institute of Technologyを卒業，1963年California Institute of Technologyで博士号（数学）を取得，同大学の教壇にたつ．
+1968年からはStanford大学コンピュータ科学科教授を務める\cite{W3TEX}．
+
+\subsection{Knuthの功績}
+
+\begin{itemize}
+\item Grace Murray Hopper賞(1971年:ACM)
+
+\item Alan Turing賞(1974年:ACM)
+
+\item Lester R.Ford賞(1975年:MAA)
+
+\item National Medal of Science賞(1979年:USA)
+
+\item McDowell賞(1980年:IEEE)
+
+\item Computer Pioneer賞(1982年:IEEE)
+\end{itemize}
+
+
+\begin{thebibliography}{99}
+
+  
+  \bibitem{W3TEX}
+  日本語TEX情報, ``http://oku.edu.mie-u.ac.jp/~okumura/texfaq/''.
+
+  \bibitem{Rate06}
+  羅手不二子, LATEXとオープンオフィスは寄生虫，KY出版，2006．
+  
+\end{thebibliography}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

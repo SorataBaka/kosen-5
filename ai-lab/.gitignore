@@ -1,0 +1,40 @@
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+
+# Editor files
+*~
+*.swp
+*.bak
+*.backup
+*.tmp
+
+# TeXShop (Mac)
+*.pdfsync
+
+# VS Code
+.vscode/
+
+# Output PDFs (optional—remove if you want to track them)
+*.pdf

@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{subfig}
+
+\begin{document}
+
+\begin{figure}
+    \centering
+    \subfloat[Caption 1]{\label{ref_label1}
+        \includegraphics[width=1.0]{apple02.jpg}
+    }
+    \subfloat[Caption 2]{\label{ref_label2}
+        \includegraphics[width=1.0]{apple01.png}
+    }
+    \caption{Overall caption}
+    \label{ref_label_overall}
+\end{figure}
+
+\end{document}

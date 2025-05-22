@@ -1,0 +1,84 @@
+\documentclass[a4j]{jarticle}
+\usepackage{fancybox}
+\usepackage{ascmac}
+
+\begin{document}
+
+\title{サルでもわかる\LaTeX 入門}
+\author{Christian Harjuno}
+\date{2023年4月24日}
+
+\maketitle
+
+\section{\LaTeX とは何か}
+
+\LaTeX は最高級の組版ソフトである. \LaTeX を使えば，数万円のドットプリンタでも数千万円の写植機でも，その能力を最大限に発揮させることができる．
+
+\hspace{20mm}章番号，節番号などを自動的につけることができるし，目次，索引，文献リストも自動的に作れる．
+また，脚注も簡単に書ける．
+
+\vspace{20mm}
+
+
+
+書体は，和文では明朝とゴシック，欧文では Roman，\textbf{Bold}，\textsf{Sans Serif}，\textit{Italic}，\textsl{Slanted}，\textsc{Small Caps}，\texttt{Typewriter}などが使える．
+
+
+
+また，findのfi，officeのffi，flowerのfl，shuffleのfflのような合字(ligature)の処理，VAX，TOYOTAのような寄せ(kerning)の処理，ハイフン処理(hyphenation)も自動的に行われる．
+\begin{itembox}[l]{Knuthの経歴}
+数式は，なにしろ\ovalbox{米国数学会(American Mathematical Society)}の標準組版システム~\cite{Rate06}になってるくらいであるから，\LaTeX は他のどんなシステムよりも自由度があり，美しい組版が可能である．たとえば
+  \[ \int_0^\infty \frac{\sin x}{\sqrt{x}}dx
+    = \sqrt{\frac{\pi}{2}} \]
+\end{itembox}
+
+といった数式が簡単に組版できる．
+同じ数式でも本文中では $\int_0^\infty$ のように書体が自動的に変わる．
+更に，数式中の空白（アキ）も自動的に決めてくれる．
+記号 $a=b$ のアキ，足し算 $a+b$ のアキ，符号 $-a$ の後のアキはみな異なる．
+
+\LaTeX の出力は機種に依存しない．
+画面，ドットプリンタ，レーザープリンタ，印刷所の写植機でも全く同じ物を出力することができる~\cite{HM99}．
+
+\LaTeX のようなソフトを使い慣れてしまうと，もう単純なワープロソフトは使う気になれなくなる（これはちょっと誇大表現だが．．．）．
+特に欧文や数式まじりの文章はワープロでは話にならない（これは本当かも）．
+
+\section{\LaTeX の作者}
+
+\subsection{Knuthについて}
+\LaTeX の作者 Donald E. Knuth は1938年1月10日，アメリカWisconsin州に生まれた．
+1960年Case Institute of Technologyを卒業，1963年Califorunia Institute of Technologyで博士号（数学）を取得，同大学の教壇にたつ．
+1968年からはStanford大学コンピュータ科学科教授を務める~\cite{W3TEX}．
+
+\subsection{Knuthの功績}
+
+\begin{description}\setlength{\itemsep}{-3pt}
+\item[Grace Murray Hopper賞]:
+Association for Computing Machinery (ACM) が1971年から授与している賞.コンピュータの先駆者であるグレース・ホッパーの名を冠している.35歳以下のコンピュータの専門家を対象とし、技術的または業務的な重要な貢献をした者を表彰する.
+
+\item[Alan Turing賞]:
+計算機科学分野で革新的な功績を残した人物に年に1度、ACMから贈られる賞であり世界最高の権威を持つ賞とされている.その功績は長く影響が続くもので、コンピュータ業界で技術的にも重要なものとされている.
+
+\item[National Medal of Science賞]:
+アメリカ合衆国大統領によって、科学や工学の世界において、その貢献が認められたアメリカ市民に送られる勲章・メダルである.対象となる主な学術分野は、行動科学、社会科学、生物学、化学、工学、数学、物理学に及ぶ.
+
+\item [釧路高専校長賞]:
+釧路高専の5学年学生で勉学，スポーツ，人格が優れている学生（各学科1名）に送られる身内賞．卒業式で副賞を贈呈されるが中身は秘密．校長賞といっても校長が決める訳ではなく各学科の教員の推薦で決定されている．
+
+\end{description}
+
+
+\begin{thebibliography}{99}
+
+\bibitem{Rate06}
+羅手不二子, LATEXとオープンオフィスは寄生虫，KY出版，2006．
+
+\bibitem{HM99}
+A. Hanage and K. Mimige, ``Study on Latex Junkie'', J.IEEE, no.4, pp.12--22, 1999.
+
+\bibitem{W3TEX}
+日本語TEX情報, ``http://oku.edu.mie-u.ac.jp/~okumura/texfaq/''.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,168 @@
+\documentclass[twocolumn]{article}
+
+\usepackage[papersize={841mm,1189mm}, margin=25mm]{geometry}
+\usepackage{type1cm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage{lmodern} % Latin Modern, a scalable version of Computer Modern
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{tikz}
+\graphicspath{{./images/}}
+\setlength{\columnsep}{20mm}  % or 60mm, adjust as needed
+% Custom font size commands
+\renewcommand{\refname}{\SectionFont{References}}
+\newcommand{\TitleFont}{\fontsize{100pt}{110pt}\selectfont}
+\newcommand{\AuthorFont}{\fontsize{55pt}{80pt}\selectfont}
+\newcommand{\SectionFont}{\fontsize{60pt}{70pt}\selectfont}
+\newcommand{\BodyFont}{\fontsize{39pt}{42pt}\selectfont}
+\newcommand{\CaptionFont}{\fontsize{30pt}{36pt}\selectfont}
+\newcommand{\ReferenceFont}{\fontsize{20pt}{22pt}\selectfont}
+\DeclareCaptionFont{mycapfont}{\fontsize{30pt}{36pt}\selectfont}
+\captionsetup{font=mycapfont}
+
+
+\begin{document}
+\twocolumn[
+  \begin{center}
+    {\SectionFont{KOSEN Open Innovation Challenge from Africa 2025 \par}}
+    \vspace{1em}
+    {\TitleFont{Improving Perishable Item Storage in Senegal \par}}
+    \vspace{1em}
+    {\AuthorFont{4M Adikwu David, 5J Christian Harjuno, 4M Nagai Tatsuya, 4D Sanpei Mizuki, 2D Oda Kuto \par}}
+    \vspace{3em}
+    
+    \vspace{0.5em}
+        {\BodyFont\textbf{Abstract}}
+        {\justifying\BodyFont{
+This project tackles cold chain logistics in low-resource settings. During COVID-19, Senegal faced challenges delivering vaccines to remote areas due to poor infrastructure and unreliable refrigeration. Conventional systems are often too expensive, complex, and power-dependent. We propose a reusable, low-cost cool box using eutectic salts, recycled materials, and a simple water-cooling system to maintain 2°C–8°C\cite{cdc2024toolkit}. The design enhances vaccine delivery and food preservation in underserved regions\cite{OTSUBO202223}.
+
+        }}
+        % {\justifying\BodyFont{This project tackles cold chain logistics challenges in low-resource regions by improving transport of temperature-sensitive goods like vaccines and food. In places like Senegal, poor infrastructure makes it hard to maintain the 2°C–8°C range using conventional refrigeration, which is costly and complex\cite{cdc2024toolkit}. We propose a reusable, low-cost cool box using phase-change materials (eutectic salts), recycled components, and simple water-cooling systems. The design prioritizes efficiency, reliability, and suitability for areas with limited power and infrastructure\cite{OTSUBO202223}.\par}}
+    \vspace{2em}\hrulefill\vspace{2em}
+    
+  \end{center}
+]
+\section*{\SectionFont{Proposed Solution}}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{new-des.eps}
+        \caption{\CaptionFont{Basic structure of the solution}}
+    \end{figure}
+\BodyFont{
+\begin{itemize}
+    \item \textbf{Heat Transfer Mechanism}: Heat from inside the box conducts into a coiled water pipe; flowing water carries the heat to an external heat exchanger.
+    \item \textbf{Thermal Battery}: Eutectic salt solutions with melting points below -20°C store more heat per degree than water, enabling long-lasting cooling.
+    \begin{figure}[H]
+        \centering
+        \begin{minipage}[t]{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{coil.eps}
+            \captionof{figure}{Heat Exchanger Coil Design}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}[t]{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{3d-design.eps}
+            \captionof{figure}{3d Layout of Coolbox}
+        \end{minipage}
+    \end{figure}
+    \item \textbf{Modular Design}: Thermal batteries are interchangeable and contain coiled copper or aluminum tubing frozen inside for efficient heat exchange.
+    \item \textbf{Cooling Loop}: Water is chilled by passing through the thermal battery, then circulated inside the cooler to maintain low internal temperatures.
+    \item \textbf{Power Source}: A low-energy water pump circulates water; it can be powered by a dynamo or solar panel.
+    \item \textbf{Temperature Monitoring}: Internal temperature is tracked with a basic electronic circuit.
+    \item \textbf{Insulated Construction}: The cooler box is built from plastic with Styrofoam insulation and aluminum foil lining to reduce heat gain; plastic tubing is embedded in the walls for water circulation.
+\end{itemize}
+}
+\vspace{-5em}
+\section*{\SectionFont{Eutectic Salts}}
+\vspace{-1.5em}
+\begin{table}[h!]
+    \centering
+    {\BodyFont{
+    \caption{\BodyFont{Eutectic saltwater solutions.}}
+        \begin{tabular}{lccc}
+            \toprule
+            \textbf{} & \textbf{KCl} & \textbf{MgCl\textsubscript{2}/H\textsubscript{2}O} & \textbf{NaCl/H\textsubscript{2}O} \\
+            \midrule
+            Salt to water (\%) & 19.5/80.5 & 25/75 & 22.4/77.6 \\
+            Phase change (°C) & $-10.7$ & $-19.4$ & $-21.2$ \\
+            Density (kg/m\textsuperscript{3}) & 1980 & 2320 & 2160 \\
+            Latent heat (kJ/kg) & 253.18 & 223.10 & 228.14 \\
+            Quantity used (g) & 950 & 1250 & 1120 \\
+            Price per 500 g (JPY) & ¥1,397 & ¥484 & ¥838 \\
+            \bottomrule
+        \end{tabular}
+    }}
+\end{table}
+\BodyFont{
+    This system uses eutectic salts as phase-change materials (PCMs) to keep the box at a constant low temperature, such as 5°C, during transport\cite{CALATI2022100224}. Unlike water, eutectic salts absorb a lot of heat while melting without rising in temperature. This keeps the coolbox cold for longer. The setup works like a thermal battery: heat inside the box is carried by coolant to the eutectic salt, which absorbs it through its latent heat.\cite{RADEBE2023106960}
+}
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{charging-graph.eps}
+    \captionof{figure}{Thermal Battery Charging Cycle}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{discharging-cycle.eps}
+    \captionof{figure}{Thermal Battery Discharging Cycle}
+\end{minipage}
+\end{figure}
+\vspace{-2em}
+\section*{\SectionFont{Simulation}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{simulation.eps}
+    \caption{This simulation is generated using a python program. Cooler box starts at 25\,°C while water cooled by eutectic salt (at 5\,°C) circulates continuously. The chilled water absorbs internal heat, gradually reducing the internal temperature of the box to 5\,°C.}
+\end{figure}
+\begin{equation}
+    \Delta T = \frac{Q \text{ (heat transferred)}}{\text{mass} \times \text{specific heat}}
+\end{equation}
+\section*{\SectionFont{Cost Analysis}}
+\begin{table}[ht]
+\centering
+{\BodyFont
+\begin{tabularx}{\linewidth}{|l|r|X|}
+\hline
+\textbf{Material}           & \textbf{Price} & \textbf{Specification}            \\ \hline
+Water pump                 & 1,498              & 3L/min --- 90 grams                 \\ \hline nsulating Material         & 0                  &                                  \\ \hline
+Water reservoir            & 2,460              & 0.75 L                          \\ \hline
+Heat Exchanger & 1,200          & 5 m                             \\ \hline
+Temperature sensor          & 999                &                                  \\ \hline
+Foil paper                 & 839                &                                  \\ \hline
+Outer Container            & 640                & 200$\times$350$\times$180mm --- 500 g       \\ \hline
+Pipe                       & 2,703              & 25 meter                        \\ \hline
+Eutectic Salt Solution      & 1,255              & 5 liters                        \\ \hline
+\multicolumn{2}{|r|}{\textbf{TOTAL}}           & \textbf{~11,594 円}               \\ \hline
+\end{tabularx}
+}
+\caption{Material costs and specifications}\label{tab:material_costs}
+\end{table}
+
+\vspace{-2em}
+\section*{\SectionFont{Challenges and Conclusion}}
+\vspace{-1em}
+\BodyFont{
+    Thermal batteries need recharging, but low-melting eutectic salts (−30\,°C) require special freezers, complicating reuse. Increasing salt volume improves cooling but adds weight.\par
+    \textbf{Solutions:} use salts melting at −10 to −20\,°C for easier freezing or gel-based PCMs for better handling.\par
+    Thermal batteries offer a simpler, cheaper alternative to active refrigeration.
+}
+\vspace{-1em}
+\begingroup
+\ReferenceFont{
+\bibliographystyle{plain}
+\bibliography{references}}
+\endgroup
+
+\end{document}

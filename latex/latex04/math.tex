@@ -1,0 +1,37 @@
+\documentclass[a4j]{jarticle}
+
+\begin{document}
+
+\title{数式の表記の仕方}
+\author{おじゃる丸\thanks{Ｅテレ株式会社} \and 野原しんのすけ\thanks{春日部市役所}}
+\date{}
+
+\maketitle
+
+\LaTeX　で文章中に数式を記述すると$\sqrt{a^2-b}$のようになる.
+
+別行立てで数式をかくと\[\int_0^\infty\frac{\sin x}{\sqrt{x}}dx = \sqrt{\frac{\pi}{2}}\]のようになる.
+
+さらに、各数式に番号をつけると
+\begin{equation} \label{eq1}
+  \sqrt{a^2-b}
+\end{equation}
+
+\begin{equation} \label{eq2}
+  \int_0^\infty\frac{\sin x}{\sqrt{x}}dx = \sqrt{\frac{\pi}{2}}
+\end{equation}
+となる.
+
+上の (\ref{eq1})~式は簡単だが, (\ref{eq2})~式は複雑だ.
+
+\vspace{2zh}
+
+集合は$A=\{\ 2i \times 5 \mid 1 \le i \leq n\}$のように書くとおしゃれだ.
+対数も$log_{10} n$は超ダッサ. 正しくは$\log_{10} n$と書く.
+sin, cos, max, min も見た目は同じだが数式コマンドを使って, $\sin$, $\cos$, $\max$, $\min$と書くべきだ.
+例えば, xをイタリック体にするとき, \textit{x} とする代わりに$x$と書いた方が楽だ. でも, $I have a pen$はおかしくなるので, \textit{I have a pen}を使う.
+
+最後に, 数式でも文中でもそうだが, 半角の`,'を使うときは, 必ず直後に半角スペースを入れることを習慣にせよ.
+He, 185cm, She, 168cm は格好いいが, He,185cm,She,168cm はダサい.
+
+\end{document}

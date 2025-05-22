@@ -1,0 +1,204 @@
+\documentclass[a4j, 10pt]{jarticle}
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{placeins}
+\usepackage{float}
+\graphicspath{{./images/}}
+
+
+\begin{document}
+\begin{titlepage}
+  
+  \title{人工知能 第1課題}
+  \author{クリスティアン・ハルジュノ（5年情報 21番 234071）}
+  \date{\today}
+  \maketitle
+\end{titlepage}
+
+\section{準備: 課題用キットに付属している動作テスト用データ moon.datの散布図をプロットし, どの様なデータなのか視覚的に確認せ
+よ. (散布図をレポート)}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{moon-scatter.eps}
+  \caption{moon.datの散布図}\label{scatterplot}
+\end{figure}
+
+\section{moon.datを学習パターンファイルとして, 以下の 未知パターンを与えて$knn_main$を実行し, 考察せよ. (作成した未知パターンファイル, (実行結果+考察)を少なくとも5つをレポート)}
+
+\begin{verbatim}
+  ファイル名test.dat
+  -0 -0.6475832468935018 1.2525427395343274
+  -1 0.16534119499451885 -1.8756075764864084
+  -1 -1.4395820312730153 0.9783427174821902
+  -1 1.7532891653084237 -0.5831049192642781
+  -1 -0.3721884935276486 1.624711205815279
+  -1 0.9872154401329826 -1.4562987294821047
+  -1 -1.826541977204583 1.1124393040074319
+\end{verbatim}
+
+\begin{table}[H]
+  \centering
+  \caption{実行結果}
+  \begin{tabular}{|r|r|r|}
+  \hline
+  $\omega_1$ & $\omega_2$ & ラベル \\
+  \hline
+  -0.6475832468935018 &  1.2525427395343274 & 0 \\
+  0.16534119499451885 & -1.8756075764864084 & 1 \\
+  -1.4395820312730153 &  0.9783427174821902 & 0 \\
+  1.7532891653084237 & -0.5831049192642781 & 1 \\
+  -0.3721884935276486 &  1.624711205815279  & 0 \\
+  0.9872154401329826 & -1.4562987294821047 & 1 \\
+  -1.826541977204583  &  1.1124393040074319 & 0 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{moon-boundary.eps}
+  \caption{moon.datの決定境界図}\label{boundarylinegraph}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{test-data-applied-boundary.eps}
+  \caption{未知データを用いた決定境界図}\label{boundarylinegraphtestdata}
+\end{figure}
+
+\subsection{moon.datの最初の行の特徴ベクトル → 実行結果は0になるはず．なぜそうなるか}
+モデルが最初のデータ点を0と予測する理由を理解するためには，まず図\ref{boundarylinegraph}に形成された決定境界を確認する必要がある\\
+
+図\ref{boundarylinegraphtestdata}によると、未知データとして最初のベクトルを入力した場合でも，そのデータは青色領域（ラベル0）内に位置しており，学習済みのパターンと一致するため，結果として0が返される．
+
+\subsection{moon.datの最後の行の特徴ベクトル → 実行結果は1になるはず．なぜそうなるか}
+最後のデータも既知データとして学習に使用されているため，同様に訓練済みモデルはそのパターンを認識する．図\ref{boundarylinegraphtestdata}で確認すると，該当のデータは赤色領域（ラベル1）内に存在し，そのためラベル1が予測されるのは妥当である．
+
+\subsection{上記1番の特徴ベクトルの数値を僅かに変えた場合 → 実行結果はどうなるか．なぜそうなるか}
+値をわずかに変更した場合，特徴ベクトルの位置が依然として同一領域内にある限り，予測されるラベルは変わらない．しかし，変更により決定境界を跨いだ場合，予測ラベルも変化する．
+\begin{table}[H]
+  \caption{1番目の特徴ベクトルの変更前後比較}\label{first-data-modification}
+  \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      状態 & $\omega_1$ & $\omega_2$ & クラス \\
+      \hline
+      変更前 & $-0.6476$ & $1.2525$ & 0 \\
+      \hline
+      変更後 & $0.6476$ & $-1.2525$ & 1 \\
+      \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{tuned-moon-data.eps}
+  \caption{変更後の特徴ベクトルの位置}\label{changed-data-location}
+\end{figure}
+
+
+\subsection{上記2番の特徴ベクトルの数値を僅かに変えた場合 → 実行結果はどうなるか．なぜそうなるか}
+同様に，正負を入れ替えただけでも特徴ベクトルが境界線を跨ぐ位置に移動することで，予測ラベルが変化する．
+
+\begin{table}[H]
+  \caption{2番目の特徴ベクトルの変更前後比較}\label{second-data-modification}
+  \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      状態 & $\omega_1$ & $\omega_2$ & クラス \\
+      \hline
+      変更前 & $0.1653$ & $1.8756$ & 1 \\
+      \hline
+      変更後 & $-0.1653$ & $-1.8756$ & 0 \\
+      \hline
+    \end{tabular}
+\end{table}
+
+\subsection{重要: その他, 考察のために自由に設定した値. ※最近傍決定則による判断が切り替わると予想される付近の座標を連続で複数与えて探ってみると良い.}
+この実験では，$y=0$のまま$x$を左から右へ漸進的に変化させるデータを生成した．
+
+\begin{table}[H]
+  \centering
+  \caption{漸進的データとラベルの変化（横向き）}\label{tab:boundary-gradient-data-horizontal}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|*{21}{c}|}
+    \hline
+    項目 & -2.0 & -1.8 & -1.6 & -1.4 & -1.2 & -1.0 & -0.8 & -0.6 & -0.4 & -0.2 & 0.0 & 0.2 & 0.4 & 0.6 & 0.8 & 1.0 & 1.2 & 1.4 & 1.6 & 1.8 & 2.0 \\
+    \hline
+    $\omega_2$ & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+    結果 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+    \hline
+  \end{tabular}
+  }
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{gradual-data.eps}
+  \caption{決定境界を跨ぐ漸進的データの散布図}\label{gradual-data-plot}
+\end{figure}
+この表より，データが徐々に移動することで，境界線付近でクラスが0から1へと切り替わることが分かる．これは最近傍法が持つ空間的判断特性によるものであり，決定境界の視覚化によりモデルの振る舞いを直感的に理解できる．
+
+\section{座学の演習問題で自作した2次元データの座標値を定規で読み取り, 学習パターンファイルを作成して決定境界を可視化せよ. (作成した学習パターンファイル, 決定境界の図をレポート)}
+\subsection{学習パターンファイルの作成}
+以下のように自作したデータを学習パターンファイルとして作成した．表\ref{tab:self-dataset-horizontal}に示す．
+\begin{verbatim}
+ファイル名: mydata.dat
+0 2.0 3.4 
+0 3.5 5.5
+0 5.2 4.0
+1 4.7 1.3
+1 6.5 2.3
+1 7.2 0.2
+2 8.0 1.3
+2 7.1 5.3
+2 4.1 6.2
+\end{verbatim}
+\begin{table}[H]
+  \centering
+  \caption{自作の既知パターンデータ（横向き）}\label{tab:self-dataset-horizontal}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    データ点 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+    \hline
+    ラベル & 0 & 0 & 0 & 1 & 1 & 1 & 2 & 2 & 2 \\
+    $\omega_1$ & 2.0 & 3.5 & 5.2 & 4.7 & 6.5 & 7.2 & 8.0 & 7.1 & 4.1 \\
+    $\omega_2$ & 3.4 & 5.5 & 4.0 & 1.3 & 2.3 & 0.2 & 1.3 & 5.3 & 6.2 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{決定境界の可視化}
+図\ref{self-data-scatter}に自作データの散布図を，図\ref{self-data-boundary}に決定境界を示す．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{self-data-scatter.eps}
+  \caption{自作学習パターンの散布図}\label{self-data-scatter}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{self-dat-boundary.eps}
+  \caption{自作学習パターンの決定境界図}\label{self-data-boundary}
+\end{figure}
+\section{重要: 課題5で可視化した結果と, 演習問題で手作業で描いた決定境界を比較して考察せよ. 両者で異なる部分や, 自分の理解が間違っていた箇所, 新たな発見等を具体的に書くこと. （レポートに記入）}
+
+プログラムによって可視化された結果と, 演習問題で自分の手で描いた決定境界を比較すると, ベクトル間の間隔がプログラム出力の方が明確かつ均等に定義されていることに気づいた. 自作のグラフでは境界線を直線的に描きすぎたため, 境界とデータ点の間隔が不均一になってしまっていた. それに対し, プログラムはより精密かつ効率的な境界線を生成し, 分類領域を的確に表現している. 自分で設計したモデルを用いて新たなデータを予測した場合, 判断に偏りが生じる可能性があり, 未知のパターンに対して正確性が損なわれる恐れがあると感じた. 
+
+\section{重要: 課題5を参考にしてmoon.datの決定境界も可視化し, 大規模なデータの場合にどの様な決定境界となるか観察し, 考察せよ. （moon.datの決定境界と考察をレポート）}
+
+\texttt{moon.dat}に対して決定境界を可視化した結果は, 図\ref{boundarylinegraph}に示している. データ量が増加するにつれて, モデルの学習（本ケースでは決定境界の推定）にかかる処理時間も大幅に増加する. 例えば, 200〜300点程度の小規模なデータセットであれば, 一般的なコンピュータでも1〜2分程度で処理が完了する. しかし, 学習に必要なデータが10万点以上に及ぶ場合, モデルの学習には数日, 場合によっては数週間かかることもある. 
+
+\texttt{moon.dat}を用いた決定境界の可視化では, 図\ref{boundarylinegraph}に示されるように, 境界線はより複雑かつ滑らかな形状を示す. 小規模データの場合, 図\ref{self-data-boundary}に見られるように, 境界は直線的かつ粗い形になりがちである. 一方, データ量が増加することで, 図\ref{tensorflow-example}のように, モデルはより滑らかで精密な決定境界を学習できるようになる. このような結果から, 大規模データを用いることで, モデルはデータの構造をより的確に捉え, 分類精度が向上することが分かる. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{tensorflow-example.eps}
+  \caption{Tensorflowの例}\label{tensorflow-example}
+\end{figure}
+
+
+\end{document}
