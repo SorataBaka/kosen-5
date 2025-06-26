@@ -2,43 +2,79 @@
 void print_help(const char *prog_name)
 {
   printf("Usage: %s [options]\n", prog_name);
-  printf("  -h, --help        Show this help message\n");
-  printf("  -c, --count N     Set count (default: 0)\n");
-  printf("  -v, --verbose     Enable verbose output\n");
+  printf("  -h, --help          Show this help message\n");
+  printf("  -r, --repeat N      Set repeat count (default: 0)\n");
+  printf("  -v, --verbose       Enable verbose output\n");
+  printf("  -o, --out FILENAME  Enable result output\n");
+}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "help.h"
+
+static void die(const char *msg)
+{
+  fputs(msg, stderr);
+  exit(EXIT_FAILURE);
 }
 
 Options parse_args(int argc, char *argv[])
 {
-  Options opts = {.count = 0, .verbose = 0, .show_help = 0};
+  if (argc < 4)
+  { /* prog  mode  repeat  dice_count */
+    die("Usage: prog <mode> <repeat> <dice_count> [options]\n");
+  }
 
-  for (int i = 1; i < argc; i++)
+  Options o = {0};
+
+  /* ── positional args ─────────────────────────────── */
+  o.mode = argv[1];
+
+  if (strcmp(o.mode, "dice") == 0)
   {
-    if ((strcmp(argv[i], "--help") == 0) || (strcmp(argv[i], "-h") == 0))
+    o.repeat = atoll(argv[2]);
+    o.dice_count = atoi(argv[3]);
+    if (o.repeat <= 0 || o.dice_count <= 0)
+      die("repeat and dice_count must be positive\n");
+  }
+  else
+  {
+    die("Unknown simulation type\n");
+  }
+
+  /* ── option flags start after the simulation-specific args ── */
+  for (int i = 4; i < argc; ++i)
+  {
+    const char *arg = argv[i];
+
+    if (!strcmp(arg, "-h") || !strcmp(arg, "--help"))
     {
-      opts.show_help = 1;
+      o.show_help = 1;
     }
-    else if ((strcmp(argv[i], "--verbose") == 0) || (strcmp(argv[i], "-v") == 0))
+    else if (!strcmp(arg, "-v") || !strcmp(arg, "--verbose"))
     {
-      opts.verbose = 1;
+      o.verbose = 1;
     }
-    else if ((strcmp(argv[i], "--count") == 0) || (strcmp(argv[i], "-c") == 0))
+    else if (!strcmp(arg, "-o") || !strcmp(arg, "--out"))
     {
-      if (i + 1 < argc)
-      {
-        opts.count = atoi(argv[++i]);
-      }
-      else
-      {
-        fprintf(stderr, "Error: --count requires an argument\n");
-        exit(EXIT_FAILURE);
-      }
+      if (++i == argc)
+        die("Error: --out needs a filename\n");
+      o.has_outfile = 1;
+
+      FILE *f = fopen(argv[i], "w"); /* truncate/create */
+      if (!f)
+        die("Cannot open output file\n");
+      fclose(f);
+
+      o.outfile = fopen(argv[i], "a");
+      if (!o.outfile)
+        die("Cannot reopen output file\n");
     }
     else
     {
-      fprintf(stderr, "Unknown option: %s\n", argv[i]);
+      fprintf(stderr, "Unknown option: %s\n", arg);
       exit(EXIT_FAILURE);
     }
   }
-
-  return opts;
+  return o;
 }

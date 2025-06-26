@@ -1,6 +1,7 @@
 #ifndef HELPER_H
 #define HELPER_H
 #include <stdlib.h>
+#include <stdio.h>
 
 #define log(fmt, ...)                      \
   do                                       \

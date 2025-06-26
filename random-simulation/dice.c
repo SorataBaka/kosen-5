@@ -1,5 +1,34 @@
 #include "dice.h"
 
+void simulateDice(long long count, int diceCount, Options opts)
+{
+  int sameCount = 0;
+  for (long long int i = 1; i <= count; i++)
+  {
+    int *dices = rollDice(diceCount);
+
+    if (checkAllDice(dices, diceCount) == 1)
+      sameCount++;
+
+    free(dices);
+
+    double percentageSame = (double)sameCount / (double)i * 100;
+
+    log("DiceCount: %d | SameCount: %d | ThrowCount: %lld | PercentageSame: %.8f%%\n",
+        diceCount,
+        sameCount,
+        i,
+        percentageSame);
+
+    if (opts.has_outfile)
+      fprintf(opts.outfile, "%d,%d,%lld,%.8f\n",
+              diceCount,
+              sameCount,
+              i,
+              percentageSame);
+  }
+}
+
 int *rollDice(int count)
 {
   int *diceArray = (int *)malloc(sizeof(int) * count);
@@ -9,12 +38,12 @@ int *rollDice(int count)
   }
   return diceArray;
 }
-
-int checkDice(int *diceArray, int length)
+int checkAllDice(int *diceArray, int length)
 {
-  int allSame = 1;
   for (int i = 0; i < length - 1; i++)
+  {
     if (diceArray[i] != diceArray[i + 1])
-      allSame = 0;
-  return allSame;
+      return 0; // Not all the same, return immediately
+  }
+  return 1; // All are the same
 }

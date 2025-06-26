@@ -1,28 +1,34 @@
-# Compiler
-CC = gcc
+# ──────────────────────────────────────────────
+# Compiler and flags
+CC      := gcc
+CFLAGS  := -Wall -Wextra -std=c11
 
-# Flags
-CFLAGS = -Wall -Wextra -std=c11
+# ──────────────────────────────────────────────
+# Directories and targets
+BIN_DIR := bin
+TARGET  := $(BIN_DIR)/simulate
 
-# Executable name
-TARGET = simulate
+# Source and object files
+SRCS    := simulate.c dice.c helper.c help.c
+OBJS    := $(patsubst %.c,$(BIN_DIR)/%.o,$(SRCS))
 
-# Source files
-SRCS = simulate.c dice.c helper.c help.c
-
-# Object files (auto-generated from SRCS)
-OBJS = $(SRCS:.c=.o)
-
-# Default rule
+# ──────────────────────────────────────────────
+# Default goal
 all: $(TARGET)
 
+# Link step
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-# Compile each .c file to .o
-%.o: %.c
+# Pattern rule: compile each .c into bin/%.o
+$(BIN_DIR)/%.o: %.c | $(BIN_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean
+# Ensure bin directory exists before anything else
+$(BIN_DIR):
+	mkdir -p $@
+
+# ──────────────────────────────────────────────
+# House-keeping
 clean:
-	rm -f $(TARGET) *.o
+	rm -f $(TARGET) $(OBJS)

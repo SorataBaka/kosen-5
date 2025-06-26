@@ -5,9 +5,15 @@
 #include <string.h>
 typedef struct
 {
-  int count;
+  const char *mode; /* "dice", "coin", ...              */
+  long long repeat; /* always required                  */
+  int dice_count;   /* only used by "dice"              */
+
+  /* generic flags */
   int verbose;
   int show_help;
+  int has_outfile;
+  FILE *outfile;
 } Options;
 
 void print_help(const char *prog_name);
