@@ -2,6 +2,9 @@
 
 void simulateDice(long long count, int diceCount, Options opts)
 {
+  if (opts.has_outfile)
+    fprintf(opts.outfile, "dice_count,same_count,throw_count,percentage\n");
+
   int sameCount = 0;
   for (long long int i = 1; i <= count; i++)
   {
@@ -14,7 +17,7 @@ void simulateDice(long long count, int diceCount, Options opts)
 
     double percentageSame = (double)sameCount / (double)i * 100;
 
-    log("DiceCount: %d | SameCount: %d | ThrowCount: %lld | PercentageSame: %.8f%%\n",
+    LOG("DiceCount: %d | SameCount: %d | ThrowCount: %lld | PercentageSame: %.8f%%\n",
         diceCount,
         sameCount,
         i,

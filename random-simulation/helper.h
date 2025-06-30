@@ -2,8 +2,8 @@
 #define HELPER_H
 #include <stdlib.h>
 #include <stdio.h>
-
-#define log(fmt, ...)                      \
+#include <time.h>
+#define LOG(fmt, ...)                      \
   do                                       \
   {                                        \
     if (verbose)                           \
@@ -11,6 +11,7 @@
   } while (0)
 
 int generateWithinRange(int min, int max);
+double generateFloatWithinRange(double min, double max);
 int verbose;
 
 #endif

@@ -3,6 +3,7 @@
 		"stdio.h": "c",
 		"stdlib.h": "c",
 		"string.h": "c",
-		"help.h": "c"
+		"help.h": "c",
+		"area.h": "c"
 	}
 }

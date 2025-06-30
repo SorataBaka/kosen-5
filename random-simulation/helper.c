@@ -4,19 +4,16 @@ int generateWithinRange(int min, int max)
 {
   if (min > max)
   {
+    // Swap if range is invalid
     int temp = min;
     min = max;
     max = temp;
   }
   int range = max - min + 1;
+  return min + rand() % range;
+}
 
-  // To reduce modulo bias, discard numbers above a threshold
-  int rand_max = RAND_MAX - (RAND_MAX % range);
-  int r;
-  do
-  {
-    r = rand();
-  } while (r >= rand_max);
-
-  return min + (r % range);
+double generateFloatWithinRange(double min, double max)
+{
+  return min + (max - min) * (double)rand() / ((double)RAND_MAX + 1);
 }

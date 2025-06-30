@@ -4,29 +4,31 @@
 #include <string.h>
 #include "dice.h"
 #include "help.h"
+#include "area.h"
 
 int main(int argc, char *argv[])
 {
-  Options opts = parse_args(argc, argv);
-  verbose = opts.verbose;
+  Options *opts = parse_args(argc, argv);
+  verbose = opts->verbose;
 
-  if (opts.show_help)
+  if (opts->show_help)
   {
     print_help(argv[0]);
     return 0;
   }
 
-  if (opts.has_outfile)
-    fprintf(opts.outfile, "dice_count,same_count,throw_count,percentage\n");
-
-  if (strcmp(opts.mode, "dice") == 0)
+  if (strcmp(opts->mode, "dice") == 0)
   {
-    log("Running dice\n");
-    simulateDice(opts.repeat, opts.dice_count, opts);
+    LOG("Running dice\n");
+    simulateDice(opts->repeat, opts->dice_count, *opts);
   }
-
-  if (opts.has_outfile)
-    fclose(opts.outfile);
+  if (strcmp(opts->mode, "area") == 0)
+  {
+    LOG("Running area\n");
+    simulatePlot(opts->repeat, opts->radius, *opts);
+  }
+  if (opts->has_outfile)
+    fclose(opts->outfile);
 
   return 0;
 }

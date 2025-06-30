@@ -56,3 +56,5 @@ dkms.conf
 bin/
 out.csv
 out.txt
+
+*.txt
