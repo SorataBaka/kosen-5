@@ -50,6 +50,12 @@ Options *parse_args(int argc, char *argv[])
     if (o->repeat <= 0 || o->radius <= 0.0)
       die("repeat and radius must be positive.\n");
   }
+  else if (strcmp(o->mode, "janken") == 0)
+  {
+    o->step = atof(argv[3]);
+    if (o->repeat <= 0 || o->step <= 0)
+      die("repeat and step must be positive.\n");
+  }
   else
   {
     die("Unknown mode. Use 'dice' or 'area'.\n");

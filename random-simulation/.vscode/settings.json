@@ -4,6 +4,9 @@
 		"stdlib.h": "c",
 		"string.h": "c",
 		"help.h": "c",
-		"area.h": "c"
+		"area.h": "c",
+		"limits": "c",
+		"ratio": "c",
+		"algorithm": "c"
 	}
 }

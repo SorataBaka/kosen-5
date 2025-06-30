@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdint.h>
 #define LOG(fmt, ...)                      \
   do                                       \
   {                                        \
@@ -12,6 +13,7 @@
 
 int generateWithinRange(int min, int max);
 double generateFloatWithinRange(double min, double max);
+double arc4random_double(void);
 int verbose;
 
 #endif

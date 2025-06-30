@@ -5,6 +5,7 @@
 #include "dice.h"
 #include "help.h"
 #include "area.h"
+#include "janken.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,11 @@ int main(int argc, char *argv[])
   {
     LOG("Running area\n");
     simulatePlot(opts->repeat, opts->radius, *opts);
+  }
+  if (strcmp(opts->mode, "janken") == 0)
+  {
+    LOG("Running janken\n");
+    simulateJanken(opts->repeat, *opts);
   }
   if (opts->has_outfile)
     fclose(opts->outfile);

@@ -9,6 +9,7 @@ typedef struct Options
   long long repeat; /* always required                  */
   int dice_count;   /* only used by "dice"              */
   double radius;
+  double step;
 
   /* generic flags */
   int verbose;
