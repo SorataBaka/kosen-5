@@ -9,7 +9,7 @@ BIN_DIR := bin
 TARGET  := $(BIN_DIR)/simulate
 
 # Source and object files
-SRCS    := simulate.c dice.c helper.c help.c area.c janken.c
+SRCS    := simulate.c dice.c helper.c help.c area.c janken.c height.c
 OBJS    := $(patsubst %.c,$(BIN_DIR)/%.o,$(SRCS))
 
 # ──────────────────────────────────────────────

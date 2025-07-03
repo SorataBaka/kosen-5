@@ -10,6 +10,7 @@ typedef struct Options
   int dice_count;   /* only used by "dice"              */
   double radius;
   double step;
+  int minTaller;
 
   /* generic flags */
   int verbose;

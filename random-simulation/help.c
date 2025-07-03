@@ -23,7 +23,7 @@ Options *parse_args(int argc, char *argv[])
 {
   if (argc < 4)
   {
-    die("Usage: prog <mode> <repeat> <dice_count|radius> [options]\n");
+    die("Usage: prog <mode> <repeat> <variable> [options]\n");
   }
 
   /* 1. allocate and zero‑initialise */
@@ -55,6 +55,12 @@ Options *parse_args(int argc, char *argv[])
     o->step = atof(argv[3]);
     if (o->repeat <= 0 || o->step <= 0)
       die("repeat and step must be positive.\n");
+  }
+  else if (strcmp(o->mode, "height") == 0)
+  {
+    o->minTaller = atoi(argv[3]);
+    if (o->repeat <= 0 || o->minTaller <= 0)
+      die("Repeat and minimum taller value must be positive");
   }
   else
   {

@@ -6,6 +6,7 @@
 #include "help.h"
 #include "area.h"
 #include "janken.h"
+#include "height.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +33,11 @@ int main(int argc, char *argv[])
   {
     LOG("Running janken\n");
     simulateJanken(opts->repeat, *opts);
+  }
+  if (strcmp(opts->mode, "height") == 0)
+  {
+    LOG("Running height\n");
+    simulateHeight(opts->repeat, *opts);
   }
   if (opts->has_outfile)
     fclose(opts->outfile);
