@@ -57,7 +57,7 @@
 用意されたパーセプトロンのプログラムは2次元特徴空間対象に作られた. しかし, 教科書の２２ページによる学習データには1次元特徴空間であった. その理由で, 表\ref{page22datasetbefore}の学習データを表\ref{page22dataset}のように修正し, ダミー特徴を追加された. また, プログラムが対象できるクラスの数字が制限されているので, $\omega_1$を$0$にして, $\omega_2$を$1$にする. 
 \begin{table}[H]
   \centering
-  \caption{修正した学習データの一覧}\label{page22dataset}
+  \caption{修正した学習データの一覧(p22.dat)}\label{page22dataset}
   \begin{tabular}{c r r}
     \hline
     クラス & 特徴量$x_1$ & ダミー特徴量 \\
@@ -74,7 +74,7 @@
 また, パーセプトロンの訓練を行う時に使用する検証用データも手動で作った.
 \begin{table}[H]
   \centering
-  \caption{テストデータの一覧}
+  \caption{テストデータの一覧(test.dat)}
   \begin{tabular}{c r r}
     \hline
     クラス & 特徴量 $x_1$ & ダミー特徴量 \\
@@ -268,7 +268,67 @@ $(\omega_0, \omega_1) = (11, 5)$ の点は, $(\omega_0, \omega_1) = (-7, 2)$ の
 \end{figure}
 
 \section{課題4: 自作学習データによるパーセプトロン}
-
-
+決定領域を4にした。
+\begin{table}[H]
+  \centering
+  \caption{作成した学習データの一覧(mydata.dat)}\label{mydata_table}
+  \begin{tabular}{c r r}
+    \hline
+    クラス & 特徴量$x_1$ & 特徴量$x_2$ \\
+    \hline
+    $\omega_1$ &  0.5 &  3.0 \\
+    $\omega_1$ &  1.0 &  2.5 \\
+    $\omega_1$ &  0.8 &  3.1 \\
+    $\omega_1$ &  1.2 &  2.6 \\
+    $\omega_1$ &  1.5 &  2.0 \\
+    $\omega_1$ &  0.6 &  2.8 \\
+    $\omega_2$ &  3.0 &  2.0 \\
+    $\omega_2$ &  4.0 &  1.0 \\
+    $\omega_2$ &  3.5 &  2.0 \\
+    $\omega_2$ &  4.5 &  0.5 \\
+    $\omega_2$ &  2.5 &  2.2 \\
+    $\omega_2$ &  3.2 &  1.5 \\
+    \hline
+  \end{tabular}
+\end{table}
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{plotted_self_data.eps}
+  \caption{自作学習データのプロット}
+\end{figure}
+\begin{table}[H]
+  \centering
+  \caption{テストデータの一覧(mytest.dat)}\label{mytest_table}
+  \begin{tabular}{c r r}
+    \hline
+    クラス & 特徴量$x_1$ & 特徴量$x_2$ \\
+    \hline
+    1 &  0.7 &  3.4 \\
+    1 &  0.9 &  3.0 \\
+    1 &  1.1 &  2.8 \\
+    1 &  1.3 &  2.5 \\
+    1 &  1.6 &  1.9 \\
+    1 &  0.4 &  3.2 \\
+    0 &  3.4 &  1.1 \\
+    0 &  3.8 &  1.2 \\
+    0 &  4.2 &  0.6 \\
+    0 &  3.6 &  1.4 \\
+    0 &  2.8 &  2.0 \\
+    0 &  3.1 &  1.3 \\
+    \hline
+  \end{tabular}
+\end{table}
+\subsection{実行方法}
+\begin{verbatim}
+  self:
+    python3 percep_main.py mydata.dat mytest.dat
+    1.2 -7 2 0 weights-self-1.dat logs-self-1.dat
+    python3 percep_main.py mydata.dat mytest.dat
+    3.6 -7 2 0 weights-self-2.dat logs-self-2.dat
+    python3 percep_main.py mydata.dat mytest.dat
+    2.0 11 5 0 weights-self-3.dat logs-self-3.dat
+    python3 plot-log3d.py logs-self-1.dat logs-self-2.dat
+    logs-self-3.dat output-self.png
+\end{verbatim}
 
 \end{document}
