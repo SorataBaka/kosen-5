@@ -1,0 +1,274 @@
+\documentclass[a4j, 12pt]{jarticle}
+
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{makeidx}
+
+\renewcommand{\lstlistingname}{コード}
+
+\graphicspath{{./assets/}}
+\title{様々なソートアルゴリズム}
+\author{クリスティアン　ハルジュノ\thanks{釧路工業高等専門学校情報工学科5年情報21番}}
+\date{\today}
+\begin{document}
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+
+  {\fontsize{25pt}{36pt}\selectfont\bfseries　パーセプトロン} \\[1cm]  % Main title
+  {\Large 釧路工業高等専門学校情報工学科5年} \\[1cm]
+  {\Large 人工知能第二課題} \\[1cm]
+  {\large 氏名：クリスティアン・ハルジュノ} \\[1cm]
+  {\large 出席番号：21} \\[1cm]
+  {\large 学籍番号：234071} \\[5cm]
+
+  {\Large 提出日：??} \\
+
+  \vfill
+
+\end{titlepage}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\section{課題2: 教科書22ページによる\texttt{percep\_main.py}の実行結果}
+教科書の22ページによって, 表\ref{page22datasetbefore}ようなデータセットが用意された. 
+\begin{table}[H]
+  \centering
+  \caption{教科書の22ページが用意された学習データ}\label{page22datasetbefore}
+  \begin{tabular}{c r}
+    \hline
+    クラス & 特徴量 $x_1$ \\
+    \hline
+    $\omega_1$ &  1.2 \\
+    $\omega_1$ &  0.2 \\
+    $\omega_1$ & -0.2 \\
+    $\omega_2$ & -0.5 \\
+    $\omega_2$ & -1.0 \\
+    $\omega_2$ & -1.5 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+用意されたパーセプトロンのプログラムは2次元特徴空間対象に作られた. しかし, 教科書の２２ページによる学習データには1次元特徴空間であった. その理由で, 表\ref{page22datasetbefore}の学習データを表\ref{page22dataset}のように修正し, ダミー特徴を追加された. また, プログラムが対象できるクラスの数字が制限されているので, $\omega_1$を$0$にして, $\omega_2$を$1$にする. 
+\begin{table}[H]
+  \centering
+  \caption{修正した学習データの一覧}\label{page22dataset}
+  \begin{tabular}{c r r}
+    \hline
+    クラス & 特徴量$x_1$ & ダミー特徴量 \\
+    \hline
+    0 &  1.2 &  1.2 \\
+    0 &  0.2 &  0.2 \\
+    0 & -0.2 & -0.2 \\
+    1 & -0.5 & -0.5 \\
+    1 & -1.0 & -1.0 \\
+    1 & -1.5 & -1.5 \\
+    \hline
+  \end{tabular}
+\end{table}
+また, パーセプトロンの訓練を行う時に使用する検証用データも手動で作った.
+\begin{table}[H]
+  \centering
+  \caption{テストデータの一覧}
+  \begin{tabular}{c r r}
+    \hline
+    クラス & 特徴量 $x_1$ & ダミー特徴量 \\
+    \hline
+    0 &  1.1 &  1.1\\
+    0 &  0.5 &  0.5\\
+    0 &  0.1 &  0.1\\
+    1 & -0.6 & -0.6\\
+    1 & -0.8 & -0.8\\
+    1 & -1.1 & -1.1\\
+    \hline
+  \end{tabular}
+\end{table}
+本実験を与えられたコードそのままで実行すると, パーセプトロンが期待される収束領域の内側ではなく, わずかに外側に位置するという異常な挙動が発生した. この原因は不要な重み $\omega_2$ が含まれていたことである. たとえ $\omega_2$ を0に設定しても, プログラムが重みを含み続けたため, 実験結果が正しくなくなった. この問題を解決するため, 以下のようにコードを修正した. 
+\begin{verbatim}
+  #変更前
+  def to_aug_vector(x):
+    dim = x.shape[0]
+    aug_x = np.empty([dim + 1, ], dtype=float)
+    aug_x[0] = 1.0
+    for j in range(0, dim):
+        aug_x[j + 1] = x[j]
+    return aug_x
+  ＃変更後
+  def to_aug_vector(x):
+    return np.array([1.0, x[0], 0.0], dtype=float)
+\end{verbatim}
+これらの変更により, $\omega_2$ を常に0に保ち, 他の重みに影響を与えないようにした. 
+
+\subsection{実行方法}
+プログラムの実行を容易にするために, 必要なコマンドを1つのコマンドで実行できるよう, Makefile にまとめました. Makefile の内容は次のコードに記載している. 
+\begin{verbatim}
+  .PHONY: run
+  run:
+    python3 percep_main.py p22.dat test.dat
+      1.2 -7 2 0 weights-test-1.dat logs-test-1.dat
+    python3 percep_main.py p22.dat test.dat
+      3.6 -7 2 0 weights-test-2.dat logs-test-2.dat
+      python3 percep_main.py p22.dat test.dat
+    2.0 11 5 0 weights-test-3.dat logs-test-3.dat
+    python3 plot-log2d.py logs-test-1.dat 
+      logs-test-2.dat logs-test-3.dat output.png
+\end{verbatim}
+また, 実行する際には次のコマンドのようになる. 
+\begin{verbatim}
+  make
+\end{verbatim}
+
+\subsection{実行結果}
+\subsubsection{$\rho=1.2$ $\omega_0=-7$ $\omega_1=2$}
+$\rho=1.2$を決定し, 重みベクトル$\omega_0$と$\omega_1$の初期値をそれぞれ$-7$と$2$とする. また, 用意されたプログラムが対象となる重みは三つであるため, $\omega_2$を0にした. \\
+プログラムを実行した結果, 表\ref{p12finalweights}に表されている重みになる. 
+\begin{table}[H]
+  \centering
+  \caption{最終的に学習された重みベクトル}\label{p12finalweights}
+  \begin{tabular}{l r}
+    \hline
+    要素 & 値 \\
+    \hline
+    $w_0$（バイアス項） & $1.400$ \\
+    $w_1$（特徴量 $x_1$ の重み） & $3.440$ \\
+    $w_2$（ダミー特徴量の重み） & $0.000$ \\
+    \hline
+  \end{tabular}
+\end{table}
+表\ref{p12logs}の実行ログから, 本プログラムは7回の反復で学習を完了し, 先に示した表\ref{p12finalweights}に記載された最終的な重みベクトルに到達したことが確認できる. 
+\begin{table}[H]
+  \centering
+  \caption{実行ログにおける重みベクトルの推移（7\,iteration）}\label{p12logs}
+  \begin{tabular}{r|rrr}
+  \hline
+  Step & $w_0$ & $w_1$ & $w_2$ \\
+  \hline
+  0 & -7.000000 & 2.000000 & 0.000000 \\
+  1 & -5.800000 & 3.440000 & 0.000000 \\
+  2 & -4.600000 & 3.680000 & 0.000000 \\
+  3 & -3.400000 & 3.440000 & 0.000000 \\
+  4 & -2.200000 & 3.680000 & 0.000000 \\
+  5 & -1.000000 & 3.440000 & 0.000000 \\
+  6 &  0.200000 & 3.680000 & 0.000000 \\
+  7 &  1.400000 & 3.440000 & 0.000000 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{$\rho=3.6$ $\omega_0=-7$ $\omega_1=2$}
+$\rho=3.6$を決定し, 重みベクトル$\omega_0$と$\omega_1$の初期値をそれぞれ$-7$と$2$とする. また, 用意されたプログラムが対象となる重みは三つであるため, $\omega_2$を0にした. \\
+プログラムを実行した結果, 表\ref{p36finalweights}に表されている重みになる. 
+\begin{table}[H]
+  \centering
+  \caption{最終的に学習された重みベクトル}\label{p36finalweights}
+  \begin{tabular}{l r}
+    \hline
+    要素 & 値 \\
+    \hline
+    $w_0$（バイアス項） & $3.800$ \\
+    $w_1$（特徴量 $x_1$ の重み） & $8.480$ \\
+    $w_2$（ダミー特徴量の重み）   & $0.000$ \\
+    \hline
+  \end{tabular}
+\end{table}
+表\ref{p36logs}の実行ログから, 本プログラムは7回の反復で学習を完了し, 先に示した表\ref{p36finalweights}に記載された最終的な重みベクトルに到達したことが確認できる. しかし, 1.2.1節の前回の実験と比較すると, 学習率（または$\rho$）を$3.6$に大きく設定した場合, パーセプトロンは収束領域を$4$回通り越した後, ようやくその内部に収まった. 
+\begin{table}[H]
+  \centering
+  \caption{実行ログにおける重みベクトルの推移（7\,iteration）}\label{p36logs}
+  \begin{tabular}{r|rrr}
+    \hline
+    Step & $w_0$ & $w_1$ & $w_2$ \\
+    \hline
+     0 & -7.000000 & 2.000000 & 0.000000 \\
+     1 & -3.400000 & 6.320000 & 0.000000 \\
+     2 &  0.200000 & 7.040000 & 0.000000 \\
+     3 &  3.800000 & 6.320000 & 0.000000 \\
+     4 &  0.200000 & 8.120000 & 0.000000 \\
+     5 &  3.800000 & 7.400000 & 0.000000 \\
+     6 &  0.200000 & 9.200000 & 0.000000 \\
+     7 &  3.800000 & 8.480000 & 0.000000 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{$\rho=2.0$ $\omega_0=11$ $\omega_1=5$}
+$\rho=2.0$を決定し, 重みベクトル$\omega_0$と$\omega_1$の初期値をそれぞれ$11$と$5$とする. また, 用意されたプログラムが対象となる重みは三つであるため, $\omega_2$を0にした. \\
+プログラムを実行した結果, 表\ref{p20finalweights}に表されている重みになる. 
+\begin{table}[H]
+  \centering
+  \caption{最終的に学習された重みベクトル}\label{p20finalweights}
+  \begin{tabular}{l r}
+    \hline
+    要素 & 値 \\
+    \hline
+    $w_0$（バイアス項） & $3.000$ \\
+    $w_1$（特徴量 $x_1$ の重み） & $10.000$ \\
+    $w_2$（ダミー特徴量の重み）   & $0.000$ \\
+    \hline
+  \end{tabular}
+\end{table}
+表\ref{p20logs}の実行ログから, 本プログラムは4回の反復だけで学習を完了し, 先に示した表\ref{p20finalweights}に記載された最終的な重みベクトルに到達したことが確認できる. 本実験は, 学習率（または$\rho$）をそれぞれ$1.2$および$3.6$とした1.2.1節および1.2.2節の実験と比較して, 中間的な妥当な結果を示している. 
+\begin{table}[H]
+  \centering
+  \caption{実行ログにおける重みベクトルの推移（4\,iteration）}\label{p20logs}
+  \begin{tabular}{r|rrr}
+    \hline
+    Step & $w_0$ & $w_1$ & $w_2$ \\
+    \hline
+     0 & 11.000000 & 5.000000 & 0.000000 \\
+     1 &  9.000000 & 6.000000 & 0.000000 \\
+     2 &  7.000000 & 8.000000 & 0.000000 \\
+     3 &  5.000000 & 9.000000 & 0.000000 \\
+     4 &  3.000000 & 10.000000 & 0.000000 \\
+    \hline
+  \end{tabular}
+\end{table}
+\subsection{考察}
+学習率（ρ）を1.2および3.6に設定し, 同じ初期値 $\omega_0 = -7$, $\omega_1 = 2$ から実行した結果を比較すると, パーセプトロンの挙動に違いが見られた. ρ を 1.2 に設定した場合, パーセプトロンは7回の反復で収束領域に到達した. 一方で, ρ を 3.6 に設定した場合も7回の反復で最終的に収束領域に到達したが, 途中で収束領域を複数回通り過ぎており, 収束点にたどり着くまでに安定性を欠いていたことがわかる. これは, 学習率が高すぎることを示しており, より効率的な学習のためには調整が必要であることを示唆している. 
+次に, ρ = 1.2（初期値 $\omega_0 = -7$, $\omega_1 = 2$）の結果と, ρ = 2.0（初期値 $\omega_0 = 11$, $\omega_1 = 5$）の結果を比較するため, まずそれぞれの初期点から収束領域の最も近い境界までの距離を計算する. 
+
+式\ref{distanceequation} に示した, 点と直線との距離を求める式を考慮すると, 
+\begin{equation}\label{distanceequation}
+  d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}
+\end{equation}
+最も近い収束領域の境界線は, 傾き 0.2 の直線である. $(\omega_0, \omega_1) = (-7, 2)$ からこの直線までの距離を計算する. 
+\begin{equation}
+  \begin{aligned}
+  d &= \frac{\left|Ax_0 + By_0 + C\right|}{\sqrt{A^2 + B^2}} \\
+  &= \frac{\left|0.2 \cdot 2 + (-1) \cdot (-7) + 0\right|}{\sqrt{(0.2)^2 + (-1)^2}} \\
+  &= \frac{\left|0.4 + 7\right|}{\sqrt{0.04 + 1}} \\
+  &= \frac{7.4}{\sqrt{1.04}} \\
+  &\approx \frac{7.4}{1.0198} \\
+  &\approx 7.26
+\end{aligned}
+\end{equation}
+この計算から, $(\omega_0, \omega_1) = (-7, 2)$ から傾き 0.2 の直線までの距離は $7.26$ であることがわかる. 
+次に, $(\omega_0, \omega_1) = (11, 5)$ から傾き 0.5 の直線までの距離を計算する. 
+\begin{equation}
+  \begin{aligned}
+  d &= \frac{|A x_0 + B y_0 + C|}{\sqrt{A^2 + B^2}} \\
+  &= \frac{|0.5 \times 5 + (-1) \times 11 + 0|}{\sqrt{(0.5)^2 + (-1)^2}} \\
+  &= \frac{|2.5 - 11|}{\sqrt{0.25 + 1}} \\
+  &= \frac{8.5}{\sqrt{1.25}} \\
+  &= \frac{8.5}{1.1180} \\
+  &\approx 7.61
+\end{aligned}
+\end{equation}
+$(\omega_0, \omega_1) = (11, 5)$ の点は, $(\omega_0, \omega_1) = (-7, 2)$ の点よりも最も近い境界線から距離が $7.61 - 7.26 = 0.35$ だけ大きいため, 学習率（ρ）を 2.0 と高く設定しても, パーセプトロンはより短い反復回数で収束領域に到達できる. 
+\section{課題3: 課題1によるパーセプトロンの図}
+\begin{figure}[H]
+  \centering
+  \caption{課題1パーセプトロンの図}
+  \includegraphics[width=\linewidth]{output.eps}
+\end{figure}
+
+\section{課題4: 自作学習データによるパーセプトロン}
+
+
+
+\end{document}
