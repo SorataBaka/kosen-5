@@ -46,4 +46,4 @@ plt.xlabel(r'特徴$x_1$')
 plt.ylabel(r'特徴$x_2$')
 
 plt.legend(loc='lower right')
-plt.savefig(png_file, dpi=200)
+plt.savefig(png_file, dpi=400)
