@@ -7,6 +7,7 @@
 		"area.h": "c",
 		"limits": "c",
 		"ratio": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"bingo.h": "c"
 	}
 }

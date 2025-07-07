@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+typedef enum BingoMode
+{
+  WITHIN,
+  EXACT,
+  MAX
+} BingoMode;
 typedef struct Options
 {
   const char *mode; /* "dice", "coin", ...              */
@@ -11,6 +17,7 @@ typedef struct Options
   double radius;
   double step;
   int minTaller;
+  BingoMode bingomode;
 
   /* generic flags */
   int verbose;

@@ -7,6 +7,7 @@
 #include "area.h"
 #include "janken.h"
 #include "height.h"
+#include "bingo.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +39,11 @@ int main(int argc, char *argv[])
   {
     LOG("Running height\n");
     simulateHeight(opts->repeat, *opts);
+  }
+  if (strcmp(opts->mode, "bingo") == 0)
+  {
+    LOG("Running bingo\n");
+    simulateBingo(opts->repeat, *opts);
   }
   if (opts->has_outfile)
     fclose(opts->outfile);

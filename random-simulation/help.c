@@ -62,6 +62,13 @@ Options *parse_args(int argc, char *argv[])
     if (o->repeat <= 0 || o->minTaller <= 0)
       die("Repeat and minimum taller value must be positive");
   }
+  else if (strcmp(o->mode, "bingo") == 0)
+  {
+    int bingomode = atoi(argv[3]);
+    if (bingomode < 0 || bingomode > 2)
+      die("Invalid bingo mode\n");
+    o->bingomode = bingomode;
+  }
   else
   {
     die("Unknown mode. Use 'dice' or 'area'.\n");

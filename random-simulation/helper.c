@@ -25,7 +25,30 @@ double generateFloatWithinRange(double min, double max)
 double arc4random_double(void)
 {
   uint64_t x;
-  arc4random_buf(&x, sizeof x); // 64 random bits from the CSPRNG
-  /* Keep the top 53 bits (IEEE‑754 mantissa width) and scale */
+  arc4random_buf(&x, sizeof x);                  // 64 random bits from the CSPRNG
   return (x >> 11) * (1.0 / 9007199254740992.0); // 2^53
+}
+int *generateWithinRangeWithoutRepetition(int count, int min, int max)
+{
+  int *numberArray = (int *)malloc(sizeof(int) * count);
+  for (int i = 0; i < count; i++)
+  {
+    int found = 1;
+    int newnum;
+    while (found)
+    {
+      newnum = generateWithinRange(min, max);
+      found = 0;
+      for (int j = 0; j < i; j++)
+      {
+        if (numberArray[j] == newnum)
+        {
+          found = 1;
+          break;
+        }
+      }
+    }
+    numberArray[i] = newnum;
+  }
+  return numberArray;
 }
