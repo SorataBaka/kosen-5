@@ -7,17 +7,18 @@ void simulateBingo(long long int repeat, Options opts)
   if (opts.bingomode == WITHIN)
   {
     int valid = 0;
-    for (int i = 0; i < repeat; i++)
+    for (long long int i = 0; i < repeat; i++)
     {
       BingoCard *card = generateHand();
+      int calledNumbers[76] = {0};
       for (int j = 0; j < 7; j++)
       {
-        simulateCalls(card);
+        simulateCalls(card, calledNumbers);
         valid += validateCard(card);
       }
-      LOG("Repeat: %5d | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+      LOG("Repeat: %lld | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%d,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+        fprintf(opts.outfile, "%lld,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
       free(card);
     }
   }
@@ -26,22 +27,46 @@ void simulateBingo(long long int repeat, Options opts)
     if (opts.has_outfile)
       fprintf(opts.outfile, "repeat,valid,percentage\n");
     int valid = 0;
-    for (int i = 0; i < repeat; i++)
+    for (long long int i = 0; i < repeat; i++)
     {
       BingoCard *card = generateHand();
+      int calledNumbers[75] = {0};
       for (int j = 0; j < 4; j++)
       {
-        simulateCalls(card);
-        valid += validateCard(card);
+        simulateCalls(card, calledNumbers);
       }
-      LOG("Repeat: %5d | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+      valid += validateCard(card);
+      LOG("Repeat: %lld | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%d,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+        fprintf(opts.outfile, "%lld,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
       free(card);
     }
   }
   else
   {
+    if (opts.has_outfile)
+      fprintf(opts.outfile, "repeat,max_call,current_call_count,percentage");
+    int current_max = 0;
+    for (long long int i = 0; i < repeat; i++)
+    {
+      BingoCard *card = generateHand();
+      int calls[76];
+      int callCount = 1;
+      simulateCalls(card, calls);
+      int valid = validateCard(card);
+      while (!valid)
+      {
+        simulateCalls(card, calls);
+        valid = validateCard(card);
+        callCount++;
+      }
+      if (callCount > current_max)
+        current_max = callCount;
+
+      LOG("Repeat: %lld | Current Max: %5d | Loop Count: %5d | Percentage: %0.06f\n", i + 1, current_max, callCount, (double)current_max / i + 1);
+      if (opts.has_outfile)
+        fprintf(opts.outfile, "%lld,%d,%d,%0.06f\n", i + 1, current_max, callCount, (double)current_max / i + 1);
+    }
   }
 }
 
@@ -55,12 +80,12 @@ BingoCard *generateHand()
     int *row = generateWithinRangeWithoutRepetition(SIDE, lowLimit, upperLimit);
     for (int j = 0; j < SIDE; j++)
     {
-      (*card)[i][j] = row[j];
+      (*card)[i][j].value = row[j];
+      (*card)[i][j].called = 0;
     }
     free(row);
   }
-  (*card)[2][2] = 0;
-
+  (*card)[2][2].called = 1;
   return card;
 }
 
@@ -72,7 +97,7 @@ int validateCard(const BingoCard *card)
     int calledCount = 0;
     for (int j = 0; j < SIDE; j++)
     {
-      if ((*card)[i][j] == 0)
+      if ((*card)[i][j].called == 1)
         calledCount++;
     }
     if (calledCount == SIDE)
@@ -84,7 +109,7 @@ int validateCard(const BingoCard *card)
     int calledCount = 0;
     for (int j = 0; j < SIDE; j++)
     {
-      if ((*card)[j][i] == 0)
+      if ((*card)[j][i].called == 1)
         calledCount++;
     }
     if (calledCount == SIDE)
@@ -96,11 +121,11 @@ int validateCard(const BingoCard *card)
 
   for (int i = 0; i < SIDE; i++)
   {
-    if ((*card)[i][i] != 0)
+    if ((*card)[i][i].called != 1)
     {
       mainDiagonal = 0;
     }
-    if ((*card)[i][SIDE - 1 - i] != 0)
+    if ((*card)[i][SIDE - 1 - i].called != 1)
     {
       antiDiagonal = 0;
     }
@@ -110,15 +135,21 @@ int validateCard(const BingoCard *card)
   return 0;
 }
 
-void simulateCalls(BingoCard *card)
+void simulateCalls(BingoCard *card, int calledNumbers[76])
 {
-  int call = generateWithinRange(1, 75);
+  int call;
+  do
+  {
+    call = generateWithinRange(1, 75);
+  } while (calledNumbers[call]);
+  calledNumbers[call] = 1;
+
   for (int i = 0; i < SIDE; i++)
   {
     for (int j = 0; j < SIDE; j++)
     {
-      if ((*card)[i][j] == call)
-        (*card)[i][j] = 0;
+      if ((*card)[i][j].value == call)
+        (*card)[i][j].called = 1;
     }
   }
 }
