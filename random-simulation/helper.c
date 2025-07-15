@@ -30,25 +30,33 @@ double arc4random_double(void)
 }
 int *generateWithinRangeWithoutRepetition(int count, int min, int max)
 {
-  int *numberArray = (int *)malloc(sizeof(int) * count);
+  int range = max - min + 1;
+  if (count > range)
+    return NULL; // Too many requested
+
+  // Step 1: fill array with all numbers in range
+  int *pool = malloc(sizeof(int) * range);
+  for (int i = 0; i < range; i++)
+  {
+    pool[i] = min + i;
+  }
+
+  // Step 2: shuffle first `count` elements using Fisher–Yates
   for (int i = 0; i < count; i++)
   {
-    int found = 1;
-    int newnum;
-    while (found)
-    {
-      newnum = generateWithinRange(min, max);
-      found = 0;
-      for (int j = 0; j < i; j++)
-      {
-        if (numberArray[j] == newnum)
-        {
-          found = 1;
-          break;
-        }
-      }
-    }
-    numberArray[i] = newnum;
+    int j = i + arc4random_uniform(range - i); // [i, range-1]
+    int tmp = pool[i];
+    pool[i] = pool[j];
+    pool[j] = tmp;
   }
-  return numberArray;
+
+  // Step 3: copy first `count` values into result
+  int *result = malloc(sizeof(int) * count);
+  for (int i = 0; i < count; i++)
+  {
+    result[i] = pool[i];
+  }
+
+  free(pool);
+  return result;
 }

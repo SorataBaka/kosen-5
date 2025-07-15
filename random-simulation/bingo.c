@@ -52,7 +52,7 @@ void simulateBingo(long long int repeat, Options opts)
     if (opts.has_outfile)
       fprintf(opts.outfile, "repeat,current_max,current_call_count,percentage\n");
     int current_max = 0;
-    int callCounts[76] = {0};
+    long long int callCounts[76] = {0};
     for (long long int i = 0; i < repeat; i++)
     {
       BingoCard *card = generateHand();
@@ -74,11 +74,31 @@ void simulateBingo(long long int repeat, Options opts)
 
       free(card);
 
-      LOG("Repeat: %lld | Current Max: %5d | Loop Count: %5d | Percentage: %0.06f\n", i + 1, current_max, callCount, (double)callCounts[callCount] / (i + 1));
+      LOG("Repeat: %lld | Current Max: %5d | Current Max Count: %lld | Loop Count: %5d | Percentage: %0.09f\n", i + 1, current_max, callCounts[current_max], callCount, (double)callCounts[current_max] / (i + 1));
 
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%lld,%d,%d,%0.06f\n", i + 1, current_max, callCount, (double)callCounts[callCount] / (i + 1));
+        fprintf(opts.outfile, "%lld,%d,%d,%0.09f\n", i + 1, current_max, callCount, (double)callCounts[current_max] / (i + 1));
     }
+    FILE *fp = fopen("call_distribution.csv", "w");
+    if (fp == NULL)
+    {
+      perror("Failed to open file");
+      exit(EXIT_FAILURE);
+    }
+
+    // Write CSV header
+    fprintf(fp, "call_count,occurrences,percentage\n");
+
+    // Dump data
+    for (int i = 0; i < 76; i++)
+    {
+      if (callCounts[i] > 0)
+      {
+        fprintf(fp, "%d,%lld,%0.07f\n", i, callCounts[i], callCounts[i] / (double)repeat);
+      }
+    }
+
+    fclose(fp);
   }
 }
 
@@ -103,7 +123,6 @@ BingoCard *generateHand()
     }
     free(row);
   }
-  (*card)[2][2].called = 1;
   return card;
 }
 
