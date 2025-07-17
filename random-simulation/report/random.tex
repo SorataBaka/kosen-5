@@ -1,0 +1,38 @@
+\documentclass[a4j, 12pt, ]{jarticle}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{makeidx}
+
+\renewcommand{\lstlistingname}{コード}
+\graphicspath{{./assets/}}
+\title{様々なソートアルゴリズム}
+\author{クリスティアン　ハルジュノ\thanks{釧路工業高等専門学校情報工学科5年情報21番}}
+\date{\today}
+\begin{document}
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+
+  {\fontsize{25pt}{36pt}\selectfont\bfseries 乱数を用いたプログラム} \\[1cm]  % Main title
+  {\Large 釧路工業高等専門学校情報工学科5年・情報工学実験II} \\[1cm]
+  {\large 氏名：クリスティアン・ハルジュノ} \\[1cm]
+  {\large 出席番号：21} \\[1cm]
+  {\large 学籍番号：234071} \\[5cm]
+
+
+  {\Large 提出日：\today} \\
+  \vfill
+
+\end{titlepage}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\section{初めに}
+乱数の生成は, 計算機科学における最も重要な概念の一つであり, 特にサイバーセキュリティ分野において重要な役割を果たす. サイバーセキュリティの文脈においては, 乱数は鍵やハッシュの生成に用いられ, データの保護および真正性の検証を可能にする. 乱数の生成は一見単純な問題のように思われる. 単に一定の規則に従わずに数値を選べばよいと考えるかもしれない. しかし, 計算機の観点から見ると, これは極めて困難な問題である. 実際に我々がプログラム中で生成している乱数（例: \texttt{rand()}）は, 真の意味での乱数ではない. これらは疑似乱数と呼ばれるものである.では, なぜそれが疑似乱数と呼ばれるのか. 計算機が提供する乱数は, 通常, あらかじめ定義されたアルゴリズムと開始点（シード）に基づいて生成される. 使用されるアルゴリズムが一般に公開されている以上, 開始シードが分かれば, 生成される乱数列は常に再現可能である.\\
+
+\end{document}

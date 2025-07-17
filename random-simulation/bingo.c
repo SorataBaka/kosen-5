@@ -41,9 +41,9 @@ void simulateBingo(long long int repeat, Options opts)
         simulateCalls(card, calledNumbers);
       }
       valid += validateCard(card);
-      LOG("Repeat: %lld | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+      LOG("Repeat: %lld | Valid: %5d | Percentage: %.09f\n", i + 1, valid, (double)valid / ((double)i + 1));
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%lld,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+        fprintf(opts.outfile, "%lld,%d,%.09f\n", i + 1, valid, (double)valid / ((double)i + 1));
       free(card);
     }
   }
