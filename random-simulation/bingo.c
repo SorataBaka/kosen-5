@@ -50,9 +50,8 @@ void simulateBingo(long long int repeat, Options opts)
   else
   {
     if (opts.has_outfile)
-      fprintf(opts.outfile, "repeat,current_max,current_call_count,percentage\n");
-    int current_max = 0;
-    long long int callCounts[76] = {0};
+      fprintf(opts.outfile, "repeat,valid_count,valid_rate\n");
+    int totalValid = 0;
     for (long long int i = 0; i < repeat; i++)
     {
       BingoCard *card = generateHand();
@@ -68,16 +67,13 @@ void simulateBingo(long long int repeat, Options opts)
         valid = validateCard(card);
         callCount++;
       }
-      callCounts[callCount]++;
-      if (callCount > current_max)
-        current_max = callCount;
-
+      if (callCount == 71)
+        totalValid++;
       free(card);
-
-      LOG("Repeat: %lld | Current Max: %5d | Current Max Count: %lld | Loop Count: %5d | Percentage: %0.09f\n", i + 1, current_max, callCounts[current_max], callCount, (double)callCounts[current_max] / (i + 1));
+      LOG("Repeat: %lld | Valid Count: %5d | Valid Rate: %0.09f\n", i + 1, totalValid, (double)totalValid / (i + 1));
 
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%lld,%d,%d,%0.09f\n", i + 1, current_max, callCount, (double)callCounts[current_max] / (i + 1));
+        fprintf(opts.outfile, "%lld,%d,%0.09f\n", i + 1, totalValid, (double)totalValid / (i + 1));
     }
     FILE *fp = fopen("call_distribution.csv", "w");
     if (fp == NULL)
@@ -86,17 +82,17 @@ void simulateBingo(long long int repeat, Options opts)
       exit(EXIT_FAILURE);
     }
 
-    // Write CSV header
-    fprintf(fp, "call_count,occurrences,percentage\n");
+    // // Write CSV header
+    // fprintf(fp, "call_count,occurrences,percentage\n");
 
-    // Dump data
-    for (int i = 0; i < 76; i++)
-    {
-      if (callCounts[i] > 0)
-      {
-        fprintf(fp, "%d,%lld,%0.07f\n", i, callCounts[i], callCounts[i] / (double)repeat);
-      }
-    }
+    // // Dump data
+    // for (int i = 0; i < 76; i++)
+    // {
+    //   if (callCounts[i] > 0)
+    //   {
+    //     fprintf(fp, "%d,%lld,%0.07f\n", i, callCounts[i], callCounts[i] / (double)repeat);
+    //   }
+    // }
 
     fclose(fp);
   }

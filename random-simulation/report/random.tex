@@ -7,7 +7,7 @@
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{makeidx}
-
+\usepackage{amssymb}
 \renewcommand{\lstlistingname}{コード}
 \graphicspath{{./assets/}}
 \title{様々なソートアルゴリズム}
@@ -156,6 +156,131 @@ def is_valid(permutation):
   \end{tabular}\label{tab:perm_results}
 \end{table}
 \subsubsection{課題4:ジャンケンの割合}
+ジャンケンシミュレーションは, 伝統的なジャンケンに得点制度を導入したシミュレーションである. 提示された条件に従い, 特定の手による勝敗によって得られる点数（本稿ではドル単位）が異なる. 完全なルールは表\ref{tab:rockpaperscissors_rule}に示す.
+\begin{table}[htbp]
+  \centering
+  \caption{じゃんけんの勝利手ごとの報酬（単位：ドル）}
+  \begin{tabular}{lccc}
+    \toprule
+    あなたの手 \textbackslash 相手の手 & グー & パー & チョキ \\
+    \midrule
+    グー   (G)     & 0   & $-10$ & $+10$ \\
+    パー   (P)     & $+30$ & 0   & $-30$ \\
+    チョキ (T)     & $-20$ & $+20$ & 0 \\
+    \bottomrule
+  \end{tabular}\label{tab:rockpaperscissors_rule}
+\end{table}
 
+ジャンケンに設定されたルールが複雑であるため, 最も高い得点を得る各手（グー, チョキ, パー）の理論的な確率や期待される比率を正確に求めることはほぼ不可能である. しかし, 式\ref{eq:approx_ratio_equation}を用いることで, その比率を近似的に求めることができる.\\
+
+\begin{equation}\label{eq:approx_ratio_equation}
+  E = \sum_{i \in \{R,P,S\}} \sum_{j \in \{R,P,S\}} P_{\text{you}}(i) \cdot P_{\text{opp}}(j) \cdot \text{reward}(i \text{ vs } j)
+  \\
+  \text{ここでEは期待利益となる}
+\end{equation}
+
+本初回のシミュレーションでは, 相手の手は偏りなくランダムに選ばれる. そのため, 各手の比率は正確に$\frac{1}{3}$となる. 先に表\ref{tab:rockpaperscissors_rule}で示した各手の勝敗に伴う得失を踏まえ, 式\ref{eq:approx_ratio_equation}に代入することで, 相手が偏りない場合に最も最適な勝率または戦略の比率を算出できる.
+
+\begin{equation}\label{eq:approx_ratio_calculation}
+  \begin{aligned}
+    E(r,p,s) &= r \cdot \left( \frac{1}{3} \cdot 0 + \frac{1}{3} \cdot (-30) + \frac{1}{3} \cdot (+10) \right) \\
+    &\quad + p \cdot \left( \frac{1}{3} \cdot (+30) + \frac{1}{3} \cdot 0 + \frac{1}{3} \cdot (-20) \right) \\
+    &\quad + s \cdot \left( \frac{1}{3} \cdot (-10) + \frac{1}{3} \cdot (+20) + \frac{1}{3} \cdot 0 \right) \\
+    &= r \cdot \left( \frac{-30 + 10}{3} \right) + p \cdot \left( \frac{30 - 20}{3} \right) + s \cdot \left( \frac{-10 + 20}{3} \right) \\
+    &= r \cdot \left( \frac{-20}{3} \right) + p \cdot \left( \frac{10}{3} \right) + s \cdot \left( \frac{10}{3} \right) \\
+    &= \frac{1}{3} \left( -20r + 10p + 10s \right)
+  \end{aligned}
+\end{equation}
+最大の利益($E$)を得るためには, $r + p + s = 1$ かつ $r, p, s \geq 0$ を満たす条件下で, $E(r, p, s)$ を最大化する必要がある. $r + p + s = 1$ であるため, 式\ref{eq:approx_ratio_calculation}における$s$を$1 - r - p$に置き換えることができ, これにより計算を式\ref{eq:approx_ratio_calculation_simplified}の形に簡略化できる.
+
+\begin{equation}\label{eq:approx_ratio_calculation_simplified}
+  \begin{aligned}
+    E(r, p) &= \frac{1}{3} \left( -20r + 10p + 10(1 - r - p) \right) \\
+            &= \frac{1}{3} \left( -20r + 10p + 10 - 10r - 10p \right) \\
+            &= \frac{1}{3} \left( -30r + 10 \right)
+  \end{aligned}
+\end{equation}
+
+式\ref{eq:approx_ratio_calculation_simplified}の内容を検討すると, $r$が増加するにつれて$E(r, p)$の値は減少する. また, $E(r, p)$を最大化する必要があり, $r \geq 0$であることから, $E(r, p)$は$r = 0$のときに最大値をとる. 最後に, $r$を0に置き換えると, $p$と$s$の合計比率が1である条件のもとで, 式\ref{eq:approx_ratio_calculation_final}に示すように期待利益は約$3.33$となる. この場合, $p$と$s$の任意の組み合わせ（例えば$0.2$と$0.8$, $0.6$と$0.4$など）でも最大利益を得られることになる.
+
+\begin{equation}\label{eq:approx_ratio_calculation_final}
+  \begin{aligned}
+    E(0, p) &= \frac{1}{3} \left( 0 + 10 \right) &= 3.33
+  \end{aligned}
+\end{equation}
+\subsubsection{課題5: ビンゴのシムレーション}
+本シミュレーションでは, 表\ref{tab:bingo_column_rules}に示した条件に従い, ランダムに生成されたビンゴカードを作成する.
+\begin{table}[H]
+  \centering
+  \caption{ビンゴカードの列と対応する数値範囲}\label{tab:bingo_column_rules}
+  \begin{tabular}{cl}
+    \toprule
+    列 & 数値範囲 \\
+    \midrule
+    1列目 (B) & 1 ～ 15 \\
+    2列目 (I) & 16 ～ 30 \\
+    3列目 (N) & 31 ～ 45 \\
+    4列目 (G) & 46 ～ 60 \\
+    5列目 (O) & 61 ～ 75 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+また, 従来のビンゴのルールでは, フルビンゴを達成するために5列すべてを完成させる必要がある（各列につき1つ）. しかし本シミュレーションでは, 1列の完成をフルビンゴとみなす. 完成した列は, ビンゴカード上の任意の位置における横, 縦, または斜めのいずれかとなる. また, ビンゴカードの中央はフリースペースとされ, ゲーム開始時点で既にこのマスは開いているものとする.\\
+
+ビンゴゲームにおいて, 以下の3つの異なる条件がシミュレーションされた.
+\begin{enumerate}
+  \item 7回以内で当たる確率をシミュレーション\\
+  本シミュレーションは, 7回のコール以内当たる確率を求めることを目的とする.
+  \item 最短回数 (4回)で当たりとなる確率をシミュレーション\\
+  本シミュレーションは, 最短ターン数である4回以内（ビンゴカード中央が既に開いていることを考慮）に当たる確率を算出することを目的とする.
+  \item 当たりとなる最も遅いゲーム回数とそのような状態の発生確率をシミュレーション\\
+  本シミュレーションは, 最も遅い（コール数が最大となる）タイミングで当たる確率を算出することを目的とする. ビンゴカードには, 表\ref{tab:bingo_column_rules}に示した通り, $75$の候補番号のうち24個（5×5のマスから中央の1マスを除く）が記載されている. これは, ビンゴカード上の番号に当たらずに呼ばれることが可能な番号が $75 - 24 = 51$ 個存在することを意味する. ビンゴカードにない番号をすべて呼んだ後でも, 表\ref{tab:bingo_card}に示すように, ビンゴカード上で列が完成しないまま呼べる番号がさらに19個存在する.\\
+
+  \begin{table}[H]
+    \centering
+    \caption{完全列または表を当たらないビンゴカード}\label{tab:bingo_card}
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      B&I&N&G&O\\ \hline
+      O & X & X & X & X \\ \hline
+      X & X & O & X & X \\ \hline
+      X & X & X & O & X \\ \hline
+      X & O & X & X & X \\ \hline
+      X & X & X & X & O \\ \hline
+    \end{tabular}
+  \end{table}
+  つまり, 列や行が完成しないまま呼べる番号の総数は $51 + 19 = 70$ となる. 言い換えれば, 最悪の場合でも71回目のコールで必ずビンゴが達成されることになる.
+\end{enumerate}
+これらのシミュレーションにおける正確な理論的確率や期待値を計算することは極めて複雑であり, 単一の数値を導出するための単一の方程式は存在しない.\\
+
+しかし, 表\ref{tab:bingo_column_rules}に示したビンゴカード作成のルールを考慮すると, 式\ref{eq:combination}に示す組み合わせの公式を用いて, 可能な組み合わせ数を計算することができる.
+\begin{equation}\label{eq:combination}
+  \mathrm{nCr}(n, r) = \frac{n!}{r!(n-r)!}
+\end{equation}
+
+\begin{equation}\label{eq:bingo_possible_permutation}
+  \begin{aligned}
+    \text{B 列:} \quad & 15C5 = 3003 \\
+    \text{I 列:} \quad & 15C5 = 3003 \\
+    \text{N 列:} \quad & 15C4 = 1365 \quad \text{(中心のFREEスペースのため4つ選ぶ)} \\
+    \text{G 列:} \quad & 15C5 = 3003 \\
+    \text{O 列:} \quad & 15C5 = 3003 \\
+    \\
+    \text{合計のカード数:} \quad
+    & (15C5)^4 \times 15C4 = 3003^4 \times 1365 \\
+    \\
+    \text{数値計算:} \quad
+    & 3003^4 \approx (3.003 \times 10^3)^4 = 3.003^4 \times 10^{12} \approx 81.2 \times 10^{12} \\
+     = 8.12 \times 10^{13} \\
+    & 8.12 \times 10^{13} \times 1365 \approx 1.1 \times 10^{17}
+  \end{aligned}
+\end{equation}
+したがって、式\ref{eq:bingo_possible_permutation}の計算により、ビンゴカードの総数は約$1.1\times 10^{17}$. この総数で条件を満たすカードを計算することは本手法は多大な計算資源を要する. それにより, 各シミュレーション条件の確率を近似するためには, シミュレーションを用いる方が望ましい.
+
+\subsection{シミュレーションの役割}
+\subsection{モンテカルロシミュレーション}
+\section{実験方法}
+\subsubsection{ランダム関数}
+\section{実験結果}
 
 \end{document}
