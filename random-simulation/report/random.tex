@@ -33,6 +33,129 @@
 \newpage
 \setcounter{page}{1}
 \section{初めに}
-乱数の生成は, 計算機科学における最も重要な概念の一つであり, 特にサイバーセキュリティ分野において重要な役割を果たす. サイバーセキュリティの文脈においては, 乱数は鍵やハッシュの生成に用いられ, データの保護および真正性の検証を可能にする. 乱数の生成は一見単純な問題のように思われる. 単に一定の規則に従わずに数値を選べばよいと考えるかもしれない. しかし, 計算機の観点から見ると, これは極めて困難な問題である. 実際に我々がプログラム中で生成している乱数（例: \texttt{rand()}）は, 真の意味での乱数ではない. これらは疑似乱数と呼ばれるものである.では, なぜそれが疑似乱数と呼ばれるのか. 計算機が提供する乱数は, 通常, あらかじめ定義されたアルゴリズムと開始点（シード）に基づいて生成される. 使用されるアルゴリズムが一般に公開されている以上, 開始シードが分かれば, 生成される乱数列は常に再現可能である.\\
+統計の世界において, ある事象が起こる「確率」の計算は $\frac{\text{条件を満たす場合の数}}{\text{全体の事象数}}$ という単純な式で表される. たとえば, コインを投げて表が出る確率は $\frac{1}{2}$ であり, これはコインに $2$ 面が存在するためである. しかし, 実際にコインを $10$ 回投げてみると, 表が出る割合は偏って見えることがあり, $1/3$ や $1/2$ といった結果になる場合もある. ある意味で, 確率には運による偏りの要素が依然として存在すると言える. このため, シミュレーションを多数回繰り返すことによって, 「運」や「ノイズ」の影響を最小限に抑え, より正確な結果を得ることが重要である.\\
+
+このレポートでは, 乱数を用いたプログラムの実装とその結果の分析を行う. 具体的には, コイン投げやサイコロの目の出方など、様々なランダムな事象をシミュレートし、それらの結果を統計的に解析することで、理論的な確率と実際の結果との関係を明らかにすることを目的とする.\\
+\section{背景}
+\subsection{５つのシムレーションを紹介}
+\subsubsection{課題1: 7つのサイコロを振る}
+本シミュレーションでは, $7$ 個の $6$ 面サイコロを投げ, すべてのサイコロが同じ目を出す確率を求める. また, サイコロの個数を変化させながらシミュレーションを実行し, その結果を比較する.\\
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \hspace{1em}
+  \includegraphics[width=0.1\linewidth]{eps/dice6.eps}
+  \caption{7つの同じ面のサイコロ}
+\end{figure}
+理論的には, 一つの均質なサイコロにおいて各面が出る確率は正確に $\frac{1}{6}$ である. しかし, サイコロの個数を増やすことで, 確率の分布は大きく変化する. $n$ 個のサイコロが同じ目を出す確率を計算するために, 式 \ref{eq:dice_probability} を用いる.\\
+
+\begin{equation}\label{eq:dice_probability}
+  P = \frac{s}{s^n} = \frac{1}{s^{n-1}}
+\end{equation}
+
+\begin{itemize}
+  \item $n$ 個のサイコロのすべての組み合わせは $s^n$ 通り。
+  \item 全てのサイコロが同じ出目になる場合の数は $s$ 通り（全て1、全て2、…、全て$s$）。
+  \item よって、確率は次のようになります：
+  \[
+  P = \frac{\text{一致する場合の数}}{\text{全体の組み合わせ数}} = \frac{s}{s^n} = \frac{1}{s^{n-1}}
+  \]
+\end{itemize}
+本実験では $7$ 個の $6$ 面サイコロをシミュレーションするため, すべてのサイコロが同じ目を示す確率は式 \ref{eq:dice_probability_calculation} に示す通り, $2.143 \times 10^{-5}$ となる.
+\begin{equation}\label{eq:dice_probability_calculation}
+  P = \frac{1}{6^{7-1}} = \frac{1}{6^6} = \frac{1}{46656} \approx 2.143 \times 10^{-5}
+\end{equation}
+\subsubsection{課題2: 半径7の円の面積}
+本シミュレーションでは, 2 次元平面上に半径 $7$ の円を描く. 乱数により生成された位置 $(x, y)$ のプロットを平面上に配置し, そのプロットが円の内部に存在する理論的確率を計算し, シミュレーション結果と比較する.\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{eps/circle.eps}
+  \caption{半径7の円の面積}
+\end{figure}
+
+乱数によって生成されたプロットが円の内部に入る理論確率の計算は, 式 \ref{eq:circle_area_equation} に示すように, 円の面積を全体の面積で割るだけである. 本シミュレーションを簡略化するため, プロットの座標の上限および下限を $-7$ から $7$ に制限し, 面積を $14 \times 14$ に設定する.\\
+
+\begin{equation}\label{eq:circle_area_equation}
+  P = \frac{\text{円の面積}}{\text{領域の面積}} = \frac{\pi r^{2}}{A}
+\end{equation}
+
+この場合, 全体の領域の一辺が $14$ であることが分かっているため, 面積は $A = 14 \times 14 = 196$ と計算できる. 一方, 円の半径を $7$ に設定しているため, 円の面積は $\pi \times r \times r = \pi \times 7 \times 7 = 49\pi$ と計算できる. これら二つの値を式 \ref{eq:circle_area_equation} に代入することで, 式 \ref{eq:circle_area_calculation} を得り, 乱数によって生成されたプロットが円の内部に入る確率は約 $0.785$ となる. \\
+
+\begin{equation}\label{eq:circle_area_calculation}
+  P = \frac{49\pi}{196} = \frac{\pi}{4} \approx 0.785
+\end{equation}
+\subsubsection{課題3: 異身長男女を一列に並べる}
+
+本実験では，身長の異なる $10$ 名（男性 $5$ 名，女性 $5$ 名）をランダムに一列に並べ，各女子の左側に，自身よりも背の高い男子が1人以上いる並びとなる確率をシミュレーションにより求める．
+
+各人の身長の関係は以下のように定義されており，すべての男性および女性は明確な順序で区別されている：
+
+\begin{equation}
+  M_1 > W_1 > M_2 > W_2 > M_3 > W_3 > M_4 > W_4 > M_5 > W_5
+\end{equation}
+
+この関係に従って，$10$ 名を一列にランダムに並べる．その上で，すべての女性について，「自身より背の高い男性が左側に少なくとも1人存在する」かどうかを調べる．この条件をすべての女性が満たす並びが，全体の中でどの程度の確率で現れるかを，シミュレーションにより統計的に推定する．
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{eps/heightcomparison.eps}
+  \caption{男女10名の身長関係と識別}\label{fig:height_comparison}
+\end{figure}
+
+しかしながら, 本問題の条件により, 理論的な割合や期待値の計算は非常に複雑になる. 先に述べた通り, 列内の各女性に対して, 少なくとも一人はその女性より身長の高い男性が左側に存在しなければならない. そのため, 本シミュレーションでは $10$ 人の並びの全ての順列を総当たりで検証し, 条件を満たすかどうかを確認する手法を用いる.\\
+
+$n$ 個の対象を一列に並べる場合の総順列数は, 式 \ref{eq:person_permutation} により計算できる.\\
+
+\begin{equation}\label{eq:person_permutation}
+  n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1
+\end{equation}
+今回のように, 身長の異なる $10$ 人（あるいは $10$ 個の対象）を一列に並べる場合, 式 \ref{eq:person_permutation} を用いることで, 順列の総数は
+\[
+10! = 10 \times 9 \times 8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1 = 3,\!628,\!800
+\]
+通りであることが分かる.\\
+次に, Pythonのコードを用いて, 先に定義した条件に対して行のすべての順列を検証した. 各順列をチェックするために使用したPythonコードはコード\ref{code:person_permutation_check}に示す.
+
+\begin{lstlisting}[caption={順列を確認するコード}, label={code:person_permutation_check}]
+def is_valid(permutation):
+    for i, person in enumerate(permutation):
+        if person.startswith('W'):
+            w_height = height_rank[person]
+            left = permutation[:i]
+            found_taller_man = any(p.startswith('M') 
+            and 
+            height_rank[p] < w_height for p in left)
+            if not found_taller_man:
+                return False
+    return True
+\end{lstlisting}
+コードを各順列を確認する結果は表\ref{tab:perm_results}に表されている. ブルートフォース法を用いて, 条件を満たす順列の数が$893025$であることを確認した. 有効な順列の数を全順列の数で割ることにより, 理論的確率または期待値が$0.2461$となることが得られた.
+
+\begin{table}[H]
+  \centering
+  \caption{身長条件シミュレーションにおける順列結果}
+  \begin{tabular}{|l|r|}
+    \hline
+    項目 & 値 \\
+    \hline
+    総順列数 & 3,628,800 \\
+    有効な順列数 & 893,025 \\
+    確率（割合） & 0.2461 \\
+    \hline
+  \end{tabular}\label{tab:perm_results}
+\end{table}
+\subsubsection{課題4:ジャンケンの割合}
+
 
 \end{document}

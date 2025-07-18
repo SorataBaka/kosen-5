@@ -1,10 +1,10 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.17)  17 JUL 2025 16:18
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  18 JUL 2025 13:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/christianharjuno/Documents/Source Codes/kosen-5/random-simulation/report/random"
-(/Users/christianharjuno/Documents/Source Codes/kosen-5/random-simulation/report/random.tex
+**"/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/random-simulation/report/random"
+(/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/random-simulation/report/random.tex
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -55,12 +55,12 @@ Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmargin=\skip52
 \droptitle=\skip53
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2024/11/05 v2.17t AMS math features
+Package: amsmath 2025/05/18 v2.17x AMS math features
 \@mathmargin=\skip54
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2021/08/26 v2.01 AMS text
+Package: amstext 2024/11/17 v2.01 AMS text
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
@@ -116,8 +116,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip55
 \multlinetaggap=\skip56
 \mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2953.
-LaTeX Info: Redefining \] on input line 2954.
+LaTeX Info: Redefining \[ on input line 2949.
+LaTeX Info: Redefining \] on input line 2950.
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
@@ -295,8 +295,45 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 
 
 [1]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 40.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 40.
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
 
-[1] (./random.aux)
+[1]
+File: ./assets/eps/circle.eps Graphic file (type eps)
+ <./assets/eps/circle.eps>
+
+[2]
+File: ./assets/eps/heightcomparison.eps Graphic file (type eps)
+ <./assets/eps/heightcomparison.eps>
+
+[3]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 138.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 138.
+
+
+[4]
+
+[5] (./random.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -304,12 +341,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 7875 strings out of 473836
- 181015 string characters out of 5731189
- 542636 words of memory out of 5000000
- 31096 multiletter control sequences out of 15000+600000
- 567307 words of font info for 71 fonts, out of 8000000 for 9000
+ 8241 strings out of 473836
+ 185096 string characters out of 5731190
+ 556731 words of memory out of 5000000
+ 31442 multiletter control sequences out of 15000+600000
+ 572283 words of font info for 89 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 73i,5n,80p,906b,542s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,8n,80p,685b,1258s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on random.dvi (3 pages, 3280 bytes).
+Output written on random.dvi (7 pages, 17100 bytes).
