@@ -28,13 +28,47 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.5}課題5: ビンゴのシムレーション}{6}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces ビンゴカードの列と対応する数値範囲}}{7}{}\protected@file@percent }
 \newlabel{tab:bingo_column_rules}{{3}{7}{}{table.3}{}}
+\citation{Morris_2019}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces 完全列または表を当たらないビンゴカード}}{8}{}\protected@file@percent }
 \newlabel{tab:bingo_card}{{4}{8}{}{table.4}{}}
 \newlabel{eq:combination}{{11}{8}{}{equation.11}{}}
 \newlabel{eq:bingo_possible_permutation}{{12}{8}{}{equation.12}{}}
+\citation{ibmMonteCarlo}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}シミュレーションの役割}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 出現率が収束する例}}{9}{}\protected@file@percent }
+\newlabel{graph:simulation_example}{{4}{9}{}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}モンテカルロシミュレーション}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}実験方法}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.0.1}ランダム関数}{9}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}実験結果}{9}{}\protected@file@percent }
-\gdef \@abspage@last{11}
+\@writefile{toc}{\contentsline {section}{\numberline {3}実験方法}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}ハードウェアと環境}{10}{}\protected@file@percent }
+\citation{wolfgang1992random}
+\citation{Ossola_2004}
+\citation{openbsd_arc4random}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}ランダム関数}{11}{}\protected@file@percent }
+\newlabel{eq:lcg_equation}{{13}{11}{}{equation.13}{}}
+\newlabel{code:simplified_rand_function}{{2}{11}{}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}$rand()$関数の簡単版}{11}{}\protected@file@percent }
+\citation{arc4randomManual}
+\citation{lemire2019fast}
+\newlabel{code:urandom_content}{{3}{12}{}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}urandomの内容のを読み取り結果例}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}モジュロによるランダム関数のバイアス}{13}{}\protected@file@percent }
+\newlabel{arc4random_general_code}{{4}{13}{}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}再実装したarc4random関数}{13}{}\protected@file@percent }
+\newlabel{arc4random_uniform_code}{{5}{13}{}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}再実装したarc4random\_uniform関数}{13}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces arc4random と arc4random\_general によって生成された乱数の比較 (下限1, 上限100)}}{14}{}\protected@file@percent }
+\newlabel{modulo_bias_comparison}{{5}{14}{}{figure.5}{}}
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{wolfgang1992random}{1}
+\bibcite{ibmMonteCarlo}{2}
+\bibcite{lemire2019fast}{3}
+\bibcite{Morris_2019}{4}
+\bibcite{arc4randomManual}{5}
+\bibcite{Ossola_2004}{6}
+\bibcite{openbsd_arc4random}{7}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces カイ二乗検定の結果}}{15}{}\protected@file@percent }
+\newlabel{p_chi_comparison}{{5}{15}{}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}実行数}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}実験結果}{15}{}\protected@file@percent }
+\gdef \@abspage@last{18}

@@ -23,7 +23,7 @@ void simulateDice(long long count, int diceCount, Options opts)
         i,
         percentageSame);
 
-    if (opts.has_outfile)
+    if (opts.has_outfile == 1)
       fprintf(opts.outfile, "%d,%d,%lld,%.8f\n",
               diceCount,
               sameCount,

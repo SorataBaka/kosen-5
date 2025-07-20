@@ -8,6 +8,9 @@
 \contentsline {subsubsection}{\numberline {2.1.5}課題5: ビンゴのシムレーション}{6}{}%
 \contentsline {subsection}{\numberline {2.2}シミュレーションの役割}{9}{}%
 \contentsline {subsection}{\numberline {2.3}モンテカルロシミュレーション}{9}{}%
-\contentsline {section}{\numberline {3}実験方法}{9}{}%
-\contentsline {subsubsection}{\numberline {3.0.1}ランダム関数}{9}{}%
-\contentsline {section}{\numberline {4}実験結果}{9}{}%
+\contentsline {section}{\numberline {3}実験方法}{10}{}%
+\contentsline {subsection}{\numberline {3.1}ハードウェアと環境}{10}{}%
+\contentsline {subsection}{\numberline {3.2}ランダム関数}{11}{}%
+\contentsline {subsection}{\numberline {3.3}モジュロによるランダム関数のバイアス}{13}{}%
+\contentsline {subsection}{\numberline {3.4}実行数}{15}{}%
+\contentsline {section}{\numberline {4}実験結果}{15}{}%

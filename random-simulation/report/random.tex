@@ -8,6 +8,7 @@
 \usepackage{siunitx}
 \usepackage{makeidx}
 \usepackage{amssymb}
+\usepackage{url}
 \renewcommand{\lstlistingname}{コード}
 \graphicspath{{./assets/}}
 \title{様々なソートアルゴリズム}
@@ -278,9 +279,144 @@ def is_valid(permutation):
 したがって、式\ref{eq:bingo_possible_permutation}の計算により、ビンゴカードの総数は約$1.1\times 10^{17}$. この総数で条件を満たすカードを計算することは本手法は多大な計算資源を要する. それにより, 各シミュレーション条件の確率を近似するためには, シミュレーションを用いる方が望ましい.
 
 \subsection{シミュレーションの役割}
+現実には, 与えられた条件に対する理論的確率や期待値の導出は, ルールの変更やバイアスの導入によって困難になる場合がある. 例えば, 節2.1.1および2.2.2で示したように, 6面ダイスや単純な2次元円を用いた場合の理論的確率の算出は, シミュレーション自体で考慮すべき要素が少ないため容易である. しかし, ダイスに偏りがあり, 特定の面が他の面よりも出やすいといった条件を導入した場合, 理論的にはその偏りの度合いが正確に分かっていれば, バイアスを計算し理論値を求めることは可能である. とはいえ, 実際には複数の予期しない要因が結果に影響を及ぼす可能性があり, このような解析ははるかに困難となる.\cite{Morris_2019}\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{eps/sample-simulation.eps}
+  \caption{出現率が収束する例}\label{graph:simulation_example}
+\end{figure}
+
+このような場合において, 理論的確率を直接計算するのではなく, シミュレーションを用いることがはるかに有効な代替手段となる. シミュレーションでは, 条件に従って同じ実験を何度も繰り返し実行し, 有効な結果のみを記録すればよい. シミュレーションの回数を十分に重ねることで出現率は次第に安定し, 図\ref{graph:simulation_example}に示すように, 当該条件における出現確率のおおよその傾向を把握することが可能となる.
+
+
 \subsection{モンテカルロシミュレーション}
+モンテカルロシミュレーションとは, 複雑な条件における確率を得るために繰り返しのサンプリングを用いる計算アルゴリズムの一種である. 節2.2で述べたように, 条件によっては理論的な確率を正確に計算することが計算コストの面で非常に高く, 多大な時間を要する場合がある. モンテカルロシミュレーションを用いることで, すべての順列を網羅的に列挙することなく, 不確実な事象の発生確率を推定することが可能となる. たとえば, 節2.1.5で定義された制約下におけるビンゴのシミュレーションでは, ビンゴカードの可能な順列数が$1.1 \times 10^7$以上存在するため, 全順列を評価するには数日から場合によっては数年を要する可能性がある. このような場合にモンテカルロシミュレーションを用いることで, 当該事象の確率を現実的な計算時間内で推定することができる.\cite{ibmMonteCarlo}
+
 \section{実験方法}
-\subsubsection{ランダム関数}
+本節では, 節2.1で述べた実験において使用される各種手法および関数について説明する.
+\subsection{ハードウェアと環境}
+ハードウェアとしてはAppleシリコンのプロセッサに基づいて実験を行う. 
+\begin{description}
+  \item[機種名] Apple Macbook Pro (M3, 2023年モデル)
+  \item[プロセッサ] Apple M3チップ（8コア：高性能コア4＋高効率コア4）
+  \item[GPU] 10コア統合型GPU
+  \item[メモリ] 16GBユニファイドメモリ
+  \item[ストレージ] 1TB SSD
+  \item[OS] macOS Sequoia 15.5
+  \item[アーキテクチャ] ARM64（Appleシリコン） 
+\end{description}
+また, 作成した実験プログラムはC言語で書き, GCCコンパイラでコンパイルされる. 
+\begin{verbatim}
+  Apple clang version 17.0.0 (clang-1700.0.13.5)
+  Target: arm64-apple-darwin24.5.0
+  Thread model: posix
+\end{verbatim}
+コンパイルを効率化するため, GCCコンパイラをMakeと同時に利用する. 
+\begin{verbatim}
+  GNU Make 3.81
+  Copyright (C) 2006  Free Software Foundation, Inc.
+  This is free software; see the source for copying conditions.
+  There is NO warranty; not even for MERCHANTABILITY or 
+  FITNESS FOR A PARTICULAR PURPOSE.
+  This program built for i386-apple-darwin11.3.0
+\end{verbatim}
+\subsection{ランダム関数}
+C言語において, 乱数値を生成する最も一般的な方法の一つは, stdlib.hライブラリが提供する\texttt{rand()}関数である.\texttt{rand()}関数は通常, 乱数の種（シード）を設定するための\texttt{srand()}関数と組み合わせて用いられる. 一般に「乱数」とは, 次にどの値が出るか予測できないことを意味するが, 広く使われている\texttt{rand()}関数の実装は厳密には真の乱数ではなく, 疑似乱数である. 先に述べたように, \texttt{rand()}関数は\texttt{srand()}関数と組み合わせて使用され, 乱数生成の開始点となる種を設定する. この種は, 疑似乱数生成の計算基準となる開始値である. この開始値は式\ref{eq:lcg_equation}におくLCG(Linear Congruential Generator)であり, 予め定められた定x数群を用いて次の疑似乱数を生成するために用いられる.\\
+
+\begin{equation}\label{eq:lcg_equation}
+X_{n+1} = (a X_n + c) \bmod m
+\end{equation}
+
+この式は\texttt{rand()}関数内に実装されており, コード\ref{code:simplified_rand_function}に類似した形で表される.\\
+
+\begin{lstlisting}[caption={$rand()$関数の簡単版}, label={code:simplified_rand_function}]
+  static unsigned long next = 1;
+
+  int rand(void) {
+      next = next * 1103515245 + 12345;
+      return (unsigned int)(next / 65536) % 32768;
+  }
+
+  void srand(unsigned int seed) {
+      next = seed;
+  }
+\end{lstlisting}
+
+一定の式を用いているため, 乱数生成は開始種が分かっていれば, 実際には生成される値を予測可能である. これは, stdlib.hライブラリが提供する一般的な\texttt{rand()}関数はエントロピーが低く, $m$回の出力後には必ず生成される値が繰り返されることを意味する.\cite{wolfgang1992random}\\
+
+モンテカルロシミュレーションにおいて, この制約はシミュレーションの精度を著しく低下させる. なぜなら, 可能なすべてのケースや順列を十分に一般化するために, シミュレーションを可能な限り多く繰り返す必要があるからである.\cite{Ossola_2004}\\
+
+この制約を回避するために, すべてのシミュレーションは, stdlib.hライブラリが提供する\texttt{arc4random}の拡張である\texttt{arc4random\_uniform}関数を用いて実行する. \texttt{rand}関数とは異なり, \texttt{arc4random}はLCG（線形合同法）を使用せず, より安全なCSPRNG（暗号学的に安全な疑似乱数生成器）を採用している. \texttt{rand}と\texttt{arc4random}はいずれも真の乱数ではなく疑似乱数であるが, \texttt{arc4random}はデバイスのハードウェアから得られるエントロピー値を乱数の種として利用する点が異なる. 一方で, 一般的な\texttt{rand}関数はエポック時刻を基に初期シードを設定しているため, 実行時刻が正確にわかれば, 次に生成される乱数を「予測」できる可能性がある.\cite{openbsd_arc4random}\\
+
+\texttt{arc4random}関数を実行すると, デバイスは\texttt{/dev/urandom}から疑似乱数バイト列を読み取る. この\texttt{urandom}ファイルは, デバイスのカーネルが管理する内部エントロピープールから生成される. エントロピープールは, ネットワークタイミング, キーボードやマウスの入出力, 割り込みタイミングなど, ハードウェアに基づくさまざまな値からシードされる. \texttt{/dev/urandom}から読み取った内容の一例をコード\ref{code:urandom_content}に示す.\\
+
+\begin{lstlisting}[caption={urandomの内容のを読み取り結果例}, label={code:urandom_content}]
+    head -c 16 /dev/urandom | xxd
+      00000000: 
+      e690 1de3 6b5c 6c27 7684 fc82 6cfa a9a3 
+      ....k\l'v...l...
+    head -c 16 /dev/urandom | xxd
+      00000000: 
+      c15c a4e2 c72e 8d0d 5494 4f21 874b d0b3 
+      .\......T.O!.K..
+    head -c 16 /dev/urandom | xxd
+      00000000:
+      3198 d4b2 7c21 5e2b 41a6 7a94 8012 f0ab 
+      1...|!^+A.z.....
+\end{lstlisting}
+
+これらのランダムな値は, ChaCha20アルゴリズムに入力される. ChaCha20は, Daniel J. Bernsteinによって2008年に設計されたストリーム暗号であり, 実用的な暗号解析に対して高い耐性を持つ. 現代の暗号技術において広く用いられており, OpenSSHやTLS（Transport Layer Security）, 各種オペレーティングシステムなど, 業界標準の技術においても利用されている.\cite{arc4randomManual}\\
+
+arc4randomは, 低レイヤのハードウェア層から生成されるエントロピー値を元にシードが設定されるという特性を持つ. このため, arc4randomは通常のrand関数と比較して, より「ランダム」に近い値を生成することが可能となる.
+\subsection{モジュロによるランダム関数のバイアス}
+ランダム値ジェネレータ内部には, 値をユーザに返す前に行われる最終的な操作が存在する. この操作はモジュロチェックと呼ばれ, 生成された値に対してあらかじめ設定された最大値で剰余演算を行うことで, 値がその範囲を超えないように制限される. しかし, この手法はランダム値を特定の範囲内で生成したい場合に大きな問題を引き起こす.\cite{lemire2019fast} 例えば, ランダム値ジェネレータが符号なし8ビット整数の最大値である255まで出力可能だとする. このとき, arc4random関数に対して最大値を120と指定した場合, 120を超えるすべての数値は先頭から再び数えられるように変換される. これにより, 予期せぬバイアスが発生し, 特定の値が他の値よりも頻繁に出力される傾向を持つようになる.\\
+
+arc4randomとarc4random\_uniformの違いを適切に評価するために, C言語を用いて小規模なシミュレーションを実施した. arc4randomは上下限の設定を直接サポートしないため, コード\ref{arc4random_general_code}に示すように再実装を行った.\\
+\begin{lstlisting}[caption={再実装したarc4random関数}, label={arc4random_general_code}]
+  int rand_in_range(int min, int max){
+    return arc4random() % (max - min + 1) + min;
+  }
+\end{lstlisting}
+一方, arc4random\_uniformは下限をサポートしないため, コード\ref{arc4random_uniform_code}に示すようにこちらも再実装を行った.\\
+\begin{lstlisting}[caption={再実装したarc4random\_uniform関数}, label={arc4random_uniform_code}]
+  int rand_uniform_in_range(int min, int max){
+    return arc4random_uniform(max - min + 1) + min;
+  }
+\end{lstlisting}
+両関数を下限1, 上限100で10万回繰り返し実行した結果は, 図\ref{modulo_bias_comparison}に示すように類似している.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{eps/arc4random_general.eps}
+  \includegraphics[width=\linewidth]{eps/arc4random_uniform.eps}
+  \caption{arc4random と arc4random\_general によって生成された乱数の比較 (下限1, 上限100)}\label{modulo_bias_comparison}
+\end{figure}
+グラフをそのまま比較した場合、2つの関数間に有意な差があるとは言い難い. 適切な比較を行うために、両手法の p 値およびカイ二乗値を算出する.\\
+
+表\ref{p_chi_comparison}の結果から, モンテカルロシミュレーションに必要な高いエントロピーを\texttt{arc4random\_uniform}の結果において確認できる. エントロピーが高いほど, 生成される値はよりランダムであることを示す. 一方で, カイ二乗値が低いことは, この結果が一様分布に近いことを意味する.\\
+
+両関数ともp値に基づくバイアスは有意ではないものの, \texttt{arc4random\_uniform}のエントロピースコアが高いことにより, シミュレーションデータに含まれる潜在的なノイズが除去される. 以上の理由から, 本実験ではすべてのシミュレーションに\texttt{arc4random\_uniform}関数を用いる.\\
+\begin{table}[H]
+  \centering
+  \caption{カイ二乗検定の結果}\label{p_chi_comparison}
+  \begin{tabular}{@{}ccc@{}}
+    \toprule
+    メソッド & カイ二乗統計量 & P値 \\
+    \midrule
+    $arc4random$ & 103.030000000 & 0.370758315 \\
+    $arc4random\_uniform$ & 83.980000000 & 0.859645089 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\subsection{実行数}
+前節2.3で述べたように, モンテカルロシミュレーションでは理論値に近い結果を得るために大量の反復回数が必要となる. サイコロのような単純なシミュレーションでは1000回の反復で十分な場合もあるが, より複雑なルールセットや稀な事象を扱うシミュレーションでは, 正確な結果を得るために100万回以上の反復が必要となることがある. 適切な反復回数の設定は困難であり, 多くの試行錯誤を要する.\\
+
 \section{実験結果}
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
 
 \end{document}

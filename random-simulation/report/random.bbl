@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+
+\bibitem{wolfgang1992random}
+Wolfgang H{\"o}rmann and Gerhard Derflinger.
+\newblock A portable uniform random number generator well suited for the rejection method.
+\newblock WorkingPaper~3, Institut f{\"u}r Statistik und Mathematik, Abt. f. Angewandte Statistik u. Datenverarbeitung, WU Vienna University of Economics and Business, 1992.
+
+\bibitem{ibmMonteCarlo}
+{IBM}.
+\newblock What is monte carlo simulation?, 2021.
+\newblock Accessed: 2025-07-20.
+
+\bibitem{lemire2019fast}
+Daniel Lemire.
+\newblock Fast random integer generation in an interval.
+\newblock {\em ACM Transactions on Modeling and Computer Simulation (TOMACS)}, 29(1):1--12, 2019.
+
+\bibitem{Morris_2019}
+Tim~P. Morris, Ian~R. White, and Michael~J. Crowther.
+\newblock Using simulation studies to evaluate statistical methods.
+\newblock {\em Statistics in Medicine}, 38(11):2074–2102, January 2019.
+
+\bibitem{arc4randomManual}
+{OpenBSD Project and BSD Manual Pages}.
+\newblock {\em arc4random(3): High-quality CSPRNG functions}, 2025.
+\newblock Manual page, OpenBSD (and FreeBSD/macOS).
+
+\bibitem{Ossola_2004}
+Giovanni Ossola and Alan~D. Sokal.
+\newblock Systematic errors due to linear congruential random-number generators with the swendsen-wang algorithm: A warning.
+\newblock {\em Physical Review E}, 70(2), August 2004.
+
+\bibitem{openbsd_arc4random}
+The~OpenBSD Project.
+\newblock arc4random — cryptographic random number generator.
+\newblock \url{https://man.openbsd.org/arc4random}, 2024.
+\newblock Accessed: 2025-07-20.
+
+\end{thebibliography}
