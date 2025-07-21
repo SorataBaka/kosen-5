@@ -15,6 +15,11 @@ Daniel Lemire.
 \newblock Fast random integer generation in an interval.
 \newblock {\em ACM Transactions on Modeling and Computer Simulation (TOMACS)}, 29(1):1--12, 2019.
 
+\bibitem{majka2024MA}
+Marcin Majka.
+\newblock Moving averages in time series analysis.
+\newblock 09 2024.
+
 \bibitem{Morris_2019}
 Tim~P. Morris, Ian~R. White, and Michael~J. Crowther.
 \newblock Using simulation studies to evaluate statistical methods.

@@ -4,7 +4,7 @@ void simulatePlot(long long int count, double radius, Options opts)
 {
   long long int withinCount = 0;
   double theoretical = calculateTheoreticalChance(radius);
-  if (opts.has_outfile)
+  if (opts.has_outfile == 1)
   {
     fprintf(opts.outfile, "index,radius,x,y,withinCount,percentageWithin,theoretical\n");
   }
@@ -13,7 +13,7 @@ void simulatePlot(long long int count, double radius, Options opts)
     Plot randomizedPlot = generateRandomPlot(radius);
     int isWithin = checkWithin(randomizedPlot, radius);
     withinCount += isWithin;
-    double percentageWithin = (double)withinCount / (double)(i + 1);
+    double percentageWithin = ((double)withinCount / (double)(i + 1)) * 100;
 
     LOG("Radius: %.4f | Plot(x: %.3f,y: %.3f) | "
         "Within Count: %lld | PercentageWithin: %.8f %% | Theoretical: %.8f%%\n",
@@ -24,7 +24,7 @@ void simulatePlot(long long int count, double radius, Options opts)
         percentageWithin, theoretical);
 
     /* CSV—for spreadsheets or later crunching */
-    if (opts.has_outfile && opts.outfile)
+    if (opts.has_outfile == 1)
     {
       fprintf(opts.outfile,
               "%lld,%.4f,%.3f,%.3f,%lld,%.8f,%.8f\n",
