@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  21 JUL 2025 17:44
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  22 JUL 2025 04:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -341,50 +341,26 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+)
+
+[1])
 \tf@toc=\write3
 \openout3 = `random.toc'.
 
 
 
-[1]
+[2]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 42.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 42.
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
-File: ./assets/eps/dice6.eps Graphic file (type eps)
- <./assets/eps/dice6.eps>
+
 
 [1]
-File: ./assets/eps/circle.eps Graphic file (type eps)
- <./assets/eps/circle.eps>
 
 [2]
-File: ./assets/eps/heightcomparison.eps Graphic file (type eps)
- <./assets/eps/heightcomparison.eps>
 
 [3]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 140.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 140.
-
-
-[4]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 167.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
@@ -393,6 +369,8 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
 
 
+[4]
+
 [5]
 
 [6]
@@ -400,8 +378,6 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 [7]
 
 [8]
-File: ./assets/eps/sample-simulation.eps Graphic file (type eps)
- <./assets/eps/sample-simulation.eps>
 
 [9]
 
@@ -410,52 +386,57 @@ File: ./assets/eps/sample-simulation.eps Graphic file (type eps)
 [11]
 
 [12]
-File: ./assets/eps/arc4random_general.eps Graphic file (type eps)
- <./assets/eps/arc4random_general.eps>
-File: ./assets/eps/arc4random_uniform.eps Graphic file (type eps)
- <./assets/eps/arc4random_uniform.eps>
 
 [13]
 
 [14]
-File: ./assets/eps/2_dice_100.eps Graphic file (type eps)
- <./assets/eps/2_dice_100.eps>
-File: ./assets/eps/2_dice_1000.eps Graphic file (type eps)
- <./assets/eps/2_dice_1000.eps>
 
 [15]
 
 [16]
 
 [17]
-File: ./assets/eps/7_dice_experiment_5mil.eps Graphic file (type eps)
- <./assets/eps/7_dice_experiment_5mil.eps>
 
 [18]
 
 [19]
-File: ./assets/eps/area_7_4000.eps Graphic file (type eps)
- <./assets/eps/area_7_4000.eps>
 
 [20]
-File: ./assets/eps/area_7_plotted.eps Graphic file (type eps)
- <./assets/eps/area_7_plotted.eps>
 
-[21] (./random.bbl
+[21]
+
+[22]
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+
+[28]
+
+[29]
+
+[30]
+
+[31] (./random.bbl
+
+[32]
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 16.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 26.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 30.
-
-
-[22]
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 36.
 )
 
-[23] (./random.aux)
+[33] (./random.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -463,12 +444,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 10437 strings out of 473836
- 224113 string characters out of 5731190
- 586911 words of memory out of 5000000
- 33592 multiletter control sequences out of 15000+600000
+ 10455 strings out of 473836
+ 225186 string characters out of 5731190
+ 583254 words of memory out of 5000000
+ 33607 multiletter control sequences out of 15000+600000
  574034 words of font info for 97 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 73i,14n,80p,844b,1258s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,80p,844b,975s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on random.dvi (25 pages, 78032 bytes).
+Output written on random.dvi (36 pages, 112892 bytes).

@@ -4,17 +4,36 @@
 \contentsline {subsubsection}{\numberline {2.1.1}課題1: 7つのサイコロを振る}{1}{}%
 \contentsline {subsubsection}{\numberline {2.1.2}課題2: 半径7の円の面積}{2}{}%
 \contentsline {subsubsection}{\numberline {2.1.3}課題3: 異身長男女を一列に並べる}{3}{}%
-\contentsline {subsubsection}{\numberline {2.1.4}課題4:ジャンケンの割合}{5}{}%
-\contentsline {subsubsection}{\numberline {2.1.5}課題5: ビンゴのシムレーション}{7}{}%
-\contentsline {subsection}{\numberline {2.2}シミュレーションの役割}{9}{}%
-\contentsline {subsection}{\numberline {2.3}モンテカルロシミュレーション}{10}{}%
-\contentsline {section}{\numberline {3}実験方法}{10}{}%
+\contentsline {subsubsection}{\numberline {2.1.4}課題4:ジャンケンの割合}{4}{}%
+\contentsline {subsubsection}{\numberline {2.1.5}課題5: ビンゴのシムレーション}{6}{}%
+\contentsline {subsection}{\numberline {2.2}シミュレーションの役割}{8}{}%
+\contentsline {subsection}{\numberline {2.3}モンテカルロシミュレーション}{9}{}%
+\contentsline {section}{\numberline {3}実験方法}{9}{}%
 \contentsline {subsection}{\numberline {3.1}ハードウェアと環境}{10}{}%
-\contentsline {subsection}{\numberline {3.2}ランダム関数}{11}{}%
-\contentsline {subsection}{\numberline {3.3}モジュロによるランダム関数のバイアス}{13}{}%
-\contentsline {subsection}{\numberline {3.4}実行数}{15}{}%
-\contentsline {subsection}{\numberline {3.5}移動平均による値の収束}{17}{}%
-\contentsline {subsection}{\numberline {3.6}ジャンケンシムレーションに用いる機械学習}{17}{}%
-\contentsline {section}{\numberline {4}実験結果}{18}{}%
-\contentsline {subsection}{\numberline {4.1}課題1: 7つのサイコロが同じ目を出すシムレーション}{18}{}%
-\contentsline {subsection}{\numberline {4.2}課題2: 半径7の円の面積}{20}{}%
+\contentsline {subsection}{\numberline {3.2}ランダム関数}{10}{}%
+\contentsline {subsection}{\numberline {3.3}モジュロによるランダム関数のバイアス}{12}{}%
+\contentsline {subsection}{\numberline {3.4}実行数}{14}{}%
+\contentsline {subsection}{\numberline {3.5}移動平均による値の収束}{16}{}%
+\contentsline {subsection}{\numberline {3.6}ジャンケンシムレーションに用いる機械学習}{16}{}%
+\contentsline {section}{\numberline {4}実験結果}{17}{}%
+\contentsline {subsection}{\numberline {4.1}課題1: 7つのサイコロが同じ目を出すシムレーション}{17}{}%
+\contentsline {subsection}{\numberline {4.2}課題2: 半径7の円の面積}{19}{}%
+\contentsline {subsection}{\numberline {4.3}課題3: 異身長男女を一列に並べる}{22}{}%
+\contentsline {subsection}{\numberline {4.4}課題4: ジャンケンの割合}{23}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}相手が完全にランダムな場合（バイアスなし）}{24}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}相手の戦略が常に変化する場合（機械学習）}{25}{}%
+\contentsline {subsection}{\numberline {4.5}課題5: ビンゴのシムレーション}{26}{}%
+\contentsline {subsubsection}{\numberline {4.5.1}7回以内で当たる}{27}{}%
+\contentsline {subsubsection}{\numberline {4.5.2}最短回数 (4回)}{27}{}%
+\contentsline {subsubsection}{\numberline {4.5.3}当たりとなる最も遅いゲーム回数 (71回)}{28}{}%
+\contentsline {section}{\numberline {5}分析と理論}{29}{}%
+\contentsline {subsection}{\numberline {5.1}課題1: 7 つのサイコロが同じ目を出すシムレーション}{29}{}%
+\contentsline {subsection}{\numberline {5.2}課題2: 半径7の円の面積}{30}{}%
+\contentsline {subsection}{\numberline {5.3}課題3: 異身長男女を一列に並べる}{31}{}%
+\contentsline {subsection}{\numberline {5.4}課題4: ジャンケンの割合}{31}{}%
+\contentsline {subsection}{\numberline {5.5}課題5: ビンゴのシムレーション}{33}{}%
+\contentsline {section}{\numberline {6}まとめ}{33}{}%
+\contentsline {section}{\numberline {7}発表について}{33}{}%
+\contentsline {subsection}{\numberline {7.1}}{33}{}%
+\contentsline {subsection}{\numberline {7.2}}{33}{}%
+\contentsline {section}{\numberline {8}付録}{33}{}%

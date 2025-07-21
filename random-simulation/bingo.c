@@ -23,7 +23,7 @@ void simulateBingo(long long int repeat, Options opts)
       }
       LOG("Repeat: %lld | Valid: %5d | Percentage: %06f\n", i + 1, valid, (double)valid / ((double)i + 1));
       if (opts.has_outfile)
-        fprintf(opts.outfile, "%lld,%d,%06f\n", i + 1, valid, (double)valid / ((double)i + 1));
+        fprintf(opts.outfile, "%lld,%d,%0.9f\n", i + 1, valid, (double)valid / ((double)i + 1));
       free(card);
     }
   }
@@ -75,26 +75,6 @@ void simulateBingo(long long int repeat, Options opts)
       if (opts.has_outfile)
         fprintf(opts.outfile, "%lld,%d,%0.09f\n", i + 1, totalValid, (double)totalValid / (i + 1));
     }
-    FILE *fp = fopen("call_distribution.csv", "w");
-    if (fp == NULL)
-    {
-      perror("Failed to open file");
-      exit(EXIT_FAILURE);
-    }
-
-    // // Write CSV header
-    // fprintf(fp, "call_count,occurrences,percentage\n");
-
-    // // Dump data
-    // for (int i = 0; i < 76; i++)
-    // {
-    //   if (callCounts[i] > 0)
-    //   {
-    //     fprintf(fp, "%d,%lld,%0.07f\n", i, callCounts[i], callCounts[i] / (double)repeat);
-    //   }
-    // }
-
-    fclose(fp);
   }
 }
 

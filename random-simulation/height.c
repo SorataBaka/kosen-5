@@ -1,4 +1,5 @@
 #include "height.h"
+
 void simulateHeight(long long int repeat, Options opts)
 {
   if (opts.has_outfile)
@@ -12,22 +13,24 @@ void simulateHeight(long long int repeat, Options opts)
     int valid = checkRow(queue, 1);
     validQueue += valid;
 
-    double validRatio = (double)validQueue / ((double)i + 1);
+    double validRatio = (double)validQueue / (i + 1);
 
     LOG("repeat,%lld,valid,%lld,ratio,%.7f\n",
-        i, validQueue, validRatio);
+        i + 1, validQueue, validRatio);
 
     if (opts.has_outfile)
     {
       fprintf(opts.outfile, "%lld,%lld,%.7f\n",
-              repeat, validQueue, validRatio);
+              i + 1, validQueue, validRatio);
     }
+
+    free(queue);
   }
 }
 
 Human *generateRow()
 {
-  Human *queue = (Human *)malloc(sizeof(Human) * 10);
+  Human *queue = malloc(sizeof(Human) * 10);
   queue[0] = M1;
   queue[1] = W1;
   queue[2] = M2;
@@ -41,7 +44,7 @@ Human *generateRow()
 
   for (size_t i = 9; i > 0; --i)
   {
-    size_t j = (size_t)generateWithinRange(0, i + 1);
+    size_t j = generateWithinRange(0, i);
     Human temp = queue[i];
     queue[i] = queue[j];
     queue[j] = temp;
@@ -49,6 +52,7 @@ Human *generateRow()
 
   return queue;
 }
+
 int checkRow(Human *queue, int minTaller)
 {
   int valid = 0;
@@ -56,25 +60,33 @@ int checkRow(Human *queue, int minTaller)
   {
     if (!IS_FEMALE(queue[i]))
       continue;
-    int higher = 0;
-    int femaleHeight = height_key(queue[i]);
+    int tallerLeft = 0;
+    int fh = height_key(queue[i]);
     for (int j = 0; j < i; j++)
     {
-      if (!IS_MALE(queue[j]))
-        continue;
-      if (height_key(queue[j]) < femaleHeight)
-        ++higher;
+      if (IS_MALE(queue[j]) && height_key(queue[j]) < fh)
+        ++tallerLeft;
     }
-    if (higher >= minTaller)
-      valid++;
+    if (tallerLeft >= minTaller)
+      ++valid;
   }
-  if (valid == 5)
-    return 1;
-  return 0;
+  return (valid == 5);
 }
 
 static inline int height_key(Human h)
-/* Returns 1..5, where 1 is the tallest. */
 {
-  return 10 - ((int)h);
+  // Directly map enum values to height ranking (1 = tallest, 10 = shortest)
+  static const int height_table[10] = {
+      10, // W5
+      9,  // M5
+      8,  // W4
+      7,  // M4
+      6,  // W3
+      5,  // M3
+      4,  // W2
+      3,  // M2
+      2,  // W1
+      1   // M1
+  };
+  return height_table[(int)h];
 }
