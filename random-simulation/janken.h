@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <math.h>
 
 typedef enum HandPosition
 {
   ROCK,
   PAPER,
-  SCISSORS
+  SCISSORS,
 } HandPosition;
 
 typedef struct Round
@@ -32,8 +33,21 @@ typedef struct Distribution
   double scissors;
 } Distribution;
 
+#define FEATURE_COUNT 6
+#define CLASS_COUNT 3
 void simulateJanken(long long int rounds, Options opts);
-Round generateRound(Distribution distribution);
+
+Round generateRound(Distribution distribution, const int opponent_count[3], int total_opponent_moves, HandPosition lastMove);
 RoundResult checkRound(Round round);
+
+void buildFeatureVector(double features[FEATURE_COUNT], HandPosition ownLastMove, const int opponent_count[3], int total_opponone_moves);
+
+void predict(const double features[FEATURE_COUNT], double output_probs[CLASS_COUNT]);
+void softmax(const double logits[CLASS_COUNT], double output_probs[CLASS_COUNT]);
+HandPosition predictBestMove(const double probs[CLASS_COUNT]);
+
+void trainWeights(const double features[FEATURE_COUNT], HandPosition actualOpponentMove, double learning_rate);
+
+HandPosition getBestMoveAgainst(HandPosition opponentMove);
 
 #endif
