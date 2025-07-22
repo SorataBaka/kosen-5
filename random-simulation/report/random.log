@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  22 JUL 2025 04:01
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  22 JUL 2025 10:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -354,13 +354,39 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 42.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 42.
-
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
+File: ./assets/eps/dice6.eps Graphic file (type eps)
+ <./assets/eps/dice6.eps>
 
 [1]
+File: ./assets/eps/circle.eps Graphic file (type eps)
+ <./assets/eps/circle.eps>
 
 [2]
+File: ./assets/eps/heightcomparison.eps Graphic file (type eps)
+ <./assets/eps/heightcomparison.eps>
 
 [3]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 140.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 140.
+
+
+[4]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 167.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
@@ -369,8 +395,6 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 167.
 
 
-[4]
-
 [5]
 
 [6]
@@ -378,6 +402,8 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 [7]
 
 [8]
+File: ./assets/eps/sample-simulation.eps Graphic file (type eps)
+ <./assets/eps/sample-simulation.eps>
 
 [9]
 
@@ -388,55 +414,95 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 [12]
 
 [13]
+File: ./assets/eps/arc4random_general.eps Graphic file (type eps)
+ <./assets/eps/arc4random_general.eps>
+File: ./assets/eps/arc4random_uniform.eps Graphic file (type eps)
+ <./assets/eps/arc4random_uniform.eps>
 
 [14]
 
 [15]
+File: ./assets/eps/2_dice_100.eps Graphic file (type eps)
+ <./assets/eps/2_dice_100.eps>
+File: ./assets/eps/2_dice_1000.eps Graphic file (type eps)
+ <./assets/eps/2_dice_1000.eps>
 
 [16]
 
 [17]
 
 [18]
+File: ./assets/eps/7_dice_experiment_5mil.eps Graphic file (type eps)
+ <./assets/eps/7_dice_experiment_5mil.eps>
 
 [19]
 
 [20]
+File: ./assets/eps/area_7_4000.eps Graphic file (type eps)
+ <./assets/eps/area_7_4000.eps>
 
 [21]
+File: ./assets/eps/area_7_plotted.eps Graphic file (type eps)
+ <./assets/eps/area_7_plotted.eps>
 
 [22]
 
 [23]
+File: ./assets/eps/person_min_1.eps Graphic file (type eps)
+ <./assets/eps/person_min_1.eps>
 
 [24]
 
 [25]
+File: ./assets/eps/janken_no_bias_comparison.eps Graphic file (type eps)
+ <./assets/eps/janken_no_bias_comparison.eps>
 
 [26]
+File: ./assets/eps/janken_ai_comparison.eps Graphic file (type eps)
+ <./assets/eps/janken_ai_comparison.eps>
 
 [27]
 
 [28]
+File: ./assets/eps/bingo_1_10000000.eps Graphic file (type eps)
+ <./assets/eps/bingo_1_10000000.eps>
+File: ./assets/eps/bingo_2_10000000.eps Graphic file (type eps)
+ <./assets/eps/bingo_2_10000000.eps>
 
 [29]
+File: ./assets/eps/bingo_3_10000000.eps Graphic file (type eps)
+ <./assets/eps/bingo_3_10000000.eps>
 
 [30]
 
-[31] (./random.bbl
+[31]
 
 [32]
+
+[33]
+
+[34]
+File: ./assets/eps/bingo_call_distribution.eps Graphic file (type eps)
+ <./assets/eps/bingo_call_distribution.eps>
+
+[35]
+
+[36]
+
+[37] (./random.bbl
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 16.
+(Font)              No change on input line 15.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 26.
+(Font)              No change on input line 21.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 30.
+(Font)              No change on input line 31.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 36.
+(Font)              No change on input line 35.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 41.
 )
 
-[33] (./random.aux)
+[38] (./random.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -444,12 +510,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 10455 strings out of 473836
- 225186 string characters out of 5731190
- 583254 words of memory out of 5000000
- 33607 multiletter control sequences out of 15000+600000
+ 10510 strings out of 473836
+ 226654 string characters out of 5731190
+ 587283 words of memory out of 5000000
+ 33658 multiletter control sequences out of 15000+600000
  574034 words of font info for 97 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 73i,14n,80p,844b,975s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,80p,844b,1258s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on random.dvi (36 pages, 112892 bytes).
+Output written on random.dvi (41 pages, 133392 bytes).

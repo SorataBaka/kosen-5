@@ -10,6 +10,11 @@ Wolfgang H{\"o}rmann and Gerhard Derflinger.
 \newblock What is monte carlo simulation?, 2021.
 \newblock Accessed: 2025-07-20.
 
+\bibitem{knuth1998art}
+Donald~E. Knuth.
+\newblock {\em The Art of Computer Programming, Volume 2: Seminumerical Algorithms}.
+\newblock Addison-Wesley, Boston, MA, 3rd edition, 1998.
+
 \bibitem{lemire2019fast}
 Daniel Lemire.
 \newblock Fast random integer generation in an interval.
