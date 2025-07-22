@@ -1,3 +1,5 @@
+*.eps
 *.png
 *.jpeg
-*.eps
+!random-simulation/**/*.png
+!random-simulation/**/*.eps
