@@ -3,3 +3,4 @@
 *.jpeg
 !random-simulation/**/*.png
 !random-simulation/**/*.eps
+.DS_Store

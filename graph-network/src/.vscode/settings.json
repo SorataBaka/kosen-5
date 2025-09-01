@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"__locale": "c",
+		"read_file.h": "c",
+		"log.h": "c"
+	}
+}
