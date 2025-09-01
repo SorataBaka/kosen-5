@@ -1,5 +1,7 @@
 #include "stack.h"
-Stack *push(Stack *stack, Node *node)
+long int memory_used = 0;
+long int total_memory_used = 0;
+Stack *push(Stack *stack, Node *node, int level)
 {
   // If the stack is empty
   if (stack == NULL)
@@ -9,9 +11,12 @@ Stack *push(Stack *stack, Node *node)
     stack->len = 0;
   }
   StackNode *new_node = (StackNode *)malloc(sizeof(StackNode));
+  memory_used += sizeof(StackNode);
+  total_memory_used += sizeof(StackNode);
   new_node->node = node;
   new_node->next = NULL;
   new_node->prev = stack->tail;
+  new_node->depth = level;
   clock_gettime(CLOCK_MONOTONIC, &(new_node->ts));
   if (stack->len == 0)
   {
@@ -27,7 +32,7 @@ Stack *push(Stack *stack, Node *node)
   stack->len++;
   return stack;
 }
-Node *pop(Stack *stack)
+StackNode *pop(Stack *stack)
 {
   if (stack == NULL || stack->len == 0)
   {
@@ -35,7 +40,6 @@ Node *pop(Stack *stack)
   }
 
   StackNode *old_tail = stack->tail;
-  Node *node = old_tail->node;
 
   // Move tail back
   stack->tail = old_tail->prev;
@@ -48,12 +52,22 @@ Node *pop(Stack *stack)
     // Stack is now empty → reset head
     stack->head = NULL;
   }
+  memory_used -= sizeof(StackNode);
 
-  free(old_tail);
+  struct timespec end;
+  clock_gettime(CLOCK_MONOTONIC, &end);
+
+  double elapsed_time = (end.tv_sec - old_tail->ts.tv_sec) +
+                        (end.tv_nsec - old_tail->ts.tv_nsec) / 1e9;
+
+  log_file("%d, %.09lf, %ld", old_tail->node->id, elapsed_time, memory_used);
+
   stack->len--;
 
-  return node;
+  // ⚠️ Do NOT free here, since caller will receive this StackNode
+  return old_tail;
 }
+
 int len(Stack *stack)
 {
   return stack->len;

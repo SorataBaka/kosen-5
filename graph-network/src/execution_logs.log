@@ -1,0 +1,7 @@
+file_name, execution_time, memory_used(b), depth, method
+assets/task-1/search_1000d.dat,0.001934000,48000,9,dfs
+assets/task-1/search_1000s.dat,0.001571000,48000,48,dfs
+assets/task-1/search_500d.dat,0.000755000,24000,6,dfs
+assets/task-1/search_500s.dat,0.000725000,24000,37,dfs
+assets/task-1/search_100d.dat,0.000247000,4800,5,dfs
+assets/task-1/search_100s.dat,0.000170000,4800,23,dfs
