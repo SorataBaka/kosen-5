@@ -8,26 +8,25 @@ typedef struct StackNode StackNode;
 
 struct StackNode
 {
-  Node *node;
+  Node *graph_node;
+  TreeNode *tree_parent;
   StackNode *next;
-  StackNode *prev;
-  struct timespec ts;
-  int depth;
 };
 
 struct Stack
 {
   StackNode *head;
-  StackNode *tail;
   int len;
 };
 extern long int memory_used;
 extern long int total_memory_used;
 
-Stack *push(Stack *stack, Node *node, int level);
-StackNode *pop(Stack *stack);
-int len(Stack *stack);
-void clear(Stack *stack);
 Stack *init();
+StackNode *create_stack_node(Node *graph_node, TreeNode *tree_parent);
 
+Stack *push(Stack *stack, Node *node, TreeNode *tree_parent);
+StackNode *pop(Stack *stack);
+
+void clear(Stack *stack);
+bool isEmpty(Stack *stack);
 #endif
