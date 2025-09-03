@@ -50,19 +50,127 @@ void print_tree(TreeNode *root, int depth)
 {
   if (!root)
     return;
-
-  // Indent according to depth
   for (int i = 0; i < depth; i++)
   {
-    printf("  "); // 2 spaces per level
+    printf(" "); // 2 spaces per level
   }
-
-  // Print node info
   printf("%d\n", root->id);
-
-  // Print all children
   for (int i = 0; i < root->connected_nodes_count; i++)
   {
     print_tree(root->connected_nodes[i], depth + 1);
   }
+}
+int get_tree_depth(TreeNode *root)
+{
+  if (!root)
+    return 0;
+
+  int max_child_depth = 0;
+  for (int i = 0; i < root->connected_nodes_count; i++)
+  {
+    int child_depth = get_tree_depth(root->connected_nodes[i]);
+    if (child_depth > max_child_depth)
+      max_child_depth = child_depth;
+  }
+  return 1 + max_child_depth;
+}
+int count_leaves(TreeNode *root)
+{
+  if (!root)
+    return 0;
+  if (root->connected_nodes_count == 0)
+    return 1;
+
+  int leaves = 0;
+  for (int i = 0; i < root->connected_nodes_count; i++)
+    leaves += count_leaves(root->connected_nodes[i]);
+  return leaves;
+}
+int max_branching(TreeNode *root)
+{
+  if (!root)
+    return 0;
+
+  int max_children = root->connected_nodes_count;
+  for (int i = 0; i < root->connected_nodes_count; i++)
+  {
+    int child_max = max_branching(root->connected_nodes[i]);
+    if (child_max > max_children)
+      max_children = child_max;
+  }
+  return max_children;
+}
+int subtree_sizes(TreeNode *root, int *sizes, int *count)
+{
+  if (!root)
+    return 0;
+  int total = 1;
+  for (int i = 0; i < root->connected_nodes_count; i++)
+    total += subtree_sizes(root->connected_nodes[i], sizes, count);
+  sizes[(*count)++] = total;
+  return total;
+}
+
+double compute_symmetry(TreeNode *root, int node_count)
+{
+  int *sizes = malloc(sizeof(int) * node_count);
+  if (!sizes)
+  {
+    fprintf(stderr, "malloc failed\n");
+    return 0.0;
+  }
+
+  int count = 0;
+  subtree_sizes(root, sizes, &count);
+
+  if (count <= 1)
+  {
+    free(sizes);
+    return 1.0;
+  }
+
+  // compute variance
+  double mean = 0;
+  for (int i = 0; i < count; i++)
+    mean += sizes[i];
+  mean /= count;
+
+  double variance = 0;
+  for (int i = 0; i < count; i++)
+  {
+    double diff = sizes[i] - mean;
+    variance += diff * diff;
+  }
+  variance /= count;
+
+  free(sizes);
+  return 1.0 / (1.0 + variance); // higher = more symmetric
+}
+int diameter_helper(TreeNode *root, int *diameter)
+{
+  if (!root)
+    return 0;
+  int max1 = 0, max2 = 0;
+  for (int i = 0; i < root->connected_nodes_count; i++)
+  {
+    int depth = diameter_helper(root->connected_nodes[i], diameter);
+    if (depth > max1)
+    {
+      max2 = max1;
+      max1 = depth;
+    }
+    else if (depth > max2)
+    {
+      max2 = depth;
+    }
+  }
+  if (max1 + max2 > *diameter)
+    *diameter = max1 + max2;
+  return max1 + 1;
+}
+int get_diameter(TreeNode *root)
+{
+  int dia = 0;
+  diameter_helper(root, &dia);
+  return dia;
 }

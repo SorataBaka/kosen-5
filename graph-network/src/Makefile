@@ -1,26 +1,26 @@
 # Compiler
 CC = gcc
 
-# Compiler flags
+# Compilation flags
 CFLAGS = -Wall -O2 -Iheaders
 
 # Target executable
-TARGET = readnode
+TARGET = out/readnode
 
 # Source files
-SRCS = main.c read_file.c stack.c log.c
+SRCS = main.c read_file.c stack.c log.c dfs.c spanning_tree.c queue.c
 
-# Object files (placed in out/)
+# Object files
 OBJS = $(SRCS:%.c=out/%.o)
 
 # Default target
-all: out $(TARGET)
+all: $(TARGET)
 
 # Link object files into executable
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o out/$(TARGET) $(OBJS)
+	$(CC) -o $(TARGET) $(OBJS)
 
-# Compile .c files to .o in out/
+# Compile .c files to .o files in out/
 out/%.o: %.c | out
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -30,4 +30,8 @@ out:
 
 # Clean build files
 clean:
-	rm -f out/*.o out/$(TARGET)
+	rm -rf out/*
+
+# Run target (optional convenience)
+run: $(TARGET)
+	gdb $(TARGET)
