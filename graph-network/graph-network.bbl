@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{bron1973algorithm}
+Coen Bron and Joep Kerbosch.
+\newblock Algorithm 457: finding all cliques of an undirected graph.
+\newblock {\em Communications of the ACM}, 16(9):575--577, 1973.
 
 \bibitem{cormen2009introduction}
 Thomas~H. Cormen, Charles~E. Leiserson, Ronald~L. Rivest, and Clifford Stein.
@@ -26,10 +31,26 @@ Sergey Kalinichenko.
 \newblock \url{https://stackoverflow.com/questions/19757342/non-recursive-dfs-when-to-mark-it-visited}, November 2013.
 \newblock Answer posted on Stack Overflow.
 
+\bibitem{kumlander2005practical}
+Deniss Kumlander.
+\newblock Some practical algorithms to solve the maximum clique problem.
+\newblock {\em Proceedings of the Estonian Academy of Sciences}, 54(2):79--86, 2005.
+
+\bibitem{lavrov2024lecture25}
+Mikhail Lavrov.
+\newblock Lecture 25: Bounds on chromatic number.
+\newblock \url{https://facultyweb.kennesaw.edu/mlavrov/courses/graph-theory/lecture25.pdf}, 2024.
+\newblock Accessed: 2025-09-09.
+
 \bibitem{moore1959shortest}
 Edward~F. Moore.
 \newblock The shortest path through a maze.
 \newblock In {\em Proceedings of the International Symposium on the Theory of Switching}, pages 285--292, Cambridge, MA, USA, 1959. Harvard University Press.
+
+\bibitem{rosen2019discrete}
+Kenneth~H. Rosen.
+\newblock {\em Discrete Mathematics and Its Applications}.
+\newblock McGraw-Hill, New York, 8 edition, 2019.
 
 \bibitem{tarjan1972dfs}
 Robert~Endre Tarjan.

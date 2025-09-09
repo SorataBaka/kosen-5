@@ -1,10 +1,10 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  9 SEP 2025 10:19
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.17)  9 SEP 2025 17:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/graph-network/graph-network"
-(/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/graph-network/graph-network.tex
+**"/Users/christianharjuno/Documents/Source Codes/kosen-5/graph-network/graph-network"
+(/Users/christianharjuno/Documents/Source Codes/kosen-5/graph-network/graph-network.tex
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -55,12 +55,12 @@ Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmargin=\skip52
 \droptitle=\skip53
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/05/18 v2.17x AMS math features
+Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip54
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2024/11/17 v2.01 AMS text
+Package: amstext 2021/08/26 v2.01 AMS text
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
@@ -116,8 +116,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip55
 \multlinetaggap=\skip56
 \mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
@@ -288,14 +288,7 @@ File: l3backend-dvips.def 2024-05-08 L3 backend support: dvips
 \g__pdf_backend_annotation_int=\count315
 \g__pdf_backend_link_int=\count316
 \g__pdf_backend_link_sf_int=\count317
-) (./graph-network.aux
-
-LaTeX Warning: Label `lst:pop-stack' multiply defined.
-
-
-LaTeX Warning: Label `lst:init-queue-tree' multiply defined.
-
-)
+) (./graph-network.aux)
 \openout1 = `graph-network.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
@@ -348,13 +341,15 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+)
+
+[1])
 \tf@toc=\write3
 \openout3 = `graph-network.toc'.
 
 
 
-[1]
+[2]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 38.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
@@ -408,59 +403,90 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 
 [12]
 
-[13] (./graph-network.bbl
-LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 5.
-LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 10.
-
+[13]
 
 [14]
+File: ./assets/eps/node-count-search.eps Graphic file (type eps)
+ <./assets/eps/node-count-search.eps>
+
+[15]
+File: ./assets/eps/greedy-coloring.eps Graphic file (type eps)
+ <./assets/eps/greedy-coloring.eps>
+
+[16]
+
+[17]
+Overfull \hbox (22.06987pt too wide) in paragraph at lines 398--410
+ [][] 
+ []
+
+(./graph-network.bbl
+
+[18]
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 6.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 10.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 15.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 20.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 25.
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--28
+Underfull \hbox (badness 7186) in paragraph at lines 29--33
 []\OT1/cmr/m/n/12 Sergey Kalinichenko.  non-recursive dfs (when to mark it vis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--28
+Underfull \hbox (badness 10000) in paragraph at lines 29--33
 \OT1/cmr/m/n/12 ited?).  $\OT1/cmtt/m/n/12 https : / / stackoverflow . com / questions / 19757342 /
  []
 
 
-Underfull \hbox (badness 2302) in paragraph at lines 24--28
+Underfull \hbox (badness 1173) in paragraph at lines 29--33
 \OT1/cmtt/m/n/12 non-[]recursive-[]dfs-[]when-[]to-[]mark-[]it-[]visited$\OT1/cmr/m/n/12 , Novem-ber 2013.  An-
  []
 
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 32.
-LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 37.
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--44
+[]\OT1/cmr/m/n/12 Mikhail Lavrov.  Lec-ture 25: Bounds on chro-matic num-ber.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--44
+\OT1/cmtt/m/n/12 https : / / facultyweb . kennesaw . edu / mlavrov / courses / graph-[]theory /
+ []
+
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
-(Font)              No change on input line 47.
+(Font)              No change on input line 48.
+
+
+[19]
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 52.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 58.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 68.
 )
 
-[15] (./graph-network.aux)
+[20] (./graph-network.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 10366 strings out of 473836
- 222118 string characters out of 5731190
- 593804 words of memory out of 5000000
- 33528 multiletter control sequences out of 15000+600000
+ 10389 strings out of 473836
+ 222838 string characters out of 5731189
+ 592057 words of memory out of 5000000
+ 33549 multiletter control sequences out of 15000+600000
  573656 words of font info for 95 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 73i,9n,80p,938b,1686s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,10n,80p,934b,1686s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on graph-network.dvi (17 pages, 56320 bytes).
+Output written on graph-network.dvi (23 pages, 70632 bytes).

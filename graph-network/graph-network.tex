@@ -246,7 +246,7 @@ struct Queue{
 DFSは章\ref{sec:stack-queue}で述べたスタックのデータ構造を用いて実装する. DFSは幅よりも深さを優先的に探索するため, アルゴリズムは以下のように動作する:
 \begin{enumerate}
   \item 空のスタックを生成する. 根ノードを訪問済みにマークし, それをスタックにプッシュする.
-  \begin{lstlisting}[caption=全域木とスタックの初期化,label=lst:init-queue-tree]
+  \begin{lstlisting}[caption=全域木とスタックの初期化,label=lst:init-queue-tree-2]
 TreeNode *root_tree = create_tree_node(
                           root_node->id,
                           NULL
@@ -262,7 +262,7 @@ push(stack, root_node, root_tree);
 StackNode *current_stack_node = pop(stack);
     \end{lstlisting}
     \item 現在のノードの未訪問の子ノードごとに, それを訪問済みにマークし, 対応する木ノードを生成して現在の木ノードに接続し, スタックにプッシュする.
-    \begin{lstlisting}[caption=本ノードの各子ノードをスタックに入れる,label=lst:pop-stack]
+    \begin{lstlisting}[caption=本ノードの各子ノードをスタックに入れる,label=lst:push-stack-nodes]
 Node *children = current_node->connected_nodes[i];
 if (children->visited == false){
   children->visited = true;
@@ -309,6 +309,18 @@ enqueue(q, child_graph, child_tree);
   \end{enumerate}
 \end{enumerate}
 BFS探索によって得られた全域木は返され, さらに解析を行うことができる.
+\subsubsection{全域木の特徴}
+DFSおよびBFSの両方から得られた全域木は, 特性を抽出するために解析できる. 本実験では, 得られた全域木を用いて以下を計算する\cite{west2001introduction}:
+
+\begin{description}
+  \item[深さ] 根ノードから最も遠い葉ノード（子を持たないノード）までの距離.
+  \item[葉ノード数] 子を持たないノードの数.
+  \item[最大分岐数] 任意のノードが持つ子ノードの最大数.
+  \item[対称性] 得られた全域木がどの程度均衡しているかを示す指標. 値が高いほど木は均衡している.
+  \item[直径] 得られた全域木における任意の2ノード間の最長経路.
+\end{description}
+
+
 \subsection{課題３: 連結成分数}
 グラフにおける連結成分数の計算方法は, \ref{sec:graph-traversal}節で述べたDFSまたはBFSアルゴリズムを用いることができる. 本実験で実装した走査アルゴリズムは, 単一の成分に含まれるノードを訪問済みとしてマークする.  
 連結成分数を数えるアルゴリズムの実装をコード\ref{lst:connected-components}に示す.
@@ -331,12 +343,93 @@ BFS探索によって得られた全域木は返され, さらに解析を行う
 \texttt{node\_list}はグラフ内の全ノードをID順に格納した配列である. 配列内の各ノードは, 接続されたノードへのポインタを保持する. この配列を順に走査し, 未訪問のノードを確認する. 各未訪問ノードに対してBFS (またはDFS) を実行する. 走査アルゴリズムはノードを訪問済みにマークするため, 同じ連結成分に含まれる全ノードは訪問済みとなる.\\
 走査を1回行うごとに連結成分数を1増加させる. この処理は, グラフ内のすべてのノードが訪問されるまで繰り返される.
 
+
 \subsection{課題４: 最大クリーク}
-\subsubsection{最大クリーク探索には}
+\subsubsection{最大クリーク探索には}\label{sec:clique-search-problem}
+グラフ内で最大クリークを求める問題はNP完全問題として知られている. これは多項式時間内で解ける既知のアルゴリズムが存在しないことを意味する. 最大クリークを求める最も基本的な方法はブルートフォース手法である. ブルートフォースではノードの全ての組合せを調べ, それらがクリークを形成するかどうかを確認する. 小規模なグラフであれば現実的であるが, グラフのサイズが大きくなるにつれて計算量は急激に増大する.
 
+ノード数が与えられた場合に調べるべき部分集合の数の可視化を図\ref{figure:node-count-search}に示す. 部分集合の総数はノード数$n$に対して$2^n$で表される. この式は$n$要素から成る集合における全ての部分集合（空集合と集合自身を含む）の数を表す. ノード数が増加すると部分集合の数は指数関数的に増加し, 最大クリーク探索に必要な比較回数は急激に増加する\cite{rosen2019discrete}.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{node-count-search.eps}
+  \caption{ノード数が与えられた場合に, 調べるべき部分集合数の可視化.}\label{figure:node-count-search}
+\end{figure}
 
+ブルートフォースは小さなノード数に対しては単純で分かりやすい手法であるが, ノード数が300に達すると現実的ではなくなる. 例えば, ノード数が300の場合, 部分集合の数は$2^{300}$であり, これはおよそ$1.07 \times 10^{90}$となる. この数は天文学的に大きく, 計算に膨大な時間を要する.
+\subsubsection{最大クリーク探索の実装}
+グラフにおける最大クリークを求めるために, すべてのノード部分集合がクリークを形成するかを確認する単純なブルートフォースあるいはバックトラッキングアルゴリズムを実装する. 各クリークが確認されるたびに, そのサイズを測定し, 発見された最大のものを記録する. 実装手順は以下の通りである\cite{bron1973algorithm}:
+\begin{enumerate}
+  \item 関数 \texttt{extend\_clique} は, グラフにおける最大クリークを探索するために設計された再帰的バックトラッキングアルゴリズムである. 
+  \item パラメータには以下が含まれる:
+    \begin{itemize}
+      \item \texttt{clique}: 現在クリークを形成している頂点集合,
+      \item \texttt{clique\_size}: 現在クリークに含まれている頂点数,
+      \item \texttt{candidates}: クリークを拡張できる可能性のある頂点集合,
+      \item \texttt{candidate\_size}: 候補集合のサイズ,
+      \item \texttt{node\_count}: グラフ全体の頂点数.
+    \end{itemize}
+  \item 候補が残っていない場合, 関数は現在のクリークサイズを返す.
+  \item 候補集合に含まれる各頂点 $v$ に対して:
+    \begin{itemize}
+      \item $v$ を一時的にクリークに追加する.
+      \item 更新されたクリーク内の全ての頂点と接続している頂点のみを含む新しい候補集合を構築し, クリークの性質を保持する.
+      \item アルゴリズムは, 減少した候補集合を用いて \texttt{extend\_clique} を再帰的に呼び出し, クリークをさらに拡張することを試みる.
+      \item すべての再帰分岐で発見された最大クリークサイズを記録する.
+    \end{itemize}
+  \item すべての可能性を探索した後, 関数は発見された最大クリークサイズを返す.
+\end{enumerate}
+\subsubsection{貪欲彩色アルゴリズム}
+章\ref{sec:clique-search-problem}で述べたように, ブルートフォース手法は単純であるが, 大規模なグラフにおいては計算コストの面で大きな制約がある. これを緩和するために, 100ノードおよび300ノードのグラフデータセットに対して貪欲彩色アルゴリズムを実装した. 貪欲彩色アルゴリズムは, グラフの頂点に色を割り当てるヒューリスティック手法である. グラフを彩色することで, 最大クリーク探索時に考慮すべき候補頂点の数を大幅に削減できる\cite{kumlander2005practical}.\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{greedy-coloring.eps}
+  \caption{貪欲彩色アルゴリズムの可視化}\label{figure:greedy-coloring}
+\end{figure}
+
+貪欲彩色アルゴリズムは, 図\ref{figure:greedy-coloring}のように可視化できる. このアルゴリズムの目的は, 隣接する頂点が同じ色にならないように頂点に色を割り当てることである. Lavrov (2024)によれば, グラフにおける最大クリークのサイズは, グラフを彩色するのに必要な最小の色数（クロマティック数）以下である\cite{lavrov2024lecture25}. 利用可能な候補に対して貪欲彩色アルゴリズムを適用することで, 最大クリークのサイズの上界を得ることができる. これにより, 探索時に考慮すべき候補頂点の数を大幅に削減できる.\\
+\newpage
 \section{実験結果}
+\subsection{課題１と課題２: DFSとBFSの実装}
+The results of analyzing the spanning trees obtained from bfs can be found in Table \ref{table:search-results-bfs}.
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lccccccc}
+  \hline
+  ファイル名 & ノード数 & 深さ & 葉ノード数 & 最大分岐数 & 対称性 & 直径 \\
+  \hline
+  search\_100s.dat  & 100  & 5 & 70  & 14  & 0.009071578 & 7 \\
+  search\_100d.dat  & 100  & 3 & 94  & 66  & 0.009716511 & 4 \\
+  search\_500s.dat  & 500  & 4 & 453 & 49  & 0.001929467 & 5 \\
+  search\_500d.dat  & 500  & 3 & 493 & 344 & 0.001918439 & 4 \\
+  search\_1000s.dat & 1000 & 3 & 946 & 107 & 0.000964235 & 4 \\
+  search\_1000d.dat & 1000 & 3 & 993 & 606 & 0.000942066 & 4 \\
+  \hline
+  \end{tabular}
+  \caption{Spanning tree properties for each dataset through BFS}\label{table:search-results-bfs}
+\end{table}
+In this table, file names suffixed with $s$ represent sparse graphs, while those with $d$ denote dense graphs. In all datasets, the depth of the spanning tree is relatively small, spanning from 3 to just 5 levels. This indicates that the graph nodes are well connected. We also see a high number of leaf nodes which indicates that many nodes are at the outermost level of the spanning tree. Looking at Table\ref{table:leaf-percentage-typed}, we can see that other than the 100 node sparse graph, most graphs have over 90\% of their nodes as leaf nodes. 
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{cccc}
+  \hline
+  ノード数 & グラフタイプ & 葉ノード数 & 葉ノード割合 \\
+  \hline
+  100   & 疎 (s)   & 70   & 70\%  \\
+  100   & 密 (d)   & 94   & 94\%  \\
+  500   & 疎 (s)   & 453  & 91\%  \\
+  500   & 密 (d)   & 493  & 99\%  \\
+  1000  & 疎 (s)   & 946  & 95\%  \\
+  1000  & 密 (d)   & 993  & 99\%  \\
+  \hline
+  \end{tabular}
+  \caption{各データセットにおける葉ノードの割合とグラフタイプ}\label{table:leaf-percentage-typed}
+\end{table}
+
+
+  
 \section{分析と理論}
 \section{まとめ}
 \section{発表についての感想}
