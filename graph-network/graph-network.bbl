@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{cormen2009introduction}
+Thomas~H. Cormen, Charles~E. Leiserson, Ronald~L. Rivest, and Clifford Stein.
+\newblock {\em Introduction to Algorithms}.
+\newblock MIT Press, 3 edition, 2009.
+
+\bibitem{diestel2017graph}
+Reinhard Diestel.
+\newblock {\em Graph Theory}.
+\newblock Graduate Texts in Mathematics. Springer, 5 edition, 2017.
+
+\bibitem{garey1979computers}
+Michael~R. Garey and David~S. Johnson.
+\newblock {\em Computers and Intractability: A Guide to the Theory of NP-Completeness}.
+\newblock W. H. Freeman, San Francisco, 1979.
+
+\bibitem{goodrich2016data}
+Michael~T. Goodrich, Roberto Tamassia, and Michael~H. Goldwasser.
+\newblock {\em Data Structures and Algorithms in C++}.
+\newblock Wiley, 2 edition, 2016.
+
+\bibitem{kalinichenko2013dfs}
+Sergey Kalinichenko.
+\newblock non-recursive dfs (when to mark it visited?).
+\newblock \url{https://stackoverflow.com/questions/19757342/non-recursive-dfs-when-to-mark-it-visited}, November 2013.
+\newblock Answer posted on Stack Overflow.
+
+\bibitem{moore1959shortest}
+Edward~F. Moore.
+\newblock The shortest path through a maze.
+\newblock In {\em Proceedings of the International Symposium on the Theory of Switching}, pages 285--292, Cambridge, MA, USA, 1959. Harvard University Press.
+
+\bibitem{tarjan1972dfs}
+Robert~Endre Tarjan.
+\newblock Depth-first search and linear graph algorithms.
+\newblock {\em SIAM Journal on Computing}, 1(2):146--160, 1972.
+
+\bibitem{kclique_percolation}
+{Trusted Analytics}.
+\newblock k-clique percolation --- trusted analytics python api documentation.
+\newblock \url{https://pythonhosted.org/trustedanalytics/python_api/graphs/graph-/kclique_percolation.html}.
+\newblock Accessed: 2025-09-07.
+
+\bibitem{west2001introduction}
+Douglas~B. West.
+\newblock {\em Introduction to Graph Theory}.
+\newblock Prentice Hall, 2 edition, 2001.
+
+\end{thebibliography}

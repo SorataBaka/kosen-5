@@ -8,7 +8,7 @@ CFLAGS = -Wall -O2 -Iheaders
 TARGET = out/readnode
 
 # Source files
-SRCS = main.c read_file.c stack.c log.c dfs.c spanning_tree.c queue.c bfs.c
+SRCS = main.c read_file.c stack.c log.c dfs.c spanning_tree.c queue.c bfs.c connected_components.c clique.c
 
 # Object files
 OBJS = $(SRCS:%.c=out/%.o)

@@ -21,6 +21,7 @@ Node *read_file(const char *filename, int *node_count)
     if (c == '\n')
       lines++;
   *node_count = lines;
+
   rewind(input_pointer);
 
   // Create an adjacency matrix
