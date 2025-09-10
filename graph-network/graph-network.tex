@@ -160,7 +160,7 @@ DFSとBFSの実装は, ノード数と密度が異なる6種類の無向グラ�
 \subsubsection{課題3: 連結成分数}
 連結成分数の実験では, 隣接行列で表現された1つの無向グラフを使用する. このグラフは2000を超えるノードを含み, 辺と連結成分の数は未知である. グラフは \texttt{search\_2000.dat} というファイルで与えられている.
 
-\subsubsection{課題4: 最大クリーク}
+\subsubsection{課題4: 最大クリーク}\label{sec:greedy-coloring-algorithm}
 最大クリーク探索アルゴリズムは, 隣接行列で表現された5種類の無向グラフに対してテストされる. グラフはサイズや密度が異なり, ノード数は30から300までの範囲にわたる. 実験で使用されるグラフの詳細は表 \ref{tab:clique_graphs} にまとめられている.
 
 \begin{table}[H]
@@ -521,7 +521,7 @@ DFSおよびBFSの両方から得られた全域木は, 特性を抽出するた
 File opened successfully.
 Biggest Clique: 3
 \end{lstlisting}
-\subsubsection{ブルートフォース手法のみ}\ref{tab:backtracking-only-results}
+\subsubsection{ブルートフォース手法のみ}
 すべてのデータセットに対してバックトラッキングアルゴリズムを実行した結果, 最大クリークサイズはそれぞれ\texttt{clique\_30}で8, \texttt{clique\_50}で9, \texttt{clique\_70}で11となった. 30ノードグラフおよび50ノードグラフにおける最大クリークサイズ探索は, いずれも1秒未満で終了した. しかし, 70ノードグラフにおける探索時間は大幅に増加し, アルゴリズムの実行は約22秒で終了した. 
 \begin{table}[H]
 \centering
@@ -539,14 +539,14 @@ Biggest Clique: 3
 \end{tabular}
 \end{table}
 
-しかし、100 ノードおよび 300 ノードのグラフに対してバックトラッキングアルゴリズムを実行したところ、30 分以内に結果を得ることができなかった。そのため、単純なバックトラッキングアルゴリズムを用いた実験は中止し、代わりにグリーディ彩色アルゴリズムを実装した。
+しかし, 100 ノードおよび 300 ノードのグラフに対してバックトラッキングアルゴリズムを実行したところ, 30 分以内に結果を得ることができなかった. そのため, 単純なバックトラッキングアルゴリズムを用いた実験は中止し, 代わりに貪欲彩色アルゴリズムを実装した.
 
-\subsubsection{グリーディ彩色アルゴリズムの実装}
-前章\ref{tab:backtracking-only-results}で述べたように, バックトラッキングアルゴリズムを用いて最大クリークを探索した場合, 70ノードを超えるグラフでは結果を得ることができなかった. この問題を解決するために, バックトラッキングアルゴリズムが検証する部分集合の数を削減する手法として, グリーディ彩色アルゴリズムを導入した. グリーディ彩色アルゴリズムとバックトラッキングアルゴリズムを組み合わせた結果は表\ref{tab:backtracking-coloring-results}に示す.
+\subsubsection{貪欲彩色アルゴリズムの実装}
+前章\ref{tab:backtracking-only-results}で述べたように, バックトラッキングアルゴリズムを用いて最大クリークを探索した場合, 70ノードを超えるグラフでは結果を得ることができなかった. この問題を解決するために, バックトラッキングアルゴリズムが検証する部分集合の数を削減する手法として, 貪欲彩色アルゴリズムを導入した. 貪欲彩色アルゴリズムとバックトラッキングアルゴリズムを組み合わせた結果は表\ref{tab:backtracking-coloring-results}に示す.
 
 \begin{table}[H]
 \centering
-\caption{異なるグラフサイズにおける最大クリークサイズと計算時間（グリーディ彩色アルゴリズム）}\label{tab:backtracking-coloring-results}
+\caption{異なるグラフサイズにおける最大クリークサイズと計算時間（貪欲彩色アルゴリズム）}\label{tab:backtracking-coloring-results}
 \begin{tabular}{l|c|r}
 \hline
 \textbf{グラフサイズ} & \textbf{最大クリークサイズ} & \textbf{計算時間 (s)} \\
@@ -563,9 +563,9 @@ Biggest Clique: 3
 この実験において, 組み合わせアルゴリズムは 30, 50, 70, 100 ノードのグラフに対していずれも1秒未満で最大クリークを発見した. それぞれの最大クリークサイズは 8, 9, 11, 14 であった. さらに, 100ノードから300ノードへと規模を拡大した場合でも, 300ノードグラフにおいて最大クリークサイズ18を約4.8 秒で発見することができた.
 
 \section{分析と理論}
-\subsection{課題１と課題２:DFSとBFSによる全域木の特徴}
+\subsection{課題1と課題2:DFSとBFSによる全域木の特徴}
 \subsubsection{深さの比較}
-The spanning tree returned as a result of traversal via DFS and BFS shows significant difference that emphasizes the main difference between how DFS and BFS work. Comparing the depth of the DFS and BFS spanning tree in table \ref{table:dfs-bfs-depth}, we can see that DFS tends to produce deeper spanning trees no matter dense or sparse. This is due to the core concept of how DFS works which goes as far as possible before backtracking to explore other branches; thus taller or deeper spanning trees. 
+DFSとBFSによる探索の結果得られたスパニング木には, それぞれの探索手法の特徴を強く反映した顕著な差が見られた.表\ref{table:dfs-bfs-depth}に示すように, スパニング木の深さを比較すると, 疎グラフ・密グラフを問わずDFSの方がより深いスパニング木を生成する傾向が確認できる.これはDFSが「できる限り深く探索してからバックトラックする」という基本的な性質を持つためであり, 結果としてスパニング木の高さ（深さ）が大きくなるのである.
 \begin{table}[H]
   \centering
   \caption{DFSとBFSにおける全域木の深さの比較}\label{table:dfs-bfs-depth}
@@ -583,9 +583,11 @@ The spanning tree returned as a result of traversal via DFS and BFS shows signif
   \end{tabular}
 \end{table}
 
-On the other hand, executing DFS on sparse graphs tend to produce much deeper spanning trees compared to dense graphs. Sparse graphs contain lower edge density which result in nodes not being well connected to each other. The lower edge count means the algorithms has very few choices of alternative routes to traverse between 1 node and another. This means that there are no shortcuts to get from 1 node to another. The algorithm needs to take a longer route thus creating much deeper spanning trees. Opposite to sparse graphs, dense graphs are much more well connected with bigger edge density. The more interconnected each nodes are to each other creates alternative paths for the algorithm to use to go from a node to another. With a lot of alternatives to choose, the algorithm is able to find shortcuts to shorten the length of path that needs to be taken.
+一方, 疎グラフに対してDFSを実行すると, 密グラフと比べてはるかに深いスパニング木が生成される傾向がある.疎グラフは辺密度が低く, ノード間の接続が十分でないためである.辺の数が少ないことは, アルゴリズムがあるノードから別のノードへ移動する際に選択できる経路がほとんど存在しないことを意味する.このため, あるノードから別のノードへ移動するための近道が存在せず, アルゴリズムはより長い経路を辿らざるを得ず, その結果としてより深いスパニング木が生成される.これとは対照的に, 密グラフは辺密度が高く, ノード同士がより密に接続されている.ノード間の接続が多ければ多いほど, アルゴリズムが利用可能な代替経路が増え, あるノードから別のノードへの移動に近道を見つけることができる.その結果, 必要な経路の長さが短縮されるのである.
+
 \subsubsection{葉ノード数}
-Comparison of the leafs of both spanning trees can be seen in table \ref{table:dfs-bfs-leaf-percent}. While DFS tends to create more leafs than BFS, the difference is extremently minimal and falls within a margin of error of 5\%. The results are negligible and we are able to conclude that neither DFS and BFS have any significant effects on leaf counts.
+両方のスパニング木の葉ノードの比較は表\ref{table:dfs-bfs-leaf-percent}に示されている. DFSはBFSよりも多くの葉ノードを生成する傾向があるが,その差は極めて小さく,誤差範囲5\%内に収まる. この結果は無視でき,DFSとBFSのどちらも葉ノード数に対して有意な影響を与えないと結論付けられる.
+
 \begin{table}[H]
   \centering
   \caption{DFSとBFSにおける全域木の葉ノード数の比較（差\%）}\label{table:dfs-bfs-leaf-percent}
@@ -603,7 +605,7 @@ Comparison of the leafs of both spanning trees can be seen in table \ref{table:d
   \end{tabular}
 \end{table}
 \subsubsection{最大分岐数}
-As explained before, the maximum branching factor calculates the furthest distance a node needs to travel to visit another node. While depth measures from root to the furthest node, the maximum branching factor calculates distance for any 2 nodes. The comparison of spanning trees can be seen in table \ref{table:dfs-bfs-maxbranch}.
+以前述べたように, 最大分岐数とはあるノードが持つ子ノードの最大数である. スパニング木の比較は表\ref{table:dfs-bfs-maxbranch}に示されている.
 \begin{table}[H]
   \centering
   \caption{DFSとBFSにおける全域木の最大分岐数の比較（差\%）}\label{table:dfs-bfs-maxbranch}
@@ -620,11 +622,131 @@ As explained before, the maximum branching factor calculates the furthest distan
   \hline
   \end{tabular}
 \end{table}
+DFSとBFS間では最大分岐数に大きな変化は見られないが, 密グラフと疎グラフ間では顕著な違いが見られる. 密グラフは疎グラフと比べて最大分岐数が大きくなる傾向がある. この違いはDFSおよびBFSの結果の両方で一貫して観察される.\\
 
+全域木における最大分岐数は, 元のグラフの次数分布によって制約される. DFSやBFSのどちらを用いて全域木を作成しても, 両方のアルゴリズムは新しい辺を生成しないため, 各ノードの最大分岐数は最終的に元のグラフの最大ノード次数に依存する. この場合, DFSとBFSの役割はどの辺を選択するかに過ぎない.\\
 
+密グラフではノード間の接続が多いため, 辺の数も多くなる. 辺密度が高いことはノード次数が高いことを意味し, そのため密グラフは使用するアルゴリズムに関わらず一貫して高い最大分岐数を示すことが説明できる.
+
+\subsubsection{対称性}
+全域木の対称性は, 各部分木のサイズがどれだけ異なるかを示す指標である. 部分木のサイズとは, そのノードを根とするノードの数を表す. すべての部分木が同じサイズであれば, 対称性の値は1になる. DFSおよびBFSによって作成された全域木の結果を比較したものは, 表\ref{table:dfs-bfs-symmetry}に示す.
+\begin{table}[H]
+  \centering
+  \caption{DFSとBFSにおける全域木の対称性の比較}\label{table:dfs-bfs-symmetry}
+  \begin{tabular}{lcc}
+  \hline
+  ファイル名 & BFS対称性 & DFS対称性 \\
+  \hline
+  search\_100s.dat  & 0.009071578 & 0.002490037 \\
+  search\_100d.dat  & 0.009716511 & 0.009185571 \\
+  search\_500s.dat  & 0.001929467 & 0.000380834 \\
+  search\_500d.dat  & 0.001918439 & 0.001820973 \\
+  search\_1000s.dat & 0.000964235 & 0.000196260 \\
+  search\_1000d.dat & 0.000942066 & 0.000850535 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+一般的に, すべてのデータセットから作成された全域木は非対称で, 値は0.01を超えないが, BFSとDFSの全域木の間には明確な傾向が見られる. BFSアルゴリズムによって作成された全域木は, 一貫してDFS全域木よりも対称性が高い. 対称性は, グラフ内の各部分木のサイズがどれだけ均等に分布しているかを示す指標であるため, DFSの全域木は背が高く細長い構造であるため, 対称性の値が小さくなる. 一方, BFSはより浅く均衡の取れた全域木を生成するため, ノードがより均等に分布し, 対称性の値がDFSよりも高くなる.
+\begin{lstlisting}[caption={DFSとBFS全域木の比較}, label=bfs-dfs-spanning-comparison]
+          A                                       A
+          \                                     / \
+            B                                   B   D
+            \                                 / \
+              C                               C   E
+            /
+            E
+          /
+          D
+\end{lstlisting}
+
+\subsubsection{直径}
+深さが根ノードから最も遠いノードまでの距離を測るのに対し, 直径は全域木内の任意の2ノード間で取り得る最長距離を測る, DFSおよびBFSの全域木の直径の比較は表\ref{table:dfs-bfs-diameter}に示す.
+\begin{table}[H]
+  \centering
+  \caption{DFSとBFSにおける全域木の直径比較}\label{table:dfs-bfs-diameter}
+  \begin{tabular}{lccc}
+  \hline
+  ファイル名 & BFS直径 & DFS直径 & 変化率 (\%) \\
+  \hline
+  search\_100s.dat  & 7  & 23 & +229\% \\
+  search\_100d.dat  & 4  & 5  & +25\%  \\
+  search\_500s.dat  & 5  & 37 & +640\% \\
+  search\_500d.dat  & 4  & 6  & +50\%  \\
+  search\_1000s.dat & 4  & 48 & +1100\% \\
+  search\_1000d.dat & 4  & 9  & +125\% \\
+  \hline
+  \end{tabular}
+\end{table}
+全域木の深さはグラフの密度と使用するアルゴリズムの両方に影響される, DFSは縦に高く細い木を作るため, 根から最も深いノードまでの距離が長くなる, 一方でBFS全域木は浅く幅広いため直径が小さくなる, この違いはグラフ内のエッジ密度によっても影響を受ける, 密なグラフでは両方のアルゴリズムが浅い木を構築できるため, 全域木の深さはあまり変わらない, しかし密に接続されていてもDFSは常に高い木を作るため, 直径はBFS全域木より大きくなる.\\
+
+また, 密なグラフから作成されたBFS全域木はコンパクトなままであり, 100, 500, 1000ノードのグラフでも直径は変化しない, 密なグラフの接続性により, グラフのサイズに関わらずほとんどのノードは根から数ステップで到達可能となる, この特性はBFSが広がり優先で探索することで, 高密度ネットワーク内のすべてのノードを浅い深さで効率的にカバーできることを示す, 一方, DFS全域木ではグラフサイズが大きくなるにつれて直径が大幅に増加し, 特に疎なグラフでは経路が長く, 構造があまりコンパクトでないことを示す.
+
+\subsection{課題3: グラフの連結成分数}
+連結成分のカウント結果を分析すると, DFSおよびBFSの両方がグラフ内のすべての連結成分を正確に識別できることがわかる, これは両アルゴリズムが, 未訪問ノードに移動する前に, 与えられた開始ノードから到達可能なすべてのノードを系統的に探索するためである, その結果, 各探索は一意に1つの連結成分を特定する, したがって, 新しい探索が開始される回数の合計は, グラフ内の連結成分の数に直接対応する, DFSとBFSの結果が一致することは, 実装の正確性を確認する, さらに, この手法はグラフの規模に応じてスケールし, 連結成分の数はグラフ全体の連結性に関する洞察を与える: 数が多いほど疎または分断されたグラフを示し, 数が少ないほど高い連結性を示す.
+
+\subsection{課題4: 最大クリーク}
+最大クリークの探索では, 元のバックトラッキングアルゴリズムを修正し, 探索時間を大幅に短縮するために貪欲彩色アルゴリズムと統合した, 貪欲彩色アルゴリズムなしでは, 30, 50, および70ノードのグラフにおける最大クリークサイズは取得できた, しかし, ノード数を100に増やすと, 十分な時間内に最大クリークサイズを得ることができなかった, したがって, 100ノードおよび300ノードのグラフでは, 単純なバックトラッキングアルゴリズムでは結果は得られなかった, セクション\ref{sec:clique-search-problem}に基づき, 探索すべき部分集合の量を図\ref{figure:node-count-search-2}で可視化できる.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{node-count-search.eps}
+  \caption{ノード数が与えられた場合に, 調べるべき部分集合数の可視化.}\label{figure:node-count-search-2}
+\end{figure}
+前述の通り, 探索すべき部分集合の量はグラフのノード数に関連して $2^n$ で計算できる, 我々のデータセットには30, 50, 70, 100, および300ノードが含まれているため, 各グラフでチェックする必要がある部分集合の量を計算できる, 部分集合の量は表\ref{table:2powern_jp}に示す.
+
+\begin{table}[H]
+\centering
+\caption{クリーク問題における $n$ に対する $2^n$ の値}\label{table:2powern_jp}
+\begin{tabular}{c|c}
+\hline
+$n$ & $2^n$ \\
+\hline
+30  & 1,073,741,824 \\
+50  & 1,125,899,906,842,624 \\
+70  & 1,180,591,620,717,411,324,224 \\
+100 & 1,267,650,600,228,229,401,496,703,205,376 \\
+300 & $2.038 \times 10^{90}$ \\
+\hline
+\end{tabular}
+\end{table}
+表\ref{table:2powern_jp}に示すように, 100ノードグラフで確認すべき部分集合の数は$10^{30}$を超え, 300ノードグラフでは$10^{90}$を超える, この指数関数的な増加により, 最先端のコンピュータであっても, 大規模グラフに対して単純な全探索によるバックトラッキングは現実的ではない, すべての可能な部分集合を網羅的に探索するために必要な計算資源と時間は, 実用的な制限をはるかに超える, したがって, 100ノード以上のグラフでは, 貪欲彩色のようなヒューリスティックまたは近似アルゴリズムを利用することが, 合理的な時間内に結果を得るために不可欠である.\\
+
+バックトラッキングと貪欲彩色アルゴリズムを組み合わせて適用することで, 提供されたすべてのデータセットにおけるクリーク探索の性能は大幅に向上した, 改善の詳細は表\ref{tab:clique-comparison-improvement}に示す.
+
+\begin{table}[H]
+\centering
+\caption{異なるグラフサイズにおける最大クリークサイズと計算時間の比較（改善率付き）}\label{tab:clique-comparison-improvement}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|r|c|r|r}
+\hline
+\textbf{グラフサイズ} & \multicolumn{2}{c|}{\textbf{バックトラッキング}} & \multicolumn{2}{c|}{\textbf{グリーディ彩色}} & \textbf{改善率 (\%)} \\
+\cline{2-6}
+ & \textbf{最大クリークサイズ} & \textbf{計算時間 (s)} & \textbf{最大クリークサイズ} & \textbf{計算時間 (s)} & \\
+\hline
+30  & 8  & 0.084   & 8  & 0.0046  & 94.5 \\
+50  & 9  & 0.286   & 9  & 0.0035  & 98.8 \\
+70  & 11 & 21.586  & 11 & 0.0419  & 99.8 \\
+100 & $-$  & $-$    & 14 & 0.1951  & $-$ \\
+300 & $-$  & $-$    & 18 & 4.8325  & $-$ \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+貪欲彩色アルゴリズムを適用する前は, 100ノードおよび300ノードのグラフで結果を得ることができなかった, しかし貪欲彩色アルゴリズムを適用することで, 異なるノードサイズでの性能が向上しただけでなく, 以前は探索可能であった30, 50, 70ノードグラフのクリークサイズ探索の性能も改善された, 表\ref{tab:clique-comparison-improvement}によると, 小規模ノードグラフにおいて少なくとも90％の改善を達成した.\\
+
+以前は100ノードグラフで最大クリークサイズを探索しても30分待っても結果が得られなかった, 改善されたアルゴリズムでは, 最大クリークサイズ14を0.5秒未満で見つけることができた, かつ300ノードグラフの探索に何年もかかる作業が, 現在では5秒未満で完了した.\\
+
+これらの大幅な改善は, カラーグラデーションを上限として利用することで, 探索すべき部分集合の数を大幅に減らせることを示している, 先に\ref{sec:greedy-coloring-algorithm}節で説明したように, クリークのノード数は色の数を超えることはできない, グラフは隣接する2つのノードが同じ色を持たないように系統的に彩色される, クリークサイズが大きくなるにつれて, アルゴリズムが無目的に探索を開始し, 処理時間が大幅に増加する可能性がある, 色の数を利用することで, アルゴリズムは特定の経路を探索すべきか停止すべきかを知ることができ, 処理時間を削減できる.
 
 \section{まとめ}
+グラフ上で異なるアルゴリズムがどのように動作するかを理解することは, 我々のシナリオにおいてどのアルゴリズムを使用するのが最適かを判断する上で重要, BFSは最短経路の探索やより対称的な探索が必要な場合に適している可能性がある, 一方でDFSはグラフが浅く, クリークや部分木などの全構造を探索する必要がある場合に有効, 両方のアルゴリズムは, 連結成分の数を計算するなど小規模なタスクにおいても互換的に使用可能, ターゲットデータの挙動や特性を分析することは, 最も効率的かつ最適なアルゴリズムを選択する上で重要.\\
+
+与えられたグラフ内で最大クリークを見つけるような難しい課題を解く際, 瞬時に解を求める具体的な方法は存在しないが, 最終手段としてブルートフォースが考えられる, 他のブルートフォースの応用が示す通り, どれだけ高性能なコンピュータを使用しても, 変数の数が増えるにつれて問題は著しく複雑化, ブルートフォースは日単位ではなく, 場合によっては年単位の計算時間を要することもある, しかし, 経路の枝刈りなどの手法を単純なブルートフォースアルゴリズムに組み込むことで, チェックすべき反復回数を大幅に削減でき, リソースの使用量を抑制, ブルートフォースは, 正確な解を導く単一の方程式が存在しない多くの複雑な問題における最終手段となり得る, しかし, アルゴリズムを最適化する方法を理解することにより, 大規模な問題の計算時間やコストを大幅に削減可能.
 \section{発表についての感想}
+\subsection{西村 悠}
+\subsection{小池 亮太}
 \section{付録}
 本実験に利用したソースコードなどはGitHubにホストされている.
 \url{https://github.com/SorataBaka/kosen-5/tree/main/graph-network}
