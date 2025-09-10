@@ -1,10 +1,10 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.17)  9 SEP 2025 17:18
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  10 SEP 2025 15:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/christianharjuno/Documents/Source Codes/kosen-5/graph-network/graph-network"
-(/Users/christianharjuno/Documents/Source Codes/kosen-5/graph-network/graph-network.tex
+**"/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/graph-network/graph-network"
+(/Users/christianharjuno/Documents/Source Codes/5-kosen-lab/graph-network/graph-network.tex
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -55,12 +55,12 @@ Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmargin=\skip52
 \droptitle=\skip53
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2024/11/05 v2.17t AMS math features
+Package: amsmath 2025/05/18 v2.17x AMS math features
 \@mathmargin=\skip54
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2021/08/26 v2.01 AMS text
+Package: amstext 2024/11/17 v2.01 AMS text
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
@@ -116,8 +116,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip55
 \multlinetaggap=\skip56
 \mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2953.
-LaTeX Info: Redefining \] on input line 2954.
+LaTeX Info: Redefining \[ on input line 2949.
+LaTeX Info: Redefining \] on input line 2950.
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count283
@@ -416,13 +416,23 @@ File: ./assets/eps/greedy-coloring.eps Graphic file (type eps)
 [16]
 
 [17]
-Overfull \hbox (22.06987pt too wide) in paragraph at lines 398--410
+
+[18]
+Overfull \hbox (22.06987pt too wide) in paragraph at lines 440--452
  [][] 
  []
 
-(./graph-network.bbl
 
-[18]
+
+[19]
+
+[20]
+
+[21]
+
+[22]
+
+[23] (./graph-network.bbl
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 6.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
@@ -451,6 +461,8 @@ Underfull \hbox (badness 1173) in paragraph at lines 29--33
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 37.
 
+
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 40--44
 []\OT1/cmr/m/n/12 Mikhail Lavrov.  Lec-ture 25: Bounds on chro-matic num-ber.
  []
@@ -462,9 +474,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--44
 
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 48.
-
-
-[19]
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 52.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
@@ -473,7 +482,7 @@ LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 68.
 )
 
-[20] (./graph-network.aux)
+[25] (./graph-network.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -481,12 +490,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 10389 strings out of 473836
- 222838 string characters out of 5731189
- 592057 words of memory out of 5000000
- 33549 multiletter control sequences out of 15000+600000
+ 10409 strings out of 473836
+ 223375 string characters out of 5731190
+ 592254 words of memory out of 5000000
+ 33569 multiletter control sequences out of 15000+600000
  573656 words of font info for 95 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 73i,10n,80p,934b,1686s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,11n,80p,972b,1686s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on graph-network.dvi (23 pages, 70632 bytes).
+Output written on graph-network.dvi (28 pages, 93252 bytes).

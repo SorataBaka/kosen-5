@@ -135,11 +135,11 @@ BFSもDFSと同様に根ノードから探索を開始する. 根ノードのす
   FITNESS FOR A PARTICULAR PURPOSE.
   This program built for i386-apple-darwin11.3.0
 \end{verbatim}
-\subsection{実験対象データ}
-本研究で行う全ての実験は、隣接リストで表現された無向グラフを利用する. 各実験では、ノード数が異なる様々なサイズのグラフが与えられる. 実験で使用されるグラフは以下の通りである.
+\subsection{実験対象データ}\label{sec:experimental-data}
+本研究で行う全ての実験は, 隣接リストで表現された無向グラフを利用する. 各実験では, ノード数が異なる様々なサイズのグラフが与えられる. 実験で使用されるグラフは以下の通りである.
 
 \subsubsection{課題1と課題2: DFSとBFSの実装}
-DFS と BFS の実装は、ノード数と密度が異なる6種類の無向グラフに対してテストされる. これらのグラフは隣接行列で表現され、密度に基づいて2種類に分類される. 密グラフはノード数に対して辺の数が多く, 疎グラフは相対的に辺の数が少ない. 実験で使用されるグラフの詳細は表\ref{tab:adjacency_matrices} にまとめられている.
+DFSとBFSの実装は, ノード数と密度が異なる6種類の無向グラフに対してテストされる. これらのグラフは隣接行列で表現され, 密度に基づいて2種類に分類される. 密グラフはノード数に対して辺の数が多く, 疎グラフは相対的に辺の数が少ない. 実験で使用されるグラフの詳細は表\ref{tab:adjacency_matrices} にまとめられている.
 
 \begin{table}[H]
   \centering
@@ -158,10 +158,10 @@ DFS と BFS の実装は、ノード数と密度が異なる6種類の無向グ�
   \end{tabular}\label{tab:adjacency_matrices}
 \end{table}
 \subsubsection{課題3: 連結成分数}
-連結成分数の実験では、隣接行列で表現された1つの無向グラフを使用する. このグラフは2000を超えるノードを含み、辺と連結成分の数は未知である. グラフは \texttt{search\_2000.dat} というファイルで与えられている.
+連結成分数の実験では, 隣接行列で表現された1つの無向グラフを使用する. このグラフは2000を超えるノードを含み, 辺と連結成分の数は未知である. グラフは \texttt{search\_2000.dat} というファイルで与えられている.
 
 \subsubsection{課題4: 最大クリーク}
-最大クリーク探索アルゴリズムは、隣接行列で表現された5種類の無向グラフに対してテストされる. グラフはサイズや密度が異なり、ノード数は30から300までの範囲にわたる. 実験で使用されるグラフの詳細は表 \ref{tab:clique_graphs} にまとめられている.
+最大クリーク探索アルゴリズムは, 隣接行列で表現された5種類の無向グラフに対してテストされる. グラフはサイズや密度が異なり, ノード数は30から300までの範囲にわたる. 実験で使用されるグラフの詳細は表 \ref{tab:clique_graphs} にまとめられている.
 
 \begin{table}[H]
   \centering
@@ -180,7 +180,7 @@ DFS と BFS の実装は、ノード数と密度が異なる6種類の無向グ�
 \end{table}
 
 \subsubsection{データの整形とパース}
-本実験で使用される全てのグラフは、隣接行列として整形されたテキストファイルで与えられる. 例えばグラフが50ノードを含む場合、隣接行列は$50 \times 50$の行列として表現される. これは探索において小さな課題をもたらす. あるノードが他のノードに接続されているかを確認するためには、全てのノードを反復処理して接続の有無を確認する必要がある. その結果、計算量は$O(n^2)$となり、大規模なグラフに対しては非効率になる可能性がある. 探索処理を最適化するために、各隣接行列は事前に処理され、各ノードがポインタを通じて他のノードにリンク可能な構造体として表現される隣接リストに変換される.\\
+本実験で使用される全てのグラフは, 隣接行列として整形されたテキストファイルで与えられる. 例えばグラフが50ノードを含む場合, 隣接行列は$50 \times 50$の行列として表現される. これは探索において小さな課題をもたらす. あるノードが他のノードに接続されているかを確認するためには, 全てのノードを反復処理して接続の有無を確認する必要がある. その結果, 計算量は$O(n^2)$となり, 大規模なグラフに対しては非効率になる可能性がある. 探索処理を最適化するために, 各隣接行列は事前に処理され, 各ノードがポインタを通じて他のノードにリンク可能な構造体として表現される隣接リストに変換される.\\
 本実験で使用される各グラフノードの構造体はコード\ref{lst:graph-node-struct} に示されている.
 
 \begin{lstlisting}[caption=グラフノードの構造,label=lst:graph-node-struct]
@@ -192,9 +192,9 @@ struct Node{
 };
 \end{lstlisting}
 
-現在のノードを追跡するために、id が置かれ、ノードが訪問済みかどうかを示すブール値も記録されている. 接続されているノードの数も構造体に保存されており、接続ノードを反復処理する際に効率的である. 最後に、他のノードへの接続を表現するために、ノードへのポインタ配列へのポインタが使用されている. これにより、全てのノードを反復処理する必要なく、接続されているノードへ直接アクセスすることが可能となり、グラフ探索を効率的に行うことができる.\\
+現在のノードを追跡するために, id が置かれ, ノードが訪問済みかどうかを示すブール値も記録されている. 接続されているノードの数も構造体に保存されており, 接続ノードを反復処理する際に効率的である. 最後に, 他のノードへの接続を表現するために, ノードへのポインタ配列へのポインタが使用されている. これにより, 全てのノードを反復処理する必要なく, 接続されているノードへ直接アクセスすることが可能となり, グラフ探索を効率的に行うことができる.\\
 
-探索の結果として得られる全域木も、ポインタによってリンクされたノードとして表現される. コード\ref{lst:graph-node-struct}と同様に、全域木の各ノードはidと隣接ノードへのポインタのリストを含む. 唯一の違いは、親ノードへのポインタが存在する点である. 全域木ノードの完全な構造はコード\ref{lst:spanning-tree-node-struct}に示されている.
+探索の結果として得られる全域木も, ポインタによってリンクされたノードとして表現される. コード\ref{lst:graph-node-struct}と同様に, 全域木の各ノードはidと隣接ノードへのポインタのリストを含む. 唯一の違いは, 親ノードへのポインタが存在する点である. 全域木ノードの完全な構造はコード\ref{lst:spanning-tree-node-struct}に示されている.
 
 \begin{lstlisting}[caption={全域木ノードの構造},label=lst:spanning-tree-node-struct]
 struct TreeNode{
@@ -205,12 +205,12 @@ struct TreeNode{
 };  
 \end{lstlisting}
 \subsection{スタックとキューの実装}\label{sec:stack-queue}
-DFSとBFSのアルゴリズムを実装するためには、スタックとキューを使用する必要がある\cite{cormen2009introduction}. 標準のC言語ライブラリにはスタックやキューの組み込みデータ構造が存在しないため、本研究ではこれらのデータ構造をリンクリストを用いて一から実装する.\\
+DFSとBFSのアルゴリズムを実装するためには, スタックとキューを使用する必要がある\cite{cormen2009introduction}. 標準のC言語ライブラリにはスタックやキューの組み込みデータ構造が存在しないため, 本研究ではこれらのデータ構造をリンクリストを用いて一から実装する.\\
 
-C言語における標準配列は固定サイズであり、動的にサイズを変更することができない. この制約により、要素の追加や削除に応じて動的に拡張や縮小を行うスタックやキューには不向きである. 一方、リンクリストは動的にメモリを割り当てることができ、必要に応じてサイズを拡張または縮小することが可能である. 配列は連続したメモリ領域に割り当てられるが、リンクリストのノードはメモリ上で分散していても、ポインタによって順序構造を維持できる. 各リンクリストノードはデータと次のノードへのポインタを含む\cite{cormen2009introduction}\cite{goodrich2016data}.
+C言語における標準配列は固定サイズであり, 動的にサイズを変更することができない. この制約により, 要素の追加や削除に応じて動的に拡張や縮小を行うスタックやキューには不向きである. 一方, リンクリストは動的にメモリを割り当てることができ, 必要に応じてサイズを拡張または縮小することが可能である. 配列は連続したメモリ領域に割り当てられるが, リンクリストのノードはメモリ上で分散していても, ポインタによって順序構造を維持できる. 各リンクリストノードはデータと次のノードへのポインタを含む\cite{cormen2009introduction}\cite{goodrich2016data}.
 
 \subsubsection{スタック}
-スタックは本質的にLIFO (Last In First Out)型のデータ構造である. スタックに最後に追加された要素が最初に取り出される.　章\ref{sec:stack-queue}で述べたように、本実験におけるスタックは単方向リンクリストを用いて実装される. スタックの構造体はコード\ref{lst:stack-struct}に示されている.
+スタックは本質的にLIFO (Last In First Out)型のデータ構造である. スタックに最後に追加された要素が最初に取り出される.　章\ref{sec:stack-queue}で述べたように, 本実験におけるスタックは単方向リンクリストを用いて実装される. スタックの構造体はコード\ref{lst:stack-struct}に示されている.
 \begin{lstlisting}[caption=スタックの構造,label=lst:stack-struct]
 struct StackNode{
   Node *graph_node; // グラフノードへのポインタ
@@ -222,10 +222,10 @@ struct Stack{
   int len;
 };
 \end{lstlisting}
-スタックは2層構造を用いて実装される. 1つ目の構造体 \texttt{StackNode} はスタック内の各ノードを表す. スタックの長さとスタックの先頭を管理するために、2つ目の構造体である \texttt{Stack} が使用される. この実装では、リンクリストの先頭（最初の要素）がスタックのトップを表す. 新しい要素はリンクリストの先頭に追加され、同じ位置から削除される.
+スタックは2層構造を用いて実装される. 1つ目の構造体 \texttt{StackNode} はスタック内の各ノードを表す. スタックの長さとスタックの先頭を管理するために, 2つ目の構造体である \texttt{Stack} が使用される. この実装では, リンクリストの先頭（最初の要素）がスタックのトップを表す. 新しい要素はリンクリストの先頭に追加され, 同じ位置から削除される.
 \newpage
 \subsubsection{キュー}
-スタックとは対照的に、キューは FIFO (First In First Out) 型のデータ構造であり、最初に追加された要素が優先され、最初に取り出される. スタックの実装と同様に、キューも単方向リンクリストを用いて実装される. キューの構造体はコード \ref{lst:queue-struct} に示されている.
+スタックとは対照的に, キューは FIFO (First In First Out) 型のデータ構造であり, 最初に追加された要素が優先され, 最初に取り出される. スタックの実装と同様に, キューも単方向リンクリストを用いて実装される. キューの構造体はコード \ref{lst:queue-struct} に示されている.
 
 \begin{lstlisting}[caption=キューの構造,label=lst:queue-struct]
 struct QueueNode{
@@ -278,7 +278,7 @@ if (children->visited == false){
 \end{enumerate}
 DFS探索によって得られた全域木は返され, さらに解析を行うことができる.
 \subsubsection{BFSの実装}
-DFSの実装とは対照的に, BFSは\ref{sec:stack-queue}節で述べたキューのデータ構造を用いる. BFSは深さよりも幅を優先するため, アルゴリズムは以下のように動作する:
+DFSの実装とは対照的に, BFSは章\ref{sec:stack-queue}で述べたキューのデータ構造を用いる. BFSは深さよりも幅を優先するため, アルゴリズムは以下のように動作する:
 \begin{enumerate}
   \item 根の全域木を初期化し, 空のキューを生成する. 根ノードを訪問済みにマークし, それをキューにエンキューする.
   \begin{lstlisting}[caption=全域木とキューの初期化,label=lst:init-queue-tree]
@@ -322,7 +322,7 @@ DFSおよびBFSの両方から得られた全域木は, 特性を抽出するた
 
 
 \subsection{課題３: 連結成分数}
-グラフにおける連結成分数の計算方法は, \ref{sec:graph-traversal}節で述べたDFSまたはBFSアルゴリズムを用いることができる. 本実験で実装した走査アルゴリズムは, 単一の成分に含まれるノードを訪問済みとしてマークする.  
+グラフにおける連結成分数の計算方法は, 章\ref{sec:graph-traversal}で述べたDFSまたはBFSアルゴリズムを用いることができる. 本実験で実装した走査アルゴリズムは, 単一の成分に含まれるノードを訪問済みとしてマークする.  
 連結成分数を数えるアルゴリズムの実装をコード\ref{lst:connected-components}に示す.
 
 \begin{lstlisting}[caption=連結成分数の計算,label=lst:connected-components]
@@ -391,11 +391,53 @@ DFSおよびBFSの両方から得られた全域木は, 特性を抽出するた
 貪欲彩色アルゴリズムは, 図\ref{figure:greedy-coloring}のように可視化できる. このアルゴリズムの目的は, 隣接する頂点が同じ色にならないように頂点に色を割り当てることである. Lavrov (2024)によれば, グラフにおける最大クリークのサイズは, グラフを彩色するのに必要な最小の色数（クロマティック数）以下である\cite{lavrov2024lecture25}. 利用可能な候補に対して貪欲彩色アルゴリズムを適用することで, 最大クリークのサイズの上界を得ることができる. これにより, 探索時に考慮すべき候補頂点の数を大幅に削減できる.\\
 \newpage
 \section{実験結果}
-\subsection{課題１と課題２: DFSとBFSの実装}
-The results of analyzing the spanning trees obtained from bfs can be found in Table \ref{table:search-results-bfs}.
+\subsection{課題１: DFSの実装}
+表\ref{table:search-results-dfs}において, ファイル名の末尾に$s$が付与されているものは疎グラフを, $d$が付与されているものは密グラフを表す. 全てのデータセットにおいて, 全域木の深さは疎グラフと密グラフの間で大きく異なる. 疎グラフは全域木がより深くなる傾向を示しており, これはノード間の接続が希薄であることを示唆している. また, 葉ノードの数が多いことから, 多くのノードが全域木の最外層に位置していることが分かる. 表\ref{table:leaf-percentage-dfs}を見ると, 100ノードの疎グラフを除き, ほとんどのグラフにおいてノードの90\%以上が葉ノードであることが確認できる.
 \begin{table}[H]
   \centering
-  \begin{tabular}{lccccccc}
+  \caption{DFSによる各データセットの全域木の特性}\label{table:search-results-dfs}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccccc}
+    \hline
+    ファイル名 & ノード数 & 深さ & 葉ノード数 & 最大分岐数 & 対称性 & 直径 \\
+    \hline
+    search\_100s.dat  & 100  & 23 & 73   & 11  & 0.002490037 & 23 \\
+    search\_100d.dat  & 100  & 5  & 96   & 66  & 0.009185571 & 5 \\
+    search\_500s.dat  & 500  & 37 & 457  & 46  & 0.000380834 & 37 \\
+    search\_500d.dat  & 500  & 6  & 495  & 344 & 0.001820973 & 6 \\
+    search\_1000s.dat & 1000 & 48 & 947  & 107 & 0.000196260 & 48 \\
+    search\_1000d.dat & 1000 & 9  & 992  & 606 & 0.000850535 & 9 \\
+    \hline
+    \end{tabular}%
+  }
+\end{table}
+
+最大分岐因子を見ると, その値は疎グラフと密グラフの間で大きく異なる. 密グラフは疎グラフと比較して分岐因子が高くなる傾向を示し, ノード間の接続がより多いことを示している. 一方で, 全てのデータセットにおいて対称性の値は低く, 0.1\%を超えるグラフは存在しなかった. これは生成された全域木が平衡ではないことを示している. また, 分岐因子とは逆に, 疎グラフは密グラフと比較して直径の値が大きくなる傾向を示し, 疎グラフがより接続性の低い構造であることを裏付けている.
+\begin{table}[h]
+  \centering
+  \caption{DFSによって得られた全域木における葉ノードの割合.}\label{table:leaf-percentage-dfs}
+  \begin{tabular}{cccc}
+  \hline
+  ノード数 & グラフタイプ & 葉ノード数 & 葉ノード割合 \\
+  \hline
+  100   & 疎 (s)   & 73   & 73\%  \\
+  100   & 密 (d)   & 96   & 96\%  \\
+  500   & 疎 (s)   & 457  & 91\%  \\
+  500   & 密 (d)   & 495  & 99\%  \\
+  1000  & 疎 (s)   & 947  & 95\%  \\
+  1000  & 密 (d)   & 992  & 99\%  \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\subsection{課題２: BFSの実装}
+
+表\ref{table:search-results-bfs}において, ファイル名の末尾が$s$のものは疎グラフを, $d$のものは密グラフを表す. 全てのデータセットにおいて, 全域木の深さは3から5段階と比較的小さい値に収まっており, グラフのノードが良く接続されていることを示している. また, 葉ノード数が多く, 多くのノードが全域木の最外層に位置していることが分かる. 表\ref{table:leaf-percentage-bfs}を見ると, 100ノード疎グラフを除き, ほとんどのグラフにおいてノード数の90\%以上が葉ノードとなっている.
+
+\begin{table}[H]
+  \centering
+  \caption{BFSによる各データセットの全域木の特性}\label{table:search-results-bfs}
+  \begin{tabular}{lccccccr}
   \hline
   ファイル名 & ノード数 & 深さ & 葉ノード数 & 最大分岐数 & 対称性 & 直径 \\
   \hline
@@ -407,12 +449,11 @@ The results of analyzing the spanning trees obtained from bfs can be found in Ta
   search\_1000d.dat & 1000 & 3 & 993 & 606 & 0.000942066 & 4 \\
   \hline
   \end{tabular}
-  \caption{Spanning tree properties for each dataset through BFS}\label{table:search-results-bfs}
 \end{table}
-In this table, file names suffixed with $s$ represent sparse graphs, while those with $d$ denote dense graphs. In all datasets, the depth of the spanning tree is relatively small, spanning from 3 to just 5 levels. This indicates that the graph nodes are well connected. We also see a high number of leaf nodes which indicates that many nodes are at the outermost level of the spanning tree. Looking at Table\ref{table:leaf-percentage-typed}, we can see that other than the 100 node sparse graph, most graphs have over 90\% of their nodes as leaf nodes. 
-
+最大分岐数に着目すると, 疎グラフと密グラフの間で大きく異なることが分かる. 密グラフは疎グラフに比べて分岐数が高く, ノード間の接続が多いことを示している. 対称性の値は全てのデータセットで低く, 0.2\%を超えるグラフは存在せず, 得られた全域木があまり均衡していないことを示している. 直径は4から7の範囲に収まっており, グラフのノードが良く接続されているという観察結果をさらに支持している.
 \begin{table}[h]
   \centering
+  \caption{BFSによって得られた全域木における葉ノードの割合.}\label{table:leaf-percentage-bfs}
   \begin{tabular}{cccc}
   \hline
   ノード数 & グラフタイプ & 葉ノード数 & 葉ノード割合 \\
@@ -425,12 +466,163 @@ In this table, file names suffixed with $s$ represent sparse graphs, while those
   1000  & 密 (d)   & 993  & 99\%  \\
   \hline
   \end{tabular}
-  \caption{各データセットにおける葉ノードの割合とグラフタイプ}\label{table:leaf-percentage-typed}
+\end{table}
+
+\subsection{課題３: 連結成分数}
+実装の正確性を確認するために, 課題1および課題2で用いた1000ノードの密グラフに対して連結成分アルゴリズムを実行した. その結果を, 章\ref{sec:experimental-data}で前述した2000ノードのグラフの結果と比較した. 結果を表\ref{table:connected-components-results}に示す.
+\begin{table}[H]
+  \centering
+  \caption{各データセットにおけるDFSおよびBFS探索による連結ノード数と割合}\label{table:connected-components-results}
+  \begin{tabular}{lccc}
+  \hline
+  ファイル名 & 総ノード数 & DFS連結ノード数 & BFS連結ノード数 \\
+  \hline
+  search\_1000d.dat & 1000 & 1    & 1 \\
+  search\_2000.dat  & 2000 & 1686 & 1686\\
+  \hline
+  \end{tabular}
+\end{table}
+既知の全域連結グラフに対してアルゴリズムを実行した場合, 期待通り連結成分数は1となった. 一方, より大規模なグラフ (search\_2000.dat) に対して実行した場合, 連結成分数は1686となり, このグラフが完全には連結しておらず, 複数の非連結成分を含むことが確認された. DFSおよびBFSの両実装は同一の結果を出力し, 探索手法の違いによる影響がないことから, 実装の正確性が確認された.
+\subsection{課題４: 最大クリーク}
+\subsubsection{アルゴリズム確認}
+バックトラッキングアルゴリズムの実装が正しいか検証するために, 最大クリークサイズが既知の5ノードからなる小規模テストグラフを作成した. 隣接行列は式\ref{eq:test-adjacency-matrix}に示す.
+
+\begin{equation}\label{eq:test-adjacency-matrix}
+  \begin{bmatrix}
+  0 & 1 & 1 & 0 & 0 \\
+  1 & 0 & 1 & 1 & 0 \\
+  1 & 1 & 0 & 1 & 1 \\
+  0 & 1 & 1 & 0 & 1 \\
+  0 & 0 & 1 & 1 & 0
+  \end{bmatrix}
+\end{equation}
+
+行列\ref{eq:test-adjacency-matrix}に基づき, 各ノードがどのように接続されているかを表\ref{table:matrix-connections}で確認できる. グラフ中の最大クリークは\{1, 2, 3\}, \{2, 3, 4\}, \{3, 4, 5\}であり, それぞれ完全に接続された部分グラフを形成している. 各クリークに含まれるノード数の最大値は3であるため, 最大クリークサイズは3と判定できる.
+\begin{table}[H]
+\centering
+\caption{各ノードの接続関係}\label{table:matrix-connections}
+\begin{tabular}{c|c}
+\hline
+\textbf{ノード} & \textbf{接続ノード} \\
+\hline
+1 & 2, 3 \\
+2 & 1, 3, 4 \\
+3 & 1, 2, 4, 5 \\
+4 & 2, 3, 5 \\
+5 & 3, 4 \\
+\hline
+\end{tabular}
 \end{table}
 
 
-  
+実装したバックトラッキングアルゴリズムを実行した結果は, コード\ref{backtracking-test-results}に示す.
+\begin{lstlisting}[caption={模擬グラフの実験結果.}, label=backtracking-test-results]
+> readnode test_3.dat
+File opened successfully.
+Biggest Clique: 3
+\end{lstlisting}
+\subsubsection{ブルートフォース手法のみ}\ref{tab:backtracking-only-results}
+すべてのデータセットに対してバックトラッキングアルゴリズムを実行した結果, 最大クリークサイズはそれぞれ\texttt{clique\_30}で8, \texttt{clique\_50}で9, \texttt{clique\_70}で11となった. 30ノードグラフおよび50ノードグラフにおける最大クリークサイズ探索は, いずれも1秒未満で終了した. しかし, 70ノードグラフにおける探索時間は大幅に増加し, アルゴリズムの実行は約22秒で終了した. 
+\begin{table}[H]
+\centering
+\caption{異なるグラフサイズにおける最大クリークサイズと計算時間（バックトラッキングアルゴリズム）}\label{tab:backtracking-only-results}
+\begin{tabular}{l|c|r}
+\hline
+\textbf{グラフサイズ} & \textbf{最大クリークサイズ} & \textbf{計算時間 (s)} \\
+\hline
+30  & 8  & 0.084 \\
+50  & 9  & 0.286 \\
+70  & 11 & 21.586 \\
+100 & $-$  & $-$ \\
+300 & $-$  & $-$ \\
+\hline
+\end{tabular}
+\end{table}
+
+しかし、100 ノードおよび 300 ノードのグラフに対してバックトラッキングアルゴリズムを実行したところ、30 分以内に結果を得ることができなかった。そのため、単純なバックトラッキングアルゴリズムを用いた実験は中止し、代わりにグリーディ彩色アルゴリズムを実装した。
+
+\subsubsection{グリーディ彩色アルゴリズムの実装}
+前章\ref{tab:backtracking-only-results}で述べたように, バックトラッキングアルゴリズムを用いて最大クリークを探索した場合, 70ノードを超えるグラフでは結果を得ることができなかった. この問題を解決するために, バックトラッキングアルゴリズムが検証する部分集合の数を削減する手法として, グリーディ彩色アルゴリズムを導入した. グリーディ彩色アルゴリズムとバックトラッキングアルゴリズムを組み合わせた結果は表\ref{tab:backtracking-coloring-results}に示す.
+
+\begin{table}[H]
+\centering
+\caption{異なるグラフサイズにおける最大クリークサイズと計算時間（グリーディ彩色アルゴリズム）}\label{tab:backtracking-coloring-results}
+\begin{tabular}{l|c|r}
+\hline
+\textbf{グラフサイズ} & \textbf{最大クリークサイズ} & \textbf{計算時間 (s)} \\
+\hline
+30  & 8  & 0.0046 \\
+50  & 9  & 0.0035 \\
+70  & 11 & 0.0419 \\
+100 & 14 & 0.1951 \\
+300 & 18 & 4.8325 \\
+\hline
+\end{tabular}
+\end{table}
+
+この実験において, 組み合わせアルゴリズムは 30, 50, 70, 100 ノードのグラフに対していずれも1秒未満で最大クリークを発見した. それぞれの最大クリークサイズは 8, 9, 11, 14 であった. さらに, 100ノードから300ノードへと規模を拡大した場合でも, 300ノードグラフにおいて最大クリークサイズ18を約4.8 秒で発見することができた.
+
 \section{分析と理論}
+\subsection{課題１と課題２:DFSとBFSによる全域木の特徴}
+\subsubsection{深さの比較}
+The spanning tree returned as a result of traversal via DFS and BFS shows significant difference that emphasizes the main difference between how DFS and BFS work. Comparing the depth of the DFS and BFS spanning tree in table \ref{table:dfs-bfs-depth}, we can see that DFS tends to produce deeper spanning trees no matter dense or sparse. This is due to the core concept of how DFS works which goes as far as possible before backtracking to explore other branches; thus taller or deeper spanning trees. 
+\begin{table}[H]
+  \centering
+  \caption{DFSとBFSにおける全域木の深さの比較}\label{table:dfs-bfs-depth}
+  \begin{tabular}{lccc}
+  \hline
+  ファイル名 & DFSの深さ & BFSの深さ & 差 (DFS-BFS) \\
+  \hline
+  search\_100s.dat  & 23 & 5 & 18 \\
+  search\_100d.dat  & 5  & 3 & 2 \\
+  search\_500s.dat  & 37 & 4 & 33 \\
+  search\_500d.dat  & 6  & 3 & 3 \\
+  search\_1000s.dat & 48 & 3 & 45 \\
+  search\_1000d.dat & 9  & 3 & 6 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+On the other hand, executing DFS on sparse graphs tend to produce much deeper spanning trees compared to dense graphs. Sparse graphs contain lower edge density which result in nodes not being well connected to each other. The lower edge count means the algorithms has very few choices of alternative routes to traverse between 1 node and another. This means that there are no shortcuts to get from 1 node to another. The algorithm needs to take a longer route thus creating much deeper spanning trees. Opposite to sparse graphs, dense graphs are much more well connected with bigger edge density. The more interconnected each nodes are to each other creates alternative paths for the algorithm to use to go from a node to another. With a lot of alternatives to choose, the algorithm is able to find shortcuts to shorten the length of path that needs to be taken.
+\subsubsection{葉ノード数}
+Comparison of the leafs of both spanning trees can be seen in table \ref{table:dfs-bfs-leaf-percent}. While DFS tends to create more leafs than BFS, the difference is extremently minimal and falls within a margin of error of 5\%. The results are negligible and we are able to conclude that neither DFS and BFS have any significant effects on leaf counts.
+\begin{table}[H]
+  \centering
+  \caption{DFSとBFSにおける全域木の葉ノード数の比較（差\%）}\label{table:dfs-bfs-leaf-percent}
+  \begin{tabular}{lccc}
+  \hline
+  ファイル名 & DFSの葉ノード数 & BFSの葉ノード数 & 差 (\%) \\
+  \hline
+  search\_100s.dat  & 73  & 70  & 4.29\%  \\
+  search\_100d.dat  & 96  & 94  & 2.13\%  \\
+  search\_500s.dat  & 457 & 453 & 0.88\%  \\
+  search\_500d.dat  & 495 & 493 & 0.41\%  \\
+  search\_1000s.dat & 947 & 946 & 0.11\%  \\
+  search\_1000d.dat & 992 & 993 & -0.10\% \\
+  \hline
+  \end{tabular}
+\end{table}
+\subsubsection{最大分岐数}
+As explained before, the maximum branching factor calculates the furthest distance a node needs to travel to visit another node. While depth measures from root to the furthest node, the maximum branching factor calculates distance for any 2 nodes. The comparison of spanning trees can be seen in table \ref{table:dfs-bfs-maxbranch}.
+\begin{table}[H]
+  \centering
+  \caption{DFSとBFSにおける全域木の最大分岐数の比較（差\%）}\label{table:dfs-bfs-maxbranch}
+  \begin{tabular}{lccc}
+  \hline
+  ファイル名 & DFS最大分岐数 & BFS最大分岐数 & 差 (\%) \\
+  \hline
+  search\_100s.dat  & 11   & 14   & -21.43\% \\
+  search\_100d.dat  & 66   & 66   & 0.00\%  \\
+  search\_500s.dat  & 46   & 49   & -6.12\%  \\
+  search\_500d.dat  & 344  & 344  & 0.00\%  \\
+  search\_1000s.dat & 107  & 107  & 0.00\%  \\
+  search\_1000d.dat & 606  & 606  & 0.00\%  \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+
 \section{まとめ}
 \section{発表についての感想}
 \section{付録}

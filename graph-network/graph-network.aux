@@ -47,6 +47,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}実験方法}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}ハードウェアと環境}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}実験対象データ}{7}{}\protected@file@percent }
+\newlabel{sec:experimental-data}{{3.2}{7}{}{subsection.3.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}課題1と課題2: DFSとBFSの実装}{7}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 隣接行列の説明}}{8}{}\protected@file@percent }
 \newlabel{tab:adjacency_matrices}{{1}{8}{}{table.1}{}}
@@ -101,14 +102,44 @@
 \citation{lavrov2024lecture25}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces 貪欲彩色アルゴリズムの可視化}}{17}{}\protected@file@percent }
 \newlabel{figure:greedy-coloring}{{7}{17}{}{figure.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}実験結果}{18}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}課題１: DFSの実装}{18}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces DFSによる各データセットの全域木の特性}}{18}{}\protected@file@percent }
+\newlabel{table:search-results-dfs}{{3}{18}{}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces DFSによって得られた全域木における葉ノードの割合.}}{18}{}\protected@file@percent }
+\newlabel{table:leaf-percentage-dfs}{{4}{18}{}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}課題２: BFSの実装}{19}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces BFSによる各データセットの全域木の特性}}{19}{}\protected@file@percent }
+\newlabel{table:search-results-bfs}{{5}{19}{}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces BFSによって得られた全域木における葉ノードの割合.}}{19}{}\protected@file@percent }
+\newlabel{table:leaf-percentage-bfs}{{6}{19}{}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}課題３: 連結成分数}{19}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces 各データセットにおけるDFSおよびBFS探索による連結ノード数と割合}}{20}{}\protected@file@percent }
+\newlabel{table:connected-components-results}{{7}{20}{}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}課題４: 最大クリーク}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}アルゴリズム確認}{20}{}\protected@file@percent }
+\newlabel{eq:test-adjacency-matrix}{{1}{20}{}{equation.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces 各ノードの接続関係}}{20}{}\protected@file@percent }
+\newlabel{table:matrix-connections}{{8}{20}{}{table.8}{}}
+\newlabel{backtracking-test-results}{{11}{21}{}{lstlisting.11}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}{\ignorespaces 模擬グラフの実験結果.}}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}ブルートフォース手法のみ}{21}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces 異なるグラフサイズにおける最大クリークサイズと計算時間（バックトラッキングアルゴリズム）}}{21}{}\protected@file@percent }
+\newlabel{tab:backtracking-only-results}{{9}{21}{}{table.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}グリーディ彩色アルゴリズムの実装}{21}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces 異なるグラフサイズにおける最大クリークサイズと計算時間（グリーディ彩色アルゴリズム）}}{22}{}\protected@file@percent }
+\newlabel{tab:backtracking-coloring-results}{{10}{22}{}{table.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}分析と理論}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}課題１と課題２:DFSとBFSによる全域木の特徴}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}深さの比較}{22}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces DFSとBFSにおける全域木の深さの比較}}{22}{}\protected@file@percent }
+\newlabel{table:dfs-bfs-depth}{{11}{22}{}{table.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}葉ノード数}{23}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces DFSとBFSにおける全域木の葉ノード数の比較（差\%）}}{23}{}\protected@file@percent }
+\newlabel{table:dfs-bfs-leaf-percent}{{12}{23}{}{table.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}最大分岐数}{23}{}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{references}
-\@writefile{toc}{\contentsline {section}{\numberline {4}実験結果}{18}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}課題１と課題２: DFSとBFSの実装}{18}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Spanning tree properties for each dataset through BFS}}{18}{}\protected@file@percent }
-\newlabel{table:search-results-bfs}{{3}{18}{}{table.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces 各データセットにおける葉ノードの割合とグラフタイプ}}{18}{}\protected@file@percent }
-\newlabel{table:leaf-percentage-typed}{{4}{18}{}{table.4}{}}
 \bibcite{bron1973algorithm}{1}
 \bibcite{cormen2009introduction}{2}
 \bibcite{diestel2017graph}{3}
@@ -116,14 +147,15 @@
 \bibcite{goodrich2016data}{5}
 \bibcite{kalinichenko2013dfs}{6}
 \bibcite{kumlander2005practical}{7}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces DFSとBFSにおける全域木の最大分岐数の比較（差\%）}}{24}{}\protected@file@percent }
+\newlabel{table:dfs-bfs-maxbranch}{{13}{24}{}{table.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}まとめ}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}発表についての感想}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}付録}{24}{}\protected@file@percent }
 \bibcite{lavrov2024lecture25}{8}
 \bibcite{moore1959shortest}{9}
-\@writefile{toc}{\contentsline {section}{\numberline {5}分析と理論}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}まとめ}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}発表についての感想}{19}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}付録}{19}{}\protected@file@percent }
 \bibcite{rosen2019discrete}{10}
 \bibcite{tarjan1972dfs}{11}
 \bibcite{kclique_percolation}{12}
 \bibcite{west2001introduction}{13}
-\gdef \@abspage@last{23}
+\gdef \@abspage@last{28}

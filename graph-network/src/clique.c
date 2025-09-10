@@ -1,8 +1,16 @@
 #include "clique.h"
-int extend_clique(Node **clique, int clique_size, Node **candidates, int candidate_size, int node_count)
+int extend_clique(Node **clique, int clique_size, Node **candidates, int candidate_size, int node_count, int *best_so_far)
 {
-  if (candidate_size == 0)
+
+  int *colors = malloc(sizeof(int) * candidate_size);
+  int graph_gradient = greedy_coloring(candidates, candidate_size, colors);
+  free(colors);
+  if (candidate_size == 0 || clique_size + graph_gradient <= *best_so_far)
+  {
+    if (clique_size > *best_so_far)
+      *best_so_far = clique_size;
     return clique_size;
+  }
 
   int max_clique_size = clique_size;
 
@@ -24,7 +32,7 @@ int extend_clique(Node **clique, int clique_size, Node **candidates, int candida
     }
 
     clique[clique_size] = v;
-    int result = extend_clique(clique, clique_size + 1, new_candidates, new_count, node_count);
+    int result = extend_clique(clique, clique_size + 1, new_candidates, new_count, node_count, best_so_far);
     if (result > max_clique_size)
       max_clique_size = result;
 
@@ -53,4 +61,31 @@ bool is_connected(Node *a, Node *b)
     }
   }
   return false;
+}
+int greedy_coloring(Node **candidates, int candidate_size, int *colors)
+{
+  int max_color = 0;
+  for (int i = 0; i < candidate_size; i++)
+  {
+    int color = 1;
+    bool conflict;
+    do
+    {
+      conflict = false;
+      for (int j = 0; j < i; j++)
+      {
+        if (is_connected(candidates[i], candidates[j]) && colors[j] == color)
+        {
+          conflict = true;
+          break;
+        }
+      }
+      if (conflict)
+        color++;
+    } while (conflict);
+    colors[i] = color;
+    if (color > max_color)
+      max_color = color;
+  }
+  return max_color;
 }
