@@ -1,0 +1,17 @@
+MACOSX_FLAGS = -DMACOSX -framework OpenGL -framework GLUT
+LINUX_FLAGS = -DLINUX -lglut -lGLU
+OPT = $(MACOSX_FLAGS)
+all: libpolygon.so sample bspt tetra
+libpolygon.so: polygon.c polygon.h
+	cc polygon.c -o libpolygon.so -lm -shared -Wall -fPIC $(OPT)
+sample: sample.c
+	cc sample.c -o sample -lpolygon -L.
+bspt: bspt.c
+	cc bspt.c -o bspt -lpolygon -L.
+tetra: tetra.c
+	cc tetra.c -o tetra -lpolygon -L.
+.PHONY: clean dist
+clean:
+	-rm -f libpolygon.so bspt tetra sample # Added -f for robust removal
+dist: clean
+	( cd ..; tar zcvf polygon.tgz polygon/ )

@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  11 SEP 2025 00:45
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.4)  11 SEP 2025 22:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -418,42 +418,50 @@ File: ./assets/eps/greedy-coloring.eps Graphic file (type eps)
 [17]
 
 [18]
-Overfull \hbox (22.06987pt too wide) in paragraph at lines 440--452
- [][] 
- []
-
-
 
 [19]
 
 [20]
 
 [21]
+File: ./assets/eps/dfs-bfs-depth.eps Graphic file (type eps)
+ <./assets/eps/dfs-bfs-depth.eps>
 
 [22]
+File: ./assets/eps/dfs-bfs-leaf.eps Graphic file (type eps)
+ <./assets/eps/dfs-bfs-leaf.eps>
 
 [23]
+File: ./assets/eps/dfs-bfs-branch.eps Graphic file (type eps)
+ <./assets/eps/dfs-bfs-branch.eps>
 
 [24]
 
 [25]
-File: ./assets/eps/node-count-search.eps Graphic file (type eps)
- <./assets/eps/node-count-search.eps>
+File: ./assets/eps/dfs-bfs-symmetry.eps Graphic file (type eps)
+ <./assets/eps/dfs-bfs-symmetry.eps>
 
 [26]
+File: ./assets/eps/dfs-bfs-diameter.eps Graphic file (type eps)
+ <./assets/eps/dfs-bfs-diameter.eps>
 
 [27]
 
-[28] (./graph-network.bbl
+[28]
+File: ./assets/eps/node-count-search.eps Graphic file (type eps)
+ <./assets/eps/node-count-search.eps>
+
+[29]
+
+[30]
+
+[31] (./graph-network.bbl
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 6.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 10.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 15.
-
-
-[29]
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 20.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
@@ -487,6 +495,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--44
 
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 48.
+
+
+[32]
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 52.
 LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
@@ -495,7 +506,7 @@ LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
 (Font)              No change on input line 68.
 )
 
-[30] (./graph-network.aux)
+[33] (./graph-network.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -503,12 +514,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 10417 strings out of 473836
- 223581 string characters out of 5731190
- 592439 words of memory out of 5000000
- 33577 multiletter control sequences out of 15000+600000
+ 10462 strings out of 473836
+ 225000 string characters out of 5731190
+ 592562 words of memory out of 5000000
+ 33617 multiletter control sequences out of 15000+600000
  573656 words of font info for 95 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  73i,11n,80p,938b,1686s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on graph-network.dvi (33 pages, 115916 bytes).
+Output written on graph-network.dvi (36 pages, 118848 bytes).

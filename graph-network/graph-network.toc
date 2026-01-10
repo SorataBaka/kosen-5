@@ -39,13 +39,13 @@
 \contentsline {subsection}{\numberline {5.1}課題1と課題2:DFSとBFSによる全域木の特徴}{22}{}%
 \contentsline {subsubsection}{\numberline {5.1.1}深さの比較}{22}{}%
 \contentsline {subsubsection}{\numberline {5.1.2}葉ノード数}{23}{}%
-\contentsline {subsubsection}{\numberline {5.1.3}最大分岐数}{23}{}%
-\contentsline {subsubsection}{\numberline {5.1.4}対称性}{24}{}%
-\contentsline {subsubsection}{\numberline {5.1.5}直径}{25}{}%
-\contentsline {subsection}{\numberline {5.2}課題3: グラフの連結成分数}{26}{}%
-\contentsline {subsection}{\numberline {5.3}課題4: 最大クリーク}{26}{}%
-\contentsline {section}{\numberline {6}まとめ}{29}{}%
-\contentsline {section}{\numberline {7}発表についての感想}{29}{}%
-\contentsline {subsection}{\numberline {7.1}西村 悠}{29}{}%
-\contentsline {subsection}{\numberline {7.2}小池 亮太}{29}{}%
-\contentsline {section}{\numberline {8}付録}{29}{}%
+\contentsline {subsubsection}{\numberline {5.1.3}最大分岐数}{24}{}%
+\contentsline {subsubsection}{\numberline {5.1.4}対称性}{26}{}%
+\contentsline {subsubsection}{\numberline {5.1.5}直径}{27}{}%
+\contentsline {subsection}{\numberline {5.2}課題3: グラフの連結成分数}{28}{}%
+\contentsline {subsection}{\numberline {5.3}課題4: 最大クリーク}{29}{}%
+\contentsline {section}{\numberline {6}まとめ}{31}{}%
+\contentsline {section}{\numberline {7}発表についての感想}{31}{}%
+\contentsline {subsection}{\numberline {7.1}西村 悠}{31}{}%
+\contentsline {subsection}{\numberline {7.2}小池 亮太}{32}{}%
+\contentsline {section}{\numberline {8}付録}{32}{}%
