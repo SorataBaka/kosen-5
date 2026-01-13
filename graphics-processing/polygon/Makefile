@@ -1,11 +1,13 @@
 MACOSX_FLAGS = -DMACOSX -framework OpenGL -framework GLUT
 LINUX_FLAGS = -DLINUX -lglut -lGLU
 OPT = $(MACOSX_FLAGS)
-all: libpolygon.so sample bspt tetra
+all: libpolygon.so bspt tetra simple complex
 libpolygon.so: polygon.c polygon.h
 	cc polygon.c -o libpolygon.so -lm -shared -Wall -fPIC $(OPT)
-sample: sample.c
-	cc sample.c -o sample -lpolygon -L.
+simple: simple.c
+	cc simple.c -o simple -lpolygon -L.
+complex: complex.c
+	cc complex.c -o complex -lpolygon -L.
 bspt: bspt.c
 	cc bspt.c -o bspt -lpolygon -L.
 tetra: tetra.c
